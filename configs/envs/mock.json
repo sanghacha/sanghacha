@@ -1,0 +1,13 @@
+{
+  "backend": "mock",
+  "robot_id": "mock",
+  "control_dt": 0.03333333333333333,
+  "workspace_min": [-0.4, -0.4, 0.0],
+  "workspace_max": [0.5, 0.4, 0.5],
+  "joint_lower": [-10, -10, -10, -10, -10, 0],
+  "joint_upper": [10, 10, 10, 10, 10, 1],
+  "max_delta": [1, 1, 1, 1, 1, 1],
+  "n_action_steps": 4,
+  "max_steps_per_subgoal": 120,
+  "max_subgoals": 12
+}

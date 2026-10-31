@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "hssg-manipulation"
+version = "0.3.0"
+description = "SO-101 MuJoCo development environment for three HSSG manipulation modules"
+requires-python = ">=3.11"
+dependencies = [
+    "glfw>=2.11.0",
+    "mujoco>=3.17.0",
+    "numpy==2.3.4",
+    "pillow>=13.0.0",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["hssg_generator*", "planner*", "action_generator*", "pipeline*"]

@@ -1,0 +1,124 @@
+{
+  "repository": "https://github.com/google-deepmind/mujoco_menagerie",
+  "commit": "3abca2e302625cec9429c49806121ea2855cef81",
+  "directory": "robotstudio_so101",
+  "license": "Apache-2.0",
+  "raw_base": "https://raw.githubusercontent.com/google-deepmind/mujoco_menagerie/3abca2e302625cec9429c49806121ea2855cef81/robotstudio_so101",
+  "files": [
+    {
+      "path": "CHANGELOG.md",
+      "size": 391,
+      "git_blob_sha1": "d8318d4c49688f8ea714e4dce5349c4958783d0e"
+    },
+    {
+      "path": "LICENSE",
+      "size": 11357,
+      "git_blob_sha1": "261eeb9e9f8b2b4b0d119366dda99c6fd7d35c64"
+    },
+    {
+      "path": "README.md",
+      "size": 1142,
+      "git_blob_sha1": "65129dba053c84d2ad384b1922cea46b119e9036"
+    },
+    {
+      "path": "so101.xml",
+      "size": 17206,
+      "git_blob_sha1": "38bd905c819c8c6d755fecb6394d166944262cce"
+    },
+    {
+      "path": "assets/base_motor_holder_so101_v1.stl",
+      "size": 1877084,
+      "git_blob_sha1": "cac2b8dd98d3d8a6dcdf429b36aaa4b576d82041"
+    },
+    {
+      "path": "assets/base_so101_v2.stl",
+      "size": 471584,
+      "git_blob_sha1": "ed10aa61d1181f8001c908ee5cae5c4f970ba417"
+    },
+    {
+      "path": "assets/motor_holder_so101_base_v1.stl",
+      "size": 1129384,
+      "git_blob_sha1": "9eaf67243a5ffc2dacb3fbd026b4c0620adcdd66"
+    },
+    {
+      "path": "assets/motor_holder_so101_wrist_v1.stl",
+      "size": 1052184,
+      "git_blob_sha1": "d0aa18b15a9cd63f41fa4d48e82df7a3b618c75d"
+    },
+    {
+      "path": "assets/moving_jaw_so101_gripper_part0_v1.stl",
+      "size": 50684,
+      "git_blob_sha1": "d8dd83494b31952e2f52432bc9624e74bd241030"
+    },
+    {
+      "path": "assets/moving_jaw_so101_gripper_part1_v1.stl",
+      "size": 342684,
+      "git_blob_sha1": "ed758675140114dbab751f93ea7d40b8d27e4594"
+    },
+    {
+      "path": "assets/moving_jaw_so101_gripper_v1.stl",
+      "size": 690384,
+      "git_blob_sha1": "f5bd23f855f0d90f73d00abef90576d0c7120719"
+    },
+    {
+      "path": "assets/moving_jaw_so101_v1.stl",
+      "size": 1413584,
+      "git_blob_sha1": "7e8736686592072cf34c7f6e2e6e88f8a3ba60bb"
+    },
+    {
+      "path": "assets/rotation_pitch_so101_v1.stl",
+      "size": 883684,
+      "git_blob_sha1": "5c05dee570623f62c4ab7597d76c7bdea20eacea"
+    },
+    {
+      "path": "assets/sts3215_03a_no_horn_v1.stl",
+      "size": 865884,
+      "git_blob_sha1": "2a89597702f5ec6849b6b1b894c867b35b98ca42"
+    },
+    {
+      "path": "assets/sts3215_03a_v1.stl",
+      "size": 954084,
+      "git_blob_sha1": "fe05403dbfac7a26822b8c8cd0fc3d5288a69fc8"
+    },
+    {
+      "path": "assets/under_arm_so101_v1.stl",
+      "size": 1975884,
+      "git_blob_sha1": "480e0583c8bb27ff9affefbebee72b784fb054c8"
+    },
+    {
+      "path": "assets/upper_arm_so101_v1.stl",
+      "size": 1303484,
+      "git_blob_sha1": "9c0f9b275a51f720476e529c92193f4f69d4784c"
+    },
+    {
+      "path": "assets/waveshare_mounting_plate_so101_v2.stl",
+      "size": 62784,
+      "git_blob_sha1": "4dba1f22b01ab9afef2466872fcb3e1efca89e38"
+    },
+    {
+      "path": "assets/wrist_roll_follower_so101_camera_mount.stl",
+      "size": 122884,
+      "git_blob_sha1": "dfe1ecc5e11eb79280c032148ad6ba68a21c431e"
+    },
+    {
+      "path": "assets/wrist_roll_follower_so101_gripper_part0_v1.stl",
+      "size": 73784,
+      "git_blob_sha1": "7a6bdae516080bd381758fb87cfa48beab3c96b9"
+    },
+    {
+      "path": "assets/wrist_roll_follower_so101_gripper_v1.stl",
+      "size": 741684,
+      "git_blob_sha1": "279308978e9d64d0bb231968d6169ce78aa0ebde"
+    },
+    {
+      "path": "assets/wrist_roll_follower_so101_v1.stl",
+      "size": 1439884,
+      "git_blob_sha1": "123ce374ad3efc240e4d7022f31314e59fe4b0c0"
+    },
+    {
+      "path": "assets/wrist_roll_pitch_so101_v2.stl",
+      "size": 2699784,
+      "git_blob_sha1": "ac5172a35e6da3e9fdea21e25803f23cc61e31f1"
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "schema_version": "0.2",
+  "object_size": [0.06, 0.06, 0.06],
+  "buffer_position": [-0.2, 0.0, 0.03],
+  "destination": [0.3, -0.2, 0.03],
+  "cases": {
+    "blocked": {
+      "objects": {"A": [0.2, 0.1, 0.09], "B": [0.2, 0.1, 0.03]},
+      "parents": {"A": "stack:A:B", "B": "stack:A:B"},
+      "edges": [["A", "B", "on_top_of"], ["B", "A", "supports"]],
+      "order": [["PICK", "A"], ["PLACE", "A"], ["PICK", "B"], ["PLACE", "B"]]
+    },
+    "accessible": {
+      "objects": {"A": [-0.2, 0.1, 0.03], "B": [0.2, 0.1, 0.03]},
+      "parents": {"A": "stack:A", "B": "stack:B"},
+      "edges": [], "order": [["PICK", "B"], ["PLACE", "B"]]
+    },
+    "after_move": {
+      "objects": {"A": [-0.2, 0.0, 0.03], "B": [0.2, 0.1, 0.03]},
+      "parents": {"A": "stack:A", "B": "stack:B"},
+      "edges": [], "order": [["PICK", "B"], ["PLACE", "B"]]
+    },
+    "missing_target": {
+      "objects": {"A": [0.2, 0.1, 0.09], "B": [0.2, 0.1, 0.03]},
+      "parents": {"A": "stack:A:B", "B": "stack:A:B"},
+      "edges": [["A", "B", "on_top_of"], ["B", "A", "supports"]],
+      "target_object_id": "missing", "order": []
+    }
+  }
+}
