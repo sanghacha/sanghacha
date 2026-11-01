@@ -1,0 +1,31 @@
+{
+  "seed": 42,
+  "device": "cuda",
+  "epochs": 120,
+  "batch_size": 64,
+  "learning_rate": 0.0003,
+  "weight_decay": 0.0001,
+  "kl_weight": 1.0,
+  "validation_fraction": 0.2,
+  "num_workers": 0,
+  "cache_images": true,
+  "balance_goals": true,
+  "torch_threads": 4,
+  "model": {
+    "image_size": [
+      120,
+      160
+    ],
+    "chunk_size": 16,
+    "hidden_dim": 128,
+    "latent_dim": 16,
+    "nheads": 4,
+    "encoder_layers": 2,
+    "decoder_layers": 2,
+    "posterior_layers": 2,
+    "feedforward_dim": 512,
+    "dropout": 0.1,
+    "residual_actions": false
+  },
+  "allow_action_mode_transfer": true
+}

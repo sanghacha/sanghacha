@@ -2,6 +2,10 @@
 
 현재 main에 있는 `src/perception`에 실행 경로를 연결합니다. `고정 RGB-D 2대 → GPU 마스크/검출 → 로컬 점군·OBB·TSDF → 객체 ID 추적 → rgbd_hssg 생성·변경 로그` 순서입니다. 기존 전문가/ACT 제어기와 training 프로젝트는 유지하며, 이 경로가 기존 A/B/C의 GT 입력을 자동 교체하지는 않습니다.
 
+인식 결과로 B/C를 실행하려면 [RGB-D 통합 실행](rgbd_integration.md)을 사용합니다.
+아래는 독립 촬영·서버 추론·TSDF 내보내기 경로이며, 통합 제어에서는 같은 인식·추적·그래프 코드를
+계획 경계와 release 이후에 호출합니다. 통합 경로는 TSDF를 매번 생성하지 않습니다.
+
 ## 로컬: 별도 Python 3.11 환경
 
 Open3D 0.19.0을 검증한 Python 3.11을 사용합니다. 기본 프로젝트의 `.python-version`은 기존 3.13으로 유지합니다. 저장소 루트의 PowerShell에서:

@@ -14,7 +14,7 @@ def cost(a,b,temporal=False):
     lo=np.maximum(a['aabb_min_m'],b['aabb_min_m']);hi=np.minimum(a['aabb_max_m'],b['aabb_max_m'])
     gap=np.linalg.norm(np.maximum(lo-hi,0))
     if not temporal and gap>.018:return 1e6
-    return distance/limit+color/.24+.2*gap/.018
+    return distance/limit+color/.24+(0 if temporal else .2*gap/.018)
 
 def match(left,right,temporal=False):
     if not left or not right:return [],list(range(len(left))),list(range(len(right)))

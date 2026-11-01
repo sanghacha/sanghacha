@@ -10,7 +10,7 @@ import numpy as np
 from PIL import Image
 
 from .mock_data import ROOT
-from .types import Contact, Edge, Observation, Pose, SceneGraph, SceneObject, Subgoal, TaskRequest, check
+from .types import Contact, Edge, Observation, Pose, SceneGraph, SceneObject, Subgoal, TargetSpec, TaskRequest, check
 
 
 @dataclass
@@ -36,6 +36,8 @@ def save_sample(directory: str | Path, sample: Sample, *, config: dict | None = 
                 "held_object_id": obs.held_object_id,
                 "objects": [asdict(obj) for obj in obs.ground_truth] if obs.ground_truth is not None else None,
                 "contacts": [asdict(contact) for contact in obs.contacts],
+                "perceived_objects": [asdict(obj) for obj in obs.perceived_objects],
+                "finger_contacts": list(obs.finger_contacts),
                 "ee_pose": asdict(obs.ee_pose) if obs.ee_pose else None,
                 "graph": asdict(sample.graph), "task": asdict(sample.task), "subgoal": asdict(sample.subgoal),
                 "versions": {"python": platform.python_version(), "numpy": np.__version__, "mujoco": mujoco.__version__},
@@ -55,7 +57,8 @@ def load_sample(directory: str | Path) -> Sample:
 
     def obj(value):
         return SceneObject(value["object_id"], pose(value["pose"]), tuple(value["size"]),
-                           value["label"], value["parent_id"])
+                           value["label"], value["parent_id"],
+                           tuple(value['color_rgb']) if value.get('color_rgb') is not None else None)
 
     contacts = tuple(Contact(c["entity_a"], c["entity_b"], tuple(c["position"]), tuple(c["normal_a_to_b"]),
                              c["normal_force"]) for c in d["contacts"])
@@ -66,10 +69,14 @@ def load_sample(directory: str | Path) -> Sample:
                                   d["source"], d["robot_id"], d["control_dt"],
                                   arrays["depth"] if arrays["depth"].size else None,
                                   arrays["camera_intrinsics"], arrays["camera_to_robot_base"], contacts,
-                                  pose(d["ee_pose"]) if d["ee_pose"] else None, d["rgb_valid"])
+                                  pose(d["ee_pose"]) if d["ee_pose"] else None, d["rgb_valid"],
+                                  tuple(obj(o) for o in d.get('perceived_objects', [])),
+                                  tuple(d.get('finger_contacts', [False, False])))
     g, task, goal = d["graph"], d["task"], d["subgoal"]
     graph = SceneGraph(tuple(obj(o) for o in g["nodes"]), tuple(Edge(**e) for e in g["edges"]),
-                       g["groups"], g["held_object_id"], g["timestamp"], g["episode_id"], g["frame_id"], g["source"])
-    return Sample(observation, graph, TaskRequest(task["target_object_id"], pose(task["destination"]), pose(task["buffer_pose"])),
+                       g["groups"], g["held_object_id"], g["timestamp"], g["episode_id"], g["frame_id"], g["source"],
+                       g.get('regions', {}))
+    return Sample(observation, graph, TaskRequest(task["target_object_id"], pose(task["destination"]), pose(task["buffer_pose"]),
+                  TargetSpec(**task['target_spec']) if task.get('target_spec') else None),
                   Subgoal(goal["subgoal_id"], goal["primitive"], goal["object_id"], pose(goal["object_pose"]),
                           pose(goal["target_ee_pose"]), pose(goal["place_pose"]) if goal["place_pose"] else None, goal["frame_id"]))

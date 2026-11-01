@@ -3,11 +3,19 @@ import unittest
 
 import numpy as np
 
-from action_generator.goal import GOAL_DIM, encode_goal
+from action_generator.goal import GOAL_DIM, encode_goal, control_goal_error
 from pipeline.types import Pose, Subgoal
 
 
 class GoalEncodingTests(unittest.TestCase):
+    def test_cartesian_feedback_uses_current_tcp_and_frozen_grasp_offset(self):
+        pick = Subgoal('pick', 'PICK', 'object', Pose((.2, .1, .03)), Pose((.2, .1, .1)))
+        np.testing.assert_allclose(control_goal_error(encode_goal(pick), Pose((.1, .1, .03))), [1., 0., 0.], atol=1e-7)
+        place = replace(pick, primitive='PLACE', place_pose=Pose((.11, .02, .1)), object_pose=Pose((.11, 0., .1)))
+        encoded = encode_goal(place, Pose((.1, 0., .1)))
+        rotated = Pose((.1, 0., .1), (0., 0., np.sqrt(.5), np.sqrt(.5)))
+        np.testing.assert_allclose(control_goal_error(encoded, rotated), [.1, .1, 0.], atol=1e-7)
+
     def test_ids_and_mock_ee_targets_are_not_network_features(self):
         goal = Subgoal('one', 'PICK', 'track_007', Pose((.2, .1, .03)), Pose((0., 0., .5)))
         renamed = replace(goal, subgoal_id='two', object_id='unrelated', target_ee_pose=Pose((1., 1., 1.)))

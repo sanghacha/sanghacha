@@ -1,5 +1,6 @@
 .venv/
 .venv-perception/
+training/.venv-rgbd/
 configs/perception_remote.json
 .uv-cache/
 assets/so101/upstream/

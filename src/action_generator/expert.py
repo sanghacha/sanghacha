@@ -42,8 +42,9 @@ class SO101Expert:
         self.recoveries = 0
 
     def _object(self, observation, object_id):
-        check(observation.ground_truth is not None, 'SO-101 expert requires observed geometry (current adapter: MuJoCo GT)')
-        found = next((obj for obj in observation.ground_truth if obj.object_id == object_id), None)
+        objects = observation.perceived_objects if observation.source == 'rgbd' else observation.ground_truth
+        check(objects is not None, 'SO-101 expert requires observed object geometry')
+        found = next((obj for obj in objects if obj.object_id == object_id), None)
         check(found is not None, f'expert cannot localize {object_id}')
         return found
 
@@ -60,6 +61,7 @@ class SO101Expert:
         self.index = self.stage_ticks = self.close_ticks = 0
         self._q_target = None
         p = np.array(obj.pose.position)
+        self.geometry_position = p.copy()
         rotation = tilted_rotation(p, np.deg2rad(35.), flip=self.attempt % 2 == 0)
         if subgoal.primitive == 'PICK':
             check(observation.held_object_id in (None, subgoal.object_id), 'another object is already held')
@@ -79,6 +81,16 @@ class SO101Expert:
             grasp[2] += self.grasp_height_offset
             opening = .75 if vertical else .7
             pre = grasp-rotation[:, 0]*(.035 if vertical else .065)
+            if observation.source == 'rgbd':
+                # Allow for measured-pose error, and open before any retry
+                # motion so a closed jaw does not sweep the displaced box.
+                opening = .70 if vertical else .60
+                self.path.append(Waypoint(current.copy(), actual_rotation, opening, 'open'))
+                if not vertical and p[2] < .04:
+                    high = pre.copy()
+                    high[2] = max(pre[2]+.045, current[2])
+                    self.path.append(Waypoint(high, rotation, opening))
+                    self._line(high, pre, rotation, opening)
             self.path.append(Waypoint(pre, rotation, opening))
             self._line(pre, grasp, rotation, opening)
             self.path.append(Waypoint(grasp, rotation, 1., 'close'))
@@ -110,8 +122,8 @@ class SO101Expert:
             self.path.append(Waypoint(retreat, rotation, 0., 'release'))
 
     def predict_action_chunk(self, observation, subgoal):
-        check(observation.robot_id == 'so101' and observation.source == 'mujoco_gt',
-              'scripted expert is a MuJoCo GT integration baseline')
+        check(observation.robot_id == 'so101' and observation.source in ('mujoco_gt', 'rgbd'),
+              'scripted expert requires SO-101 geometry and contact feedback')
         key = (observation.episode_id, subgoal)
         continuous = self.last_time is not None and np.isclose(
             observation.timestamp-self.last_time, observation.control_dt, rtol=1e-5, atol=1e-8)
@@ -121,6 +133,12 @@ class SO101Expert:
             self.recovering, self.recoveries = False, 0
             self._begin(observation, subgoal)
         self.last_time = observation.timestamp
+        if observation.source == 'rgbd' and subgoal.primitive == 'PICK' and observation.held_object_id is None:
+            position = np.array(self._object(observation, subgoal.object_id).pose.position)
+            if np.linalg.norm(position-self.geometry_position) > .005:
+                self.attempt += 1
+                check(self.attempt < 4, 'observed object kept moving during grasp approach')
+                self._begin(observation, subgoal)
         if self.recovering:
             obj = self._object(observation, subgoal.object_id)
             if observation.held_object_id == subgoal.object_id and obj.pose.position[2] > self.recovery_z+.012:
@@ -154,9 +172,13 @@ class SO101Expert:
         reached = (np.linalg.norm(actual-waypoint.position) < .0065 or
                    np.max(np.abs(self._q_target[:5]-observation.robot_state[:5])) < .025)
         advance = reached
-        if waypoint.mode == 'close':
+        if waypoint.mode == 'open':
+            advance = observation.robot_state[5] <= waypoint.gripper+.025 and self.stage_ticks >= 3
+        elif waypoint.mode == 'close':
             fingers = set()
-            for contact in observation.contacts:
+            if observation.source == 'rgbd':
+                fingers = {name for name, active in zip(('fixed', 'moving'), observation.finger_contacts) if active}
+            for contact in (() if observation.source == 'rgbd' else observation.contacts):
                 if subgoal.object_id not in (contact.entity_a, contact.entity_b) or contact.normal_force < .1:
                     continue
                 for entity in (contact.entity_a, contact.entity_b):

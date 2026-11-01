@@ -52,11 +52,15 @@ class SceneObject:
     size: tuple[float, float, float] = (0.06, 0.06, 0.06)
     label: str = "box"
     parent_id: str | None = None
+    color_rgb: tuple[float, float, float] | None = None
 
     def __post_init__(self):
         check(bool(self.object_id) and bool(self.label), "missing object ID/label")
         _vector(self.size, 3)
         check(all(v > 0 for v in self.size), "object size must be positive")
+        if self.color_rgb is not None:
+            _vector(self.color_rgb, 3)
+            check(all(0 <= v <= 1 for v in self.color_rgb), "color_rgb must be within [0,1]")
 
 
 @dataclass(frozen=True)
@@ -93,6 +97,8 @@ class Observation:
     contacts: tuple[Contact, ...] = ()
     ee_pose: Pose | None = None
     rgb_valid: bool = True  # False: 물리/GT 전용 실행. RGB를 정책/인식 입력으로 쓰지 않는다.
+    perceived_objects: tuple[SceneObject, ...] = ()
+    finger_contacts: tuple[bool, bool] = (False, False)
 
     def __post_init__(self):
         check(self.frame_id == FRAME, "observation must use robot_base")
@@ -100,6 +106,10 @@ class Observation:
         check(np.isfinite(self.timestamp) and self.timestamp >= 0, "invalid timestamp")
         check(np.isfinite(self.control_dt) and self.control_dt > 0, "invalid control_dt")
         check(self.source in ("mock_gt", "mujoco_gt", "rgbd"), "invalid observation source")
+        ids = [obj.object_id for obj in self.perceived_objects]
+        check(len(ids) == len(set(ids)), "duplicate perceived object IDs")
+        check(len(self.finger_contacts) == 2 and all(type(v) is bool for v in self.finger_contacts),
+              "finger_contacts must contain two booleans")
         check(isinstance(self.rgb, np.ndarray) and self.rgb.ndim == 3 and
               self.rgb.shape[2] == 3 and min(self.rgb.shape[:2]) > 0, "RGB must be HWC")
         object.__setattr__(self, "rgb", _array(self.rgb, self.rgb.shape, "uint8"))
@@ -144,6 +154,7 @@ class SceneGraph:
     episode_id: str = "mock-0"
     frame_id: str = FRAME
     source: str = "mock_gt"
+    regions: dict[str, dict] = field(default_factory=dict)
 
     def __post_init__(self):
         check(self.frame_id == FRAME, "graph must use robot_base")
@@ -161,6 +172,7 @@ class SceneGraph:
                 seen.add(current)
                 current = self.groups[current]
         endpoints = set(ids) | self.groups.keys()
+        check(set(self.regions) <= self.groups.keys(), "region metadata must reference graph groups")
         check(all(e.source in endpoints and e.target in endpoints for e in self.edges), "unknown edge endpoint")
         check(len(set(self.edges)) == len(self.edges), "duplicate edge")
 
@@ -172,10 +184,36 @@ class SceneGraph:
 
 
 @dataclass(frozen=True)
+class TargetSpec:
+    """Observable target attributes; region restricts initial identification only."""
+    reference_rgb: tuple[float, float, float]
+    region: str | None = None
+    category: str = "box"
+    size_m: tuple[float, float, float] | None = None
+    color_tolerance: float = .12
+    ambiguity_margin: float = .035
+
+    def __post_init__(self):
+        _vector(self.reference_rgb, 3)
+        object.__setattr__(self, 'reference_rgb', tuple(self.reference_rgb))
+        check(all(0 <= v <= 1 for v in self.reference_rgb) and sum(self.reference_rgb) > 0,
+              "target reference_rgb must be nonzero RGB within [0,1]")
+        check(bool(self.category), "missing target category")
+        check(np.isfinite(self.color_tolerance) and 0 < self.color_tolerance <= 1,
+              "invalid target color tolerance")
+        check(np.isfinite(self.ambiguity_margin) and self.ambiguity_margin > 0, "invalid ambiguity margin")
+        if self.size_m is not None:
+            _vector(self.size_m, 3)
+            object.__setattr__(self, 'size_m', tuple(self.size_m))
+            check(all(v > 0 for v in self.size_m), "target size must be positive")
+
+
+@dataclass(frozen=True)
 class TaskRequest:
     target_object_id: str
     destination: Pose
     buffer_pose: Pose
+    target_spec: TargetSpec | None = None
 
     def __post_init__(self):
         check(bool(self.target_object_id), "missing target object ID")

@@ -7,7 +7,10 @@ import subprocess
 import sys
 import tempfile
 import unittest
+import importlib.util
 
+if importlib.util.find_spec('networkx') is None:
+    raise unittest.SkipTest('Install the sg or perception extra for graph tests')
 import networkx as nx
 import numpy as np
 

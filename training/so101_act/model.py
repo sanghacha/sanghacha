@@ -24,8 +24,17 @@ class ACTConfig:
     posterior_layers: int = 2
     feedforward_dim: int = 512
     dropout: float = .1
+    residual_actions: bool = True
+    include_velocity: bool = False
+    include_goal_error: bool = False
 
     def __post_init__(self):
+        if type(self.residual_actions) is not bool:
+            raise ValueError('residual_actions must be boolean')
+        if type(self.include_velocity) is not bool:
+            raise ValueError('include_velocity must be boolean')
+        if type(self.include_goal_error) is not bool:
+            raise ValueError('include_goal_error must be boolean')
         self.image_size = tuple(self.image_size)
         values = (self.chunk_size, self.hidden_dim, self.latent_dim, self.nheads,
                   self.encoder_layers, self.decoder_layers, self.posterior_layers, self.feedforward_dim)
@@ -51,7 +60,8 @@ class GoalConditionedACT(nn.Module):
             nn.Conv2d(64, d, 3, stride=2, padding=1), nn.GELU(), nn.AdaptiveAvgPool2d((6, 8)))
         self.image_pos = nn.Parameter(torch.randn(1, 48, d)*.02)
         self.condition_pos = nn.Parameter(torch.randn(1, 3, d)*.02)
-        self.state_proj, self.goal_proj = nn.Linear(6, d), nn.Linear(GOAL_DIM, d)
+        self.state_proj = nn.Linear(6+6*c.include_velocity+3*c.include_goal_error, d)
+        self.goal_proj = nn.Linear(GOAL_DIM, d)
         self.action_proj = nn.Linear(6, d)
         self.cls = nn.Parameter(torch.zeros(1, 1, d))
         self.posterior_pos = nn.Parameter(torch.randn(1, c.chunk_size+3, d)*.02)
@@ -102,8 +112,9 @@ class GoalConditionedACT(nn.Module):
         condition = torch.cat((state_token, goal_token, self.latent_proj(z).unsqueeze(1)), 1)
         memory = self.encoder(torch.cat((condition+self.condition_pos, visual), 1))
         decoded = self.decoder(self.queries.expand(batch, -1, -1), memory)
-        base = state*self.state_to_action_scale+self.state_to_action_bias
-        return base.unsqueeze(1)+self.action_head(decoded), mu, logvar
+        base = state[:, :6]*self.state_to_action_scale+self.state_to_action_bias
+        prediction = self.action_head(decoded)
+        return (base.unsqueeze(1)+prediction if self.config.residual_actions else prediction), mu, logvar
 
 
 def act_loss(prediction, actions, padding, mu=None, logvar=None, kl_weight=1.):
