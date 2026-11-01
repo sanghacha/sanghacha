@@ -1,0 +1,5 @@
+# Install CUDA-enabled PyTorch separately for the GPU server's CUDA environment.
+transformers==4.57.1
+numpy>=2,<3
+pillow>=13.0.0
+scipy>=1.15,<2

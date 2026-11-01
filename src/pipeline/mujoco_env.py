@@ -114,6 +114,18 @@ class MujocoEnvironment:
         quaternion = np.empty(4)
         mujoco.mju_mat2Quat(quaternion, rotation.ravel())
         world.add_camera(name=c["camera_name"], pos=position, quat=quaternion, fovy=c["camera_fovy"])
+        # RGB-D acquisition cameras remain fixed independently of arm movement.
+        for name, position, target, fovy in (
+            ("fixed_top", [.24, 0., .75], [.24, 0., .02], 50.),
+            ("fixed_oblique", [.58, .48, .48], [.22, 0., .04], 47.),
+        ):
+            z = np.asarray(position) - target
+            z /= np.linalg.norm(z)
+            x = np.cross([0., 1., 0.], z)
+            x /= np.linalg.norm(x)
+            rotation = np.column_stack((x, np.cross(z, x), z))
+            mujoco.mju_mat2Quat(quaternion, rotation.ravel())
+            world.add_camera(name=name, pos=position, quat=quaternion, fovy=fovy)
 
     def _to_ctrl(self, command):
         result = np.array(command, dtype=np.float64)

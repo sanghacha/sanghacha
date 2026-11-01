@@ -1,12 +1,11 @@
 """CPU reconstruction from real model predictions; no ground truth API."""
 import json
 from pathlib import Path
-import networkx as nx
 import numpy as np
 import open3d as o3d
 from scipy.ndimage import label
 from .geometry import backproject,clean_cloud,describe
-from .robot_frames import add_robot_frames
+from rgbd_hssg import build_scene_graph, save_graph
 
 def box_iou(a,b):
     lo=np.maximum(a[:2],b[:2]);hi=np.minimum(a[2:],b[2:])
@@ -62,27 +61,14 @@ def public(track):
 
 def export_graph(tracks,meta,directory):
     directory=Path(directory);directory.mkdir(parents=True,exist_ok=True)
-    g=nx.DiGraph(frame_id='robot_base',source='rgbd',timestamp=meta['timestamp'],episode_id=meta['episode_id'],
-                 pose_note='Visible-surface OBB estimates, not model-registered 6D poses')
-    g.add_node('workspace',kind='workspace')
-    for r in meta['regions']:
-        g.add_node(r['id'],kind='region',**r)
-        g.add_edge(r['id'],'workspace',relation='inside')
+    g=build_scene_graph(tracks,meta)
     for track in tracks:
         ident=track['instance_id']
-        g.add_node(ident,kind='object_candidate',**public(track))
         if track['status']=='seen':
-            c=track['visible_surface_centroid_m']
-            for r in meta['regions']:
-                if all(abs(c[i]-r['center'][i])<=r['size'][i]/2 for i in (0,1)):
-                    g.add_edge(ident,r['id'],relation='inside',evidence='RGB-D location + configured region boundary')
-                    break
             p=o3d.geometry.PointCloud()
             p.points=o3d.utility.Vector3dVector(track['_points'])
             p.colors=o3d.utility.Vector3dVector(track['_colors'])
             assert o3d.io.write_point_cloud(str(directory/f'{ident}.ply'),p)
-    add_robot_frames(g,meta,tracks)
     # Partial visible surfaces do not prove contact/support; do not emit on/blocks.
-    payload=nx.node_link_data(g,edges='edges')
-    (directory/'scene_graph.json').write_text(json.dumps(payload,indent=2),encoding='utf-8')
+    save_graph(g,directory/'scene_graph.json')
     return g
