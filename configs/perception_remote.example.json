@@ -1,0 +1,7 @@
+{
+  "host": "gpu.example.com",
+  "user": "root",
+  "port": 22,
+  "wsl_distribution": "Ubuntu-22.04",
+  "wsl_key_path": "/home/USER/.ssh/id_ed25519"
+}

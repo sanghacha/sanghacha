@@ -16,8 +16,9 @@ dependencies = [
 
 [tool.setuptools.packages.find]
 where = ["src"]
-include = ["hssg_generator*", "planner*", "action_generator*", "pipeline*", "rgbd_hssg*"]
+include = ["hssg_generator*", "planner*", "action_generator*", "pipeline*", "rgbd_hssg*", "perception*"]
 
 [project.optional-dependencies]
 sg = ["networkx>=3.4,<4"]
+perception = ["open3d==0.19.0", "scipy>=1.15,<2", "networkx>=3.4,<4"]
 
