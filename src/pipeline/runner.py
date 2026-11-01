@@ -13,7 +13,7 @@ from .types import ActionChunk, SceneGraph, Subgoal, TaskRequest, check
 
 def run_pipeline(env: MockEnvironment | MujocoEnvironment, task: TaskRequest, *, seed: int = 0,
                  generate_graph=generate_scene_graph, plan_subgoal=plan_next_subgoal,
-                 predict_action=predict_action_chunk) -> list[Subgoal]:
+                 predict_action=predict_action_chunk, on_step=None) -> list[Subgoal]:
     """자기 팀 함수 하나만 keyword argument로 교체해서 통합할 수 있다."""
     completed = []
     seen_ids = set()
@@ -52,6 +52,8 @@ def run_pipeline(env: MockEnvironment | MujocoEnvironment, task: TaskRequest, *,
                     check(observation.episode_id == previous.episode_id and
                           np.isclose(observation.timestamp - previous.timestamp, previous.control_dt), "invalid step timing")
                     steps += 1
+                    if on_step is not None:
+                        on_step(previous, command, observation, subgoal)
                     if env.subgoal_complete(subgoal):
                         break
             completed.append(subgoal)

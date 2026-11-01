@@ -52,7 +52,8 @@ class JointJogControl:
 class SimulationViewer:
     """MuJoCo 렌더러 + GLFW 키 상태. OS 전역 키보드 훅은 사용하지 않는다."""
 
-    def __init__(self, model, data):
+    def __init__(self, model, data, *, interactive=True):
+        self.interactive = interactive
         if not glfw.init():
             raise RuntimeError("GLFW initialization failed")
         # MuJoCo's offscreen renderer leaves GLFW's global VISIBLE hint disabled.
@@ -81,6 +82,8 @@ class SimulationViewer:
 
     def _key(self, window, key, scancode, action, mods):
         if action != glfw.PRESS:
+            return
+        if not getattr(self, 'interactive', True) and key not in (*range(glfw.KEY_1, glfw.KEY_6+1), glfw.KEY_ESCAPE):
             return
         if glfw.KEY_1 <= key <= glfw.KEY_6:
             self.joint = key-glfw.KEY_1
@@ -148,6 +151,11 @@ class SimulationViewer:
             unit = "% closed"
         self._status = (f"Joint {j+1}: {joint_names[j]}\nCurrent / target\nRange\nControls\nScene\nCamera",
                         f"Hold UP / DOWN to move\n{value:+.1f} / {target:+.1f} {unit}\n{lower:.1f} .. {upper:.1f} {unit}\n1..6 select | SPACE home | ESC close\nR: new seeded layout\nLeft drag rotate | Right drag pan | Wheel zoom")
+        if not self.interactive:
+            self._status = (self._status[0],
+                            f"Executing task\n{value:+.1f} / {target:+.1f} {unit}\n{lower:.1f} .. {upper:.1f} {unit}\n"
+                            "1..6 inspect joint | ESC stop\nSee window title for current task\n"
+                            "Left drag rotate | Right drag pan | Wheel zoom")
         mujoco.mjr_overlay(mujoco.mjtFont.mjFONT_NORMAL, mujoco.mjtGridPos.mjGRID_TOPLEFT,
                            viewport, *self._status, self.context)
         if screenshot is not None:

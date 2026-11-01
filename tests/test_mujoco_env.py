@@ -80,11 +80,12 @@ class MujocoEnvironmentTests(unittest.TestCase):
         np.testing.assert_array_equal(loaded.observation.robot_state, obs.robot_state)
         self.assertEqual(loaded.observation.contacts, obs.contacts)
 
-    def test_c_starter_uses_real_joint_hold_not_mock_kinematics(self):
+    def test_explicit_hold_diagnostic_uses_real_joint_state(self):
         obs = self.env.reset()
         graph = generate_scene_graph(obs)
         goal = plan_next_subgoal(graph, self.env.task, obs.robot_state)
-        chunk = predict_action_chunk(obs, goal)
+        with patch.dict('os.environ', {'HSSG_C_BACKEND': 'hold'}):
+            chunk = predict_action_chunk(obs, goal)
         self.assertEqual(chunk.robot_id, "so101")
         np.testing.assert_array_equal(chunk.commands[0], obs.robot_state)
         after = self.env.step(chunk.commands[0])

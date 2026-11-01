@@ -1,0 +1,42 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "so101-act"
+version = "0.1.0"
+description = "Goal-conditioned ACT training and MuJoCo demonstration collection for module C"
+requires-python = ">=3.11,<3.14"
+dependencies = ["hssg-manipulation"]
+
+[project.optional-dependencies]
+cpu = ["torch==2.9.0"]
+cuda = ["torch==2.9.0"]
+
+[project.scripts]
+act-collect = "so101_act.collect:main"
+act-generate = "so101_act.generate:main"
+act-train = "so101_act.train:main"
+act-evaluate = "so101_act.evaluate:main"
+act-smoke = "so101_act.smoke:main"
+
+[tool.uv.sources]
+hssg-manipulation = { path = "..", editable = true }
+torch = [{ index = "pytorch-cpu", extra = "cpu" }, { index = "pytorch-cu128", extra = "cuda" }]
+
+[tool.uv]
+conflicts = [[{ extra = "cpu" }, { extra = "cuda" }]]
+
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true
+
+[[tool.uv.index]]
+name = "pytorch-cu128"
+url = "https://download.pytorch.org/whl/cu128"
+explicit = true
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["so101_act*"]

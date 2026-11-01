@@ -10,6 +10,8 @@ __pycache__/
 build/
 dist/
 outputs/
+training/data/
+training/runs/
 .env
 .env.*
 !.env.example

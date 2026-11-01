@@ -74,6 +74,8 @@ PICK의 `object_pose`는 현재 물체 자세, `target_ee_pose`는 선택한 그
 PLACE만 `place_pose`를 필수로 받는다. 실제 로봇에서는 파지한 물체↔EE 상대 변환을 반영해야 한다.
 MuJoCo의 destination/buffer_pose는 빈 선반의 **바닥 위에 놓인 물체 중심**이다.
 목표 중심 z는 선반 바닥 두께+목표 물체 높이/2로 계산하고, 다른 높이의 방해물은 Planner에서 그 차이를 보정한다.
+MuJoCo 예시 Planner는 11cm 임시 선반에서 x±0.025m 두 슬롯을 후보로 골라 물체 footprint 중복을 검사한다.
+다른 크기의 선반/물체를 쓰는 B 구현은 해당 작업 공간에 맞는 후보를 제공해야 한다.
 mock은 EE z=물체 중심 z+0.08m를 사용한다.
 
 Action은 absolute joint-position target이다. 첫 5채널은 관절 rad, 마지막은 0=open/1=closed이다.
@@ -130,9 +132,22 @@ sample = load_sample("outputs/so101/shelves/seed_42")
 `arrays.npz`는 RGB/깊이/관절/카메라 배열, `sample.json`은 GT·접촉·EE·graph·목표·설정·버전·모델 커밋이다.
 읽을 때 allow_pickle=False를 사용한다. `rgb.png`는 실제 렌더링이 있는 경우에만 저장한다.
 코드에 실행 중인 MuJoCo model/data 객체를 넘기지 않으므로 각 모듈이 캡처한 데이터로 독립 개발할 수 있다.
-기본 SO-101 C는 관절 hold 출력만 제공한다. 파지/배치를 수행하는 ACT/IK 정책은 팀 C가 개발한다.
+SO-101 C는 `HSSG_ACT_CHECKPOINT`가 없으면 MuJoCo GT 전문가를 사용하고, 지정하면 별도 `training/` 프로젝트의 ACT를 로드한다.
+`HSSG_C_BACKEND=expert|act|hold|auto`로 선택할 수 있다. hold는 명시적인 진단용이다.
+전문가는 별도 공식 로봇 모델로 IK를 계산하고 실제 관측·접촉으로 단계별 제어한다. 살아 있는 환경의 model/data를 받거나 수정하지 않는다.
+계획한 물체의 집기·파지 확인·들어 올리기, 배치 위치 보정·부분 개방·후퇴·완전 개방을 수행한다.
+배치가 목표 밖에 정착하면 최대 두 번 재집기를 시도하고, 관절 한계·파지 실패·정체는 오류로 반환한다.
+목표 인코딩 `so101-goal-v2`는 primitive one-hot 2, 시작 물체 pose 7, PLACE pose 7, 유효 플래그 1,
+PLACE 시작 시 물체↔EE 상대 pose 7, 상대 pose 유효 플래그 1을 합친 25D이다.
+상대 pose는 C가 Subgoal 시작 시 물체 자세와 실제 EE 자세로 계산해 고정한다. EE 자세가 없으면 공식 로봇 FK를 사용한다.
+ID와 mock EE 목표는 신경망 특징에 포함하지 않는다. 공통 필드와 세 함수 API는 변경하지 않는다.
+목표 인코더는 `src/action_generator/goal.py`, 학습/수집/평가 안내는 `training/README.md`이다.
+내부 K-step 예측 중 4개를 사용하되, C는 실제 관측 기준으로 명령을 제한하여 한 tick씩 `ActionChunk[1,6]`으로 반환한다.
+`training`의 `act-generate`가 실제 성공한 전문가 시연을 자동 저장한다. 학습된 ACT와 전문가 성공률은 구분한다.
+기본 실행 예산은 Subgoal당 450 tick이다. 데이터 수집·표시용 `run_pipeline(on_step=...)`은
+실행된 각 명령 뒤 `(before_observation, command, after_observation, subgoal)`을 받으며, 생략하면 기존 동작과 같다.
 
 v0.3은 v0.2의 세 함수 API와 기존 필드를 유지하며 실제 환경용 선택적 관측 필드를 추가했다.
 v0.1의 `hssg_manipulation.common`/Protocol/codec과는 호환되지 않는다.
 필드를 바꾸면 이 문서, `pipeline/types.py`, JSON 예시와 소비자/테스트를 함께 수정한다.
-실제 관절 매핑과 학습용 Goal 인코딩은 팀 합의 후 확정한다.
+관절 매핑은 SO-101 기준을 사용한다. 위 Goal 인코딩은 모듈 C 내부 v1이며 변경 시 시연·체크포인트 버전도 변경해야 한다.

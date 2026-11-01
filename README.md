@@ -65,7 +65,11 @@ uv run python scripts/check_module.py c
 
 다른 Python 모듈을 지정하려면 `--module my_package.my_module`을 붙인다.
 현재 A는 MuJoCo GT 접촉 기반 적층 그래프 예시, B는 단순 순서 선택 예시이다.
-**C의 SO-101 시작 코드는 현재 관절을 유지하는 hold baseline이다. ACT/파지 정책은 팀 C의 개발 대상이다.**
+**C는 체크포인트 없이도 IK·접촉 피드백 전문가로 PICK/PLACE를 수행한다. `HSSG_ACT_CHECKPOINT`를 지정하면 목표 조건부 ACT를 사용한다.**
+시연 수집·학습·평가는 루트의 별도 uv 프로젝트 [training/](training/README.md)에서 진행한다.
+전문가 제어기는 ACT 학습 결과와 구분한다. 자동 시연 생성도 제공한다.
+현재 작업 폴더의 `training/runs/act_grasp/best.pt`는 `accessible`의 상자 B/C에 대해 실제 집기·배치를 검증한 초기 ACT이다.
+사용법과 성공/실패 범위는 [모듈 C 검증 기록](training/VALIDATION.md)에 있다.
 단독 검사는 입출력 확인이며 물체 회수 성공 평가가 아니다.
 
 ## 같은 입력 파일로 독립 개발
@@ -90,7 +94,7 @@ uv run python scripts/check_module.py b --sample outputs/so101/shelves/seed_42
 배치 목표의 z는 빈 선반의 바닥 두께와 물체 높이를 반영한다.
 배치는 서로 겹치지 않는 후보 위치와 회전에서 샘플링하고 MuJoCo 물리로 안정화한다.
 큰 상자를 아래에 놓고 그보다 작은 상자를 위에 쌓는다. 바닥 목표 `shelf_2_obj_01` 위에는 방해물을 배치한다.
-일반적인 물체의 파지 도달 가능성/경로는 아직 검증하지 않는다.
+전문가는 현재 상자 장면에서 검증하며, 임의 형상·모든 무작위 배치의 도달 가능성을 보장하지 않는다.
 기존 소형 회귀 장면은 `--case blocked`, `--case accessible`, `--case after_move`로 생성한다.
 배치는 `--seed`로 재현한다. 저장 폴더에는 `rgb.png`, 숫자 배열 `arrays.npz`,
 타입별 데이터·모델 커밋·환경 설정·버전 기록 `sample.json`이 있다. pickle은 사용하지 않는다.
@@ -115,10 +119,16 @@ CLI에서도 모듈 경로를 지정할 수 있다.
 
 ```sh
 uv run python scripts/run_pipeline.py --backend mujoco --action-module my_package.my_policy
+uv run python scripts/run_pipeline.py --backend mujoco --controller expert --seed 42 --gui
+uv run python scripts/run_pipeline.py --backend mujoco --controller expert --physics-only
 ```
 
-기본 C=hold로는 PICK/PLACE를 수행하지 못하며 실행 예산 소진으로 실패한다.
-이 결과를 ACT나 목표 추출 성공으로 보고하지 않는다.
+기본 `auto`는 체크포인트가 있으면 ACT, 없으면 전문가를 선택한다. `--controller expert`는 전문가를 명시한다.
+`--controller hold`는 관절 유지 진단용이며 작업을 수행하지 않는다. 실패 시 다른 제어기로 몰래 전환하지 않는다.
+전문가는 관절 명령만 출력하고, 실제 접촉으로 집기·들어 올리기·배치·놓기를 수행한다. 물체 위치를 직접 변경하지 않는다.
+현재 B의 MuJoCo 예시는 임시 선반의 두 슬롯을 사용해 두 방해물을 분리해서 배치한다.
+PICK/PLACE당 450 tick, 최대 Subgoal 12개로 제한하고, 예외/실패/완료 시 stop한다.
+연구용 RGB-D 인식·탐색 시스템과 학습된 ACT 성공률은 각각 별도 검증해야 한다.
 기존 mock 연결 예제는 `uv run python scripts/run_pipeline.py --backend mock`으로 따로 실행한다.
 
 ## 구조와 명세
@@ -133,10 +143,12 @@ configs/io/README.md         공통 입출력 명세
 assets/so101/                공식 모델 출처와 다운로드 manifest
 scripts/                     설치·GUI·모듈 검사·통합 실행
 tests/                       CPU 계약·물리·통합 테스트
+training/                    별도 uv 프로젝트: 자동 시연·ACT 학습·평가
 ```
 
 먼저 [입출력 명세](configs/io/README.md)를 맞춘다. 팔 관절은 radian, 그리퍼는 0=open/1=closed이며
-실제 모터 원시 단위와 구분한다. 실제 로봇 연결과 ACT 학습은 이 환경 구축에 포함하지 않는다.
+실제 모터 원시 단위와 구분한다. 실제 로봇 연결은 포함하지 않는다.
+모듈 C의 ACT 학습 환경은 공통 패키지와 분리된 [training/](training/README.md)에 있다.
 
 ```sh
 uv run python -m unittest discover -s tests -v

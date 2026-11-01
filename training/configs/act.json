@@ -1,0 +1,24 @@
+{
+  "seed": 42,
+  "device": "auto",
+  "epochs": 100,
+  "batch_size": 16,
+  "learning_rate": 0.0001,
+  "weight_decay": 0.0001,
+  "kl_weight": 1.0,
+  "validation_fraction": 0.2,
+  "num_workers": 0,
+  "torch_threads": 4,
+  "model": {
+    "image_size": [120, 160],
+    "chunk_size": 16,
+    "hidden_dim": 128,
+    "latent_dim": 16,
+    "nheads": 4,
+    "encoder_layers": 2,
+    "decoder_layers": 2,
+    "posterior_layers": 2,
+    "feedforward_dim": 512,
+    "dropout": 0.1
+  }
+}

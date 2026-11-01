@@ -1,13 +1,42 @@
-"""모듈 C 시작점. SO-101에서는 현재 관절을 유지한다. ACT/파지 정책은 팀 C가 구현한다."""
+"""모듈 C: 체크포인트 ACT 또는 즉시 실행 가능한 MuJoCo 전문가 제어기."""
+
+from functools import lru_cache
+import os
+from pathlib import Path
 
 import numpy as np
 
 from pipeline.types import ActionChunk, Observation, Subgoal, check
 
 
+@lru_cache(maxsize=1)
+def _load_act(checkpoint, device):
+    try:
+        from so101_act.policy import ACTPolicy
+    except ImportError as exc:
+        raise RuntimeError('ACT needs the training environment: uv run --project training --extra cpu ... '
+                           '(or --extra cuda)') from exc
+    return ACTPolicy(checkpoint, device=device)
+
+
+@lru_cache(maxsize=1)
+def _load_expert():
+    from .expert import SO101Expert
+    return SO101Expert()
+
+
 def predict_action_chunk(observation: Observation, subgoal: Subgoal) -> ActionChunk:
     if observation.robot_id == "so101":
-        # 실제 관절 명령 형식을 독립 검사하는 hold baseline. Subgoal 수행 성공을 의미하지 않는다.
+        checkpoint = os.environ.get('HSSG_ACT_CHECKPOINT')
+        mode = os.environ.get('HSSG_C_BACKEND', 'auto')
+        check(mode in ('auto', 'expert', 'act', 'hold'), 'unknown HSSG_C_BACKEND')
+        if mode == 'act' or (mode == 'auto' and checkpoint):
+            check(bool(checkpoint), 'ACT mode requires HSSG_ACT_CHECKPOINT')
+            return _load_act(str(Path(checkpoint).resolve()), os.environ.get('HSSG_ACT_DEVICE', 'auto')).predict_action_chunk(
+                observation, subgoal)
+        if mode != 'hold':
+            return _load_expert().predict_action_chunk(observation, subgoal)
+        # Explicit diagnostic baseline, never used as an automatic fallback after failures.
         return ActionChunk(subgoal.subgoal_id, np.repeat(observation.robot_state[None, :], 4, axis=0),
                            observation.control_dt, observation.robot_id)
     check(observation.robot_id == "mock", "starter action generator only supports mock robot")
