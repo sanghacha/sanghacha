@@ -14,11 +14,14 @@ from .target import TargetResolver
 
 def run_pipeline(env: MockEnvironment | MujocoEnvironment, task: TaskRequest, *, seed: int = 0,
                  generate_graph=generate_scene_graph, plan_subgoal=plan_next_subgoal,
-                 predict_action=predict_action_chunk, on_step=None, refresh_observation=None) -> list[Subgoal]:
+                 predict_action=predict_action_chunk, on_step=None, refresh_observation=None, on_event=None) -> list[Subgoal]:
     """자기 팀 함수 하나만 keyword argument로 교체해서 통합할 수 있다."""
     completed = []
     seen_ids = set()
     resolver = TargetResolver()
+    def emit(event, **payload):
+        if on_event is not None:
+            on_event(event, **payload)
     try:
         observation = env.reset(seed)
         check(env.contains(task.destination.position), "destination outside workspace")
@@ -34,7 +37,9 @@ def run_pipeline(env: MockEnvironment | MujocoEnvironment, task: TaskRequest, *,
             check(graph.episode_id == observation.episode_id and graph.source == observation.source and
                   np.isclose(graph.timestamp, observation.timestamp, rtol=0, atol=1e-9), "stale/mismatched graph")
             task = resolver.resolve(graph, task)
+            emit('scene', observation=observation, graph=graph, task=task)
             if env.task_complete(task):
+                emit('finished', observation=observation, completed=tuple(completed))
                 return completed
             check(len(completed) < env.config["max_subgoals"], "subgoal count budget exhausted")
             subgoal = plan_subgoal(graph, task, observation.robot_state)
@@ -46,6 +51,8 @@ def run_pipeline(env: MockEnvironment | MujocoEnvironment, task: TaskRequest, *,
             check(env.contains(subgoal.target_ee_pose.position), "EE target outside workspace")
             if subgoal.place_pose:
                 check(env.contains(subgoal.place_pose.position), "placement outside workspace")
+            emit('planned', observation=observation, graph=graph, task=task, subgoal=subgoal,
+                 index=len(completed)+1, budget=env.config['max_steps_per_subgoal'])
             steps = 0
             while not env.subgoal_complete(subgoal):
                 check(steps < env.config["max_steps_per_subgoal"], "subgoal step budget exhausted")
@@ -54,6 +61,7 @@ def run_pipeline(env: MockEnvironment | MujocoEnvironment, task: TaskRequest, *,
                 check(chunk.subgoal_id == subgoal.subgoal_id and chunk.robot_id == observation.robot_id,
                       "stale/mismatched action chunk")
                 check(np.isclose(chunk.command_dt, observation.control_dt, rtol=1e-6, atol=1e-9), "wrong command_dt")
+                emit('chunk', chunk=chunk)
                 count = min(env.config["n_action_steps"], env.config["max_steps_per_subgoal"] - steps)
                 for command in chunk.commands[:count]:
                     previous = observation
@@ -66,6 +74,10 @@ def run_pipeline(env: MockEnvironment | MujocoEnvironment, task: TaskRequest, *,
                     if env.subgoal_complete(subgoal):
                         break
             completed.append(subgoal)
+            emit('completed', observation=observation, subgoal=subgoal, steps=steps)
         raise RuntimeError("pipeline did not terminate")
+    except Exception as exc:
+        emit('failed', error=str(exc))
+        raise
     finally:
         env.stop()

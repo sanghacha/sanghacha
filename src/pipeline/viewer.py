@@ -52,14 +52,16 @@ class JointJogControl:
 class SimulationViewer:
     """MuJoCo 렌더러 + GLFW 키 상태. OS 전역 키보드 훅은 사용하지 않는다."""
 
-    def __init__(self, model, data, *, interactive=True):
+    def __init__(self, model, data, *, interactive=True, inspector=None):
         self.interactive = interactive
+        self.inspector = inspector
         if not glfw.init():
             raise RuntimeError("GLFW initialization failed")
         # MuJoCo's offscreen renderer leaves GLFW's global VISIBLE hint disabled.
         glfw.default_window_hints()
         glfw.window_hint(glfw.VISIBLE, glfw.TRUE)
-        self.window = glfw.create_window(1100, 800, "SO-101 - hold Up/Down to move", None, None)
+        self.window = glfw.create_window(1600 if inspector else 1100, 960 if inspector else 800,
+                                         "SO-101 pipeline inspector" if inspector else "SO-101 - hold Up/Down to move", None, None)
         if not self.window:
             raise RuntimeError("Cannot create MuJoCo OpenGL window")
         glfw.make_context_current(self.window)
@@ -79,9 +81,15 @@ class SimulationViewer:
         glfw.set_window_focus_callback(self.window, self._focus)
         glfw.set_cursor_pos_callback(self.window, self._mouse_move)
         glfw.set_scroll_callback(self.window, self._scroll)
+        if inspector is not None:
+            glfw.set_mouse_button_callback(self.window, self._click)
 
     def _key(self, window, key, scancode, action, mods):
         if action != glfw.PRESS:
+            return
+        inspector = getattr(self, 'inspector', None)
+        if inspector is not None and key in (glfw.KEY_SPACE, glfw.KEY_N):
+            inspector.handle_key('space' if key == glfw.KEY_SPACE else 'next')
             return
         if not getattr(self, 'interactive', True) and key not in (*range(glfw.KEY_1, glfw.KEY_6+1), glfw.KEY_ESCAPE):
             return
@@ -117,6 +125,10 @@ class SimulationViewer:
         previous, self._mouse = self._mouse, (x, y)
         if previous is None:
             return
+        if self.inspector is not None:
+            w = glfw.get_window_size(window)[0]
+            if x >= w*.625:
+                return
         height = max(1, glfw.get_window_size(window)[1])
         if glfw.get_mouse_button(window, glfw.MOUSE_BUTTON_LEFT) == glfw.PRESS:
             action = mujoco.mjtMouse.mjMOUSE_ROTATE_V
@@ -125,6 +137,43 @@ class SimulationViewer:
         else:
             return
         mujoco.mjv_moveCamera(self.model, action, (x-previous[0])/height, (y-previous[1])/height, self.cam)
+
+    def _click(self, window, button, action, mods):
+        if button != glfw.MOUSE_BUTTON_LEFT or action != glfw.PRESS:
+            return
+        x, y = glfw.get_cursor_pos(window)
+        width, height = glfw.get_window_size(window)
+        left = width*.625
+        if x >= left and height > 0:
+            self.inspector.select_at((x-left)/(width-left)*600, y/height*960)
+
+    def _markers(self, observation):
+        """Decorations use the public observation/graph only, never body IDs."""
+        inspector = self.inspector
+        if inspector is None:
+            return
+        objects = observation.perceived_objects if observation.source == 'rgbd' else (observation.ground_truth or ())
+        for obj in objects:
+            if self.scene.ngeom >= self.scene.maxgeom:
+                break
+            selected = inspector.goal is not None and obj.object_id == inspector.goal.object_id
+            target = inspector.task is not None and obj.object_id == inspector.task.target_object_id
+            focused = selected or target or obj.object_id == inspector.selected
+            related = obj.object_id in inspector.explanation.get('chain', [])
+            geom = self.scene.geoms[self.scene.ngeom]
+            color = np.array([1., .8, .25, 1.] if target else [.2, .95, .9, 1.] if focused else [.6, .7, .85, .7], dtype=np.float32)
+            mujoco.mjv_initGeom(geom, mujoco.mjtGeom.mjGEOM_SPHERE, np.array([.0035]*3),
+                               np.array(obj.pose.position)+[0, 0, obj.size[2]/2+.006], np.eye(3).ravel(), color)
+            from .inspector import short
+            geom.label = short(obj.object_id) if focused or related else ''
+            self.scene.ngeom += 1
+        goal = inspector.goal
+        if goal is not None and goal.place_pose is not None and self.scene.ngeom < self.scene.maxgeom:
+            geom = self.scene.geoms[self.scene.ngeom]
+            mujoco.mjv_initGeom(geom, mujoco.mjtGeom.mjGEOM_SPHERE, np.array([.006]*3),
+                               np.array(goal.place_pose.position), np.eye(3).ravel(), np.array([.2, 1., .8, .8], np.float32))
+            geom.label = 'PLACE goal'
+            self.scene.ngeom += 1
 
     def _scroll(self, window, x, y):
         mujoco.mjv_moveCamera(self.model, mujoco.mjtMouse.mjMOUSE_ZOOM, 0, -.05*y, self.cam)
@@ -138,9 +187,11 @@ class SimulationViewer:
         if width == 0 or height == 0:
             return
         viewport = mujoco.MjrRect(0, 0, width, height)
+        scene_viewport = mujoco.MjrRect(0, 0, int(width*.625), height) if self.inspector else viewport
         mujoco.mjv_updateScene(self.model, self.data, self.opt, None, self.cam,
                               mujoco.mjtCatBit.mjCAT_ALL, self.scene)
-        mujoco.mjr_render(viewport, self.scene, self.context)
+        self._markers(observation)
+        mujoco.mjr_render(scene_viewport, self.scene, self.context)
         j = self.joint
         value, target, lower, upper = (observation.robot_state[j], control.target[j], control.lower[j], control.upper[j])
         if j < 5:
@@ -156,8 +207,24 @@ class SimulationViewer:
                             f"Executing task\n{value:+.1f} / {target:+.1f} {unit}\n{lower:.1f} .. {upper:.1f} {unit}\n"
                             "1..6 inspect joint | ESC stop\nSee window title for current task\n"
                             "Left drag rotate | Right drag pan | Wheel zoom")
+        if self.inspector is not None:
+            goal = self.inspector.goal
+            from .inspector import short
+            self._status = (f'SO-101 | {self.inspector.controller.upper()}\nSubgoal\nJoint {j+1}\nCamera',
+                            f'Pipeline inspector\n{goal.primitive}({short(goal.object_id)})' if goal else 'Pipeline inspector\nObserving')
+            self._status = (self._status[0], self._status[1]+f'\n{value:+.1f} / {target:+.1f} {unit}\nDrag rotate/pan | Wheel zoom')
         mujoco.mjr_overlay(mujoco.mjtFont.mjFONT_NORMAL, mujoco.mjtGridPos.mjGRID_TOPLEFT,
-                           viewport, *self._status, self.context)
+                           scene_viewport, *self._status, self.context)
+        if self.inspector is not None:
+            if self.inspector.camera_image is not None:
+                thumb_width = min(420, int(scene_viewport.width*.42))
+                thumb_height = int(180*thumb_width/420)
+                thumb = self.inspector.camera_image.resize((thumb_width, thumb_height), Image.Resampling.BILINEAR)
+                rect = mujoco.MjrRect(scene_viewport.width-thumb_width-12, height-thumb_height-12, thumb_width, thumb_height)
+                mujoco.mjr_drawPixels(np.ascontiguousarray(np.flipud(thumb)).reshape(-1), None, rect, self.context)
+            side = mujoco.MjrRect(scene_viewport.width, 0, width-scene_viewport.width, height)
+            pixels = np.ascontiguousarray(np.flipud(self.inspector.render(side.width, height)))
+            mujoco.mjr_drawPixels(pixels.reshape(-1), None, side, self.context)
         if screenshot is not None:
             pixels = np.empty((height, width, 3), dtype=np.uint8)
             mujoco.mjr_readPixels(pixels, None, viewport, self.context)

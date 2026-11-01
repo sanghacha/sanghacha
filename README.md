@@ -16,6 +16,8 @@
 설치·목표 지정·실행·검증 범위는 [RGB-D 통합 실행](docs/rgbd_integration.md)을 따른다.
 RGB-D와 학습된 ACT를 함께 쓰는 Python 3.11 CUDA 환경 및 평가 결과는
 [RGB-D ACT 검증 기록](training/RGBD_VALIDATION.md)에 있다.
+`--inspect`를 붙이면 시뮬레이션과 씬그래프 갱신·플래너 선택 이유·현재 Subgoal을 같은 창에서 볼 수 있다.
+Space 일시정지, N 다음 단계, 노드 클릭 검사는 [시각화 안내](docs/inspector.md)를 따른다.
 
 ## 처음 설치하기
 

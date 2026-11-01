@@ -67,6 +67,7 @@ class RGBDEnvironment:
         self.verified = False
         self.events = []
         self.regions = []
+        self.on_scene = None
         self.jaw_bodies = (simulator.fixed_jaw_body, simulator.moving_jaw_body)
         base = simulator.model.body('base').id
         self.robot_bodies = {base}
@@ -133,7 +134,8 @@ class RGBDEnvironment:
                                output=str((directory/'predictions').resolve()))
                     for arg in self.inference_command]
             subprocess.run(argv, check=True)
-        objects = fuse_views({name: proposals(name, frame, meta, prediction) for name, frame in frames.items()})
+        by_camera = {name: proposals(name, frame, meta, prediction) for name, frame in frames.items()}
+        objects = fuse_views(by_camera)
         rejected = 0
         for obj in objects:
             try:
@@ -177,6 +179,17 @@ class RGBDEnvironment:
         self.objects = self.graph.nodes
         self.last_graph, self.last_capture_time = raw_graph, observation.timestamp
         self.snapshot += 1
+        if self.on_scene is not None:
+            views = {}
+            for name, items in by_camera.items():
+                detections = []
+                for obj in items:
+                    record = obj['observations'][0]
+                    ident = next((track['instance_id'] for track in tracks if track['status'] == 'seen'
+                                  and record in track['observations']), None)
+                    detections.append(dict(object_id=ident, mask=obj['_mask'], bbox=record['bbox']))
+                views[name] = dict(rgb=frames[name]['rgb'], detections=detections)
+            self.on_scene(observation=self.observe(), graph=self.graph, raw_graph=raw_graph, camera_views=views)
         print(f'RGB-D snapshot {self.snapshot}: {len(self.objects)} current objects, held={self.held_id}', flush=True)
         return self.observe()
 

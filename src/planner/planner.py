@@ -166,3 +166,42 @@ def plan_next_subgoal(graph: SceneGraph, task: TaskRequest,
     x, y, z = (place_pose or obj.pose).position
     return Subgoal(f"{graph.episode_id}:{graph.timestamp:.9f}:{primitive}:{obj.object_id}",
                    primitive, obj.object_id, obj.pose, Pose((x, y, z + MOCK_GRASP_OFFSET)), place_pose)
+
+
+def explain_subgoal(graph, task, subgoal):
+    """Expose this planner's actual rules for inspection, without planning again."""
+    on = _on_top_of(graph)
+    visible = task.target_object_id in {obj.object_id for obj in graph.nodes}
+    result = dict(support_pairs=sorted(on),
+                  support_source='geometry' if graph.source == 'rgbd' and not any(e.relation == 'on_top_of' for e in graph.edges) else 'graph',
+                  chain=[], candidates=[])
+    if subgoal.primitive == 'PLACE':
+        result.update(mode='target_place' if subgoal.object_id == task.target_object_id else 'buffer_place',
+                      reason='목표 물체를 회수 트레이로 옮깁니다.' if subgoal.object_id == task.target_object_id else
+                             '파지한 방해물을 빈 배치 공간으로 옮깁니다.')
+        if graph.source != 'mock_gt' and subgoal.object_id != task.target_object_id:
+            obj = graph.object(subgoal.object_id)
+            for dx in (.025, -.025):
+                p = (task.buffer_pose.position[0]+dx, task.buffer_pose.position[1], subgoal.place_pose.position[2])
+                result['candidates'].append(dict(label=f'buffer x={p[0]:.3f}', free=_free_xy(graph, obj, p)))
+    elif not visible:
+        result.update(mode='search', reason='목표가 관측되지 않아, 숨은 공간이 많은 더미의 맨 위 물체부터 치웁니다.')
+        for shelf, stacks in _hidden_by_shelf(graph, on).items():
+            for obj, count in stacks:
+                if count > 0 and (task.target_spec is None or task.target_spec.region in (None, shelf)):
+                    result['candidates'].append(dict(object_id=obj.object_id, region=shelf,
+                        shelf_hidden=sum(n for _, n in stacks), hidden=count,
+                        distance=float(np.linalg.norm(np.array(obj.pose.position[:2])-_REACH))))
+        result['candidates'].sort(key=lambda c: (-c['shelf_hidden'], -c['hidden'], c['distance'], c['object_id']))
+    else:
+        chain, current = [task.target_object_id], task.target_object_id
+        while current != subgoal.object_id:
+            above = sorted(a for a, b in on if b == current)
+            if not above or above[0] in chain:
+                break
+            current = above[0]
+            chain.append(current)
+        result.update(chain=chain, mode='target_pick' if subgoal.object_id == task.target_object_id else 'unblock',
+                      reason='접근 가능한 목표 물체를 집습니다.' if subgoal.object_id == task.target_object_id else
+                             '목표 위에 놓인 방해물을 위에서부터 제거합니다.')
+    return result
