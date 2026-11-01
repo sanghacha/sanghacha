@@ -10,13 +10,13 @@ from pipeline.types import ActionChunk, Observation, Subgoal, check
 
 
 @lru_cache(maxsize=1)
-def _load_act(checkpoint, device):
+def _load_act(checkpoint, device, execute_steps=None, temporal_ensemble=False):
     try:
         from so101_act.policy import ACTPolicy
     except ImportError as exc:
         raise RuntimeError('ACT needs the training environment: uv run --project training --extra cpu ... '
                            '(or --extra cuda)') from exc
-    return ACTPolicy(checkpoint, device=device)
+    return ACTPolicy(checkpoint, device=device, execute_steps=execute_steps, temporal_ensemble=temporal_ensemble)
 
 
 @lru_cache(maxsize=1)
@@ -32,7 +32,10 @@ def predict_action_chunk(observation: Observation, subgoal: Subgoal) -> ActionCh
         check(mode in ('auto', 'expert', 'act', 'hold'), 'unknown HSSG_C_BACKEND')
         if mode == 'act' or (mode == 'auto' and checkpoint):
             check(bool(checkpoint), 'ACT mode requires HSSG_ACT_CHECKPOINT')
-            return _load_act(str(Path(checkpoint).resolve()), os.environ.get('HSSG_ACT_DEVICE', 'auto')).predict_action_chunk(
+            steps = os.environ.get('HSSG_ACT_EXECUTE_STEPS')
+            return _load_act(str(Path(checkpoint).resolve()), os.environ.get('HSSG_ACT_DEVICE', 'auto'),
+                             int(steps) if steps else None,
+                             os.environ.get('HSSG_ACT_TEMPORAL_ENSEMBLE', '0') == '1').predict_action_chunk(
                 observation, subgoal)
         if mode != 'hold':
             return _load_expert().predict_action_chunk(observation, subgoal)

@@ -37,6 +37,22 @@ def predict_action_chunk(observation: Observation, subgoal: Subgoal) -> ActionCh
 | `Subgoal` | `subgoal_id`, `primitive`, `object_id`, `object_pose`, `target_ee_pose`, `place_pose`, frame |
 | `ActionChunk` | `subgoal_id`, `commands float32[K,6]`, `command_dt`, `robot_id` |
 
+RGB-D 통합에서 사용하는 추가 필드(기존 호출의 기본값은 유지):
+
+- `SceneObject.color_rgb`: 관측 표면의 평균 RGB, 각 채널 `[0,1]`.
+- `Observation.perceived_objects`: 현재 추적 객체의 제어용 자세·크기. `ground_truth`와 구분한다.
+- `Observation.finger_contacts`: 고정/이동 jaw의 외부 접촉 여부 두 개. 물체의 물리 ID는 포함하지 않는다.
+- `SceneGraph.regions`: 영역별 XY 경계, `region_type`, `floor_top_m`. B의 숨은 공간 계산에 사용한다.
+- `TaskRequest.target_spec`: 선택적 `TargetSpec(reference_rgb, region, category, size_m, ...)`.
+  `TargetResolver`가 관측 객체에 매칭하고 `target_object_id`를 추적 ID로 바꾼다.
+  후보가 없으면 미해결 상태로 탐색하고, 모호한 후보는 오류로 중단한다.
+  최초 매칭 후에는 ID를 유지하며 초기 영역 조건을 다시 적용하지 않는다.
+
+`RGBDEnvironment`에서는 객체 GT·GT 접촉 ID를 A/B/C에 보내지 않는다.
+집은 물체의 이동 중 자세는 최초 관측과 TCP 상대 변환으로 전파한 추정값이다.
+PICK은 양쪽 접촉과 TCP 상승, PLACE는 개방 후 정착 시간을 두고 새 RGB-D 관측으로 확인한다.
+이 관측 기반 판정과 기존 GT 물리 판정의 차이는 [RGB-D 통합 실행](../../docs/rgbd_integration.md)을 따른다.
+
 `Observation.depth`는 선택적 float32[H,W], m이며 0은 유효하지 않은 깊이를 뜻한다.
 `camera_intrinsics`는 float64[3,3], `camera_to_robot_base`는 float64[4,4]이다.
 카메라 optical 좌표는 x=오른쪽, y=아래, z=전방으로 정의한다.

@@ -5,8 +5,12 @@
 A/B의 기본 환경에는 PyTorch를 추가하지 않는 **별도 uv 프로젝트**이다.
 아래 명령은 모두 저장소 루트에서 실행한다.
 
-현재는 **시뮬레이터 GT로 물체 자세와 완료 여부를 얻는 기준 구현**이다.
-RGB-D 인식·추적·숨은 목표 탐색은 구현하지 않는다. ID를 모델 특징으로 사용하지 않는다.
+RGB-D 인식에서 생성한 목표로 ACT를 실행·수집·학습·평가하는 경로는
+[RGB-D ACT 검증 기록](RGBD_VALIDATION.md)을 따른다. Open3D와 CUDA ACT를 함께 쓰는 Python 3.11 환경은
+`training/.venv-rgbd`로 분리한다.
+
+기존 수집 명령은 **시뮬레이터 GT로 물체 자세와 완료 여부를 얻는 기준 구현**이다.
+RGB-D 경로는 별도 옵션으로 선택하며, 데이터의 source·교사·물리 검증 출처를 기록한다. ID를 모델 특징으로 사용하지 않는다.
 전문가는 실제 관절 명령과 접촉 물리로 작동한다. 현재 작업 폴더에는 자동 시연으로 학습하고
 `accessible` 장면에서 검증한 초기 ACT 체크포인트 `training/runs/act_grasp/best.pt`도 있다.
 데이터·가중치는 Git 제외 대상이므로 팀원에게는 별도로 복사하거나 자동 수집·학습 명령으로 생성한다.
@@ -22,7 +26,8 @@ uv run --project training --extra cuda python scripts/run_pipeline.py --backend 
 이 명령은 실제 ACT만 사용한다. 실패를 전문가 행동으로 대체하지 않는다.
 GPU 추론은 `--device cuda`, GPU 없는 PC의 설치 환경은 `--extra cpu`를 사용한다.
 현재 ACT 검증 범위는 고정 카메라의 `accessible` 장면과 3cm 상자 B/C이다.
-선반 3개 장면은 아래 전문가로 검증했고, 해당 장면의 ACT는 같은 자동 시연 경로로 별도 학습해야 한다.
+이 `act_grasp` 체크포인트의 범위는 소형 장면이다. 선반 3개용 추가 ACT 체크포인트와
+RGB-D 통합 성공·실패 범위는 [RGB-D ACT 검증 기록](RGBD_VALIDATION.md)에 있다.
 
 ## 학습 없이 A/B/C 통합 실행
 

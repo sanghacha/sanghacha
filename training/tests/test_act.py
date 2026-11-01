@@ -75,6 +75,68 @@ class DatasetTests(unittest.TestCase):
         np.testing.assert_array_equal(last['padding'], [False, True, True, True])
         np.testing.assert_array_equal(last['actions'][1:], 0.)
 
+    def test_velocity_condition_uses_only_previous_measured_state(self):
+        segment = read_segment(self.segment())
+        segment['states'][1] = .03
+        segment['states'][2] = .05
+        config = model_config()
+        config.include_velocity = True
+        data = ChunkDataset([segment], identity_stats(), config)
+        np.testing.assert_allclose(data[0]['state'][6:], 0.)
+        np.testing.assert_allclose(data[1]['state'][6:], np.array([.03]*6)/control()['max_delta'])
+        segment['states'][2] = 1.
+        np.testing.assert_allclose(data[1]['state'][6:], np.array([.03]*6)/control()['max_delta'])
+
+    def test_multiple_roots_keep_calibration_checks_and_reject_overlap(self):
+        first = self.segment('seed-0')
+        second = self.segment('seed-1')
+        self.assertEqual(len(discover_segments([first, second])), 2)
+        with self.assertRaisesRegex(ValueError, 'overlapping'):
+            discover_segments([self.root, first])
+        path = second/'metadata.json'
+        meta = json.loads(path.read_text())
+        meta['camera_to_robot_base'][0][3] = .1
+        path.write_text(json.dumps(meta))
+        with self.assertRaisesRegex(ValueError, 'mixed camera'):
+            discover_segments([first, second])
+
+    def test_recovery_prefix_keeps_original_place_goal_and_records_only_teacher_actions(self):
+        from types import SimpleNamespace
+        from pipeline.types import ActionChunk, TaskRequest
+        from so101_act.generate import generate_episode
+        observation, pick = inputs()
+        observation = replace(observation, ee_pose=Pose((.2, 0., .08)))
+        goal = replace(pick, primitive='PLACE', place_pose=Pose((.08, .18, .03)))
+        moved = replace(observation, timestamp=1/30, ee_pose=Pose((.21, 0., .10)))
+        fake = SimpleNamespace(config={}, task=TaskRequest(goal.object_id, goal.place_pose, Pose((.08, -.18, .03))),
+            lower=control()['lower'], upper=control()['upper'], close=lambda: None,
+            subgoal_complete=lambda g: True, task_complete=lambda t: True)
+        fake.config['max_delta'] = control()['max_delta']
+        learner = SimpleNamespace(predict_action_chunk=lambda o, g: ActionChunk(g.subgoal_id,
+            np.full((1, 6), .01, np.float32), robot_id='so101'))
+        teacher = SimpleNamespace(predict_action_chunk=lambda o, g: ActionChunk(g.subgoal_id,
+            np.full((1, 6), .02, np.float32), robot_id='so101'))
+        def run(env, task, *, predict_action, on_step, **kwargs):
+            prefix = predict_action(observation, goal)
+            on_step(observation, prefix.commands[0], moved, goal)
+            action = predict_action(moved, goal)
+            on_step(moved, action.commands[0], replace(moved, timestamp=2/30), goal)
+            return [goal]
+        checkpoint = self.root/'prefix.pt'
+        checkpoint.write_bytes(b'unit fixture checkpoint digest')
+        with patch('so101_act.generate.MujocoEnvironment', return_value=fake), \
+             patch('so101_act.generate.SO101Expert', return_value=teacher), \
+             patch('so101_act.policy.ACTPolicy', return_value=learner), \
+             patch('so101_act.generate.provenance', return_value={}), \
+             patch('so101_act.generate.scene_group', return_value='scene'), \
+             patch('so101_act.generate.run_pipeline', side_effect=run):
+            result = generate_episode(self.root, 'accessible', 0, learner_checkpoint=checkpoint, learner_steps=1)
+        self.assertTrue(result['success'])
+        segment = read_segment(result['saved_segments'][0])
+        np.testing.assert_allclose(segment['goal'], encode_goal(goal, observation.ee_pose))
+        np.testing.assert_allclose(segment['actions'], .02)
+        np.testing.assert_allclose(segment['timestamps'], [1/30])
+
     def test_split_groups_all_subgoals_from_same_scene_and_stats_use_train_only(self):
         for group in ('seed-0', 'seed-0', 'seed-1', 'seed-1'):
             self.segment(group)
@@ -112,6 +174,47 @@ class DatasetTests(unittest.TestCase):
         self.assertTrue(np.isfinite(payload['metrics']['val_prior_l1']))
         self.assertNotEqual(payload['split']['train'][0]['group_id'], payload['split']['validation'][0]['group_id'])
 
+    def test_camera_transfer_is_explicit_and_recomputes_train_normalization(self):
+        self.segment('seed-0')
+        self.segment('seed-1')
+        config = json.loads(DEFAULT_CONFIG.read_text(encoding='utf-8'))
+        config.update(epochs=1, batch_size=2, device='cpu', torch_threads=2)
+        config['model'] = model_config().to_dict()
+        checkpoint = train_run(self.root, self.root/'original', config)
+        payload = torch.load(checkpoint, weights_only=True)
+        payload['camera']['camera_to_robot_base'][0][3] = .2
+        payload['stats']['states']['mean'] = [3.]*6
+        transferred = self.root/'different_camera.pt'
+        torch.save(payload, transferred)
+        with self.assertRaisesRegex(ValueError, 'camera calibration'):
+            train_run(self.root, self.root/'rejected', config, init_checkpoint=transferred)
+        result = train_run(self.root, self.root/'transferred', config, init_checkpoint=transferred, transfer_camera=True)
+        new = torch.load(result, weights_only=True)
+        self.assertTrue(new['camera_transfer'])
+        np.testing.assert_allclose(new['stats']['states']['mean'], 0.)
+        np.testing.assert_allclose(new['model']['state_to_action_scale'].numpy(),
+            np.array(new['stats']['states']['std'])/new['stats']['actions']['std'])
+
+    def test_feedback_transfer_expands_inputs_without_changing_action_contract(self):
+        self.segment('seed-0')
+        self.segment('seed-1')
+        config = json.loads(DEFAULT_CONFIG.read_text(encoding='utf-8'))
+        config.update(epochs=1, batch_size=2, device='cpu', torch_threads=2)
+        config['model'] = model_config().to_dict()
+        checkpoint = train_run(self.root, self.root/'base', config)
+        config['model'].update(include_velocity=True, include_goal_error=True)
+        with self.assertRaisesRegex(ValueError, 'velocity input transfer'):
+            train_run(self.root, self.root/'rejected', config, init_checkpoint=checkpoint)
+        config.update(allow_velocity_transfer=True, allow_goal_error_transfer=True)
+        with patch('action_generator.kinematics.SO101Kinematics') as kinematics:
+            kinematics.return_value.pose.return_value = Pose((.1, 0., .1))
+            result = train_run(self.root, self.root/'feedback', config, init_checkpoint=checkpoint)
+        payload = torch.load(result, weights_only=True)
+        self.assertEqual(payload['model']['state_proj.weight'].shape[1], 15)
+        obs, goal = inputs()
+        chunk = ACTPolicy(result, device='cpu').predict_action_chunk(replace(obs, ee_pose=Pose((.1, 0., .1))), goal)
+        self.assertEqual(chunk.commands.shape, (1, 6))
+
     def test_warm_start_expands_legacy_goal_without_validation_leakage(self):
         self.segment('seed-0')
         self.segment('seed-1')
@@ -134,6 +237,18 @@ class DatasetTests(unittest.TestCase):
 
 
 class ModelTests(unittest.TestCase):
+    def test_absolute_action_mode_does_not_copy_measured_state_into_prediction(self):
+        config = model_config()
+        config.residual_actions = False
+        model = GoalConditionedACT(config).eval()
+        with torch.no_grad():
+            model.action_head.weight.zero_()
+            model.action_head.bias.fill_(.2)
+        image = torch.zeros(1, 3, 32, 32)
+        for value in (0., 2.):
+            prediction, _, _ = model(image, torch.full((1, 6), value), torch.zeros(1, GOAL_DIM))
+            torch.testing.assert_close(prediction, torch.full((1, 4, 6), .2))
+
     def test_zero_residual_is_measured_state_in_action_units(self):
         model = GoalConditionedACT(model_config()).eval()
         stats = identity_stats()
@@ -210,6 +325,40 @@ class PolicyTests(unittest.TestCase):
             self.assertEqual(forward.call_count, 3)
             policy.predict_action_chunk(replace(observation, timestamp=0., episode_id='new-episode'), goal)
             self.assertEqual(forward.call_count, 4)
+
+    def test_temporal_ensemble_aligns_future_actions_and_clears_at_new_goal(self):
+        policy = ACTPolicy(self.checkpoint, device='cpu', temporal_ensemble=True)
+        observation, goal = inputs()
+        first = torch.tensor([.01, .02, .03, .04]).view(1, 4, 1).expand(1, 4, 6)
+        second = torch.full((1, 4, 6), .03)
+        with patch.object(policy.model, 'forward', side_effect=[(first, None, None), (second, None, None), (second, None, None)]):
+            policy.predict_action_chunk(observation, goal)
+            command = policy.predict_action_chunk(replace(observation, timestamp=1/30), goal)
+            expected = (.02*np.exp(-.2)+.03)/(np.exp(-.2)+1)
+            np.testing.assert_allclose(command.commands[0], expected, atol=1e-7)
+            command = policy.predict_action_chunk(replace(observation, timestamp=2/30), replace(goal, subgoal_id='next'))
+            np.testing.assert_allclose(command.commands[0], .03, atol=1e-7)
+
+    def test_velocity_state_is_reset_at_subgoal_boundary(self):
+        config = model_config()
+        config.include_velocity = True
+        self.payload['model_config'] = config.to_dict()
+        self.payload['model'] = GoalConditionedACT(config).state_dict()
+        torch.save(self.payload, self.checkpoint)
+        policy = ACTPolicy(self.checkpoint, device='cpu', execute_steps=1)
+        observation, goal = inputs()
+        states = []
+        def forward(image, state, encoded_goal):
+            states.append(state.cpu().numpy().copy())
+            return torch.zeros(1, 4, 6), None, None
+        with patch.object(policy.model, 'forward', side_effect=forward):
+            policy.predict_action_chunk(observation, goal)
+            changed = replace(observation, timestamp=1/30, robot_state=np.full(6, .03, np.float32))
+            policy.predict_action_chunk(changed, goal)
+            policy.predict_action_chunk(replace(changed, timestamp=2/30), replace(goal, subgoal_id='new'))
+        np.testing.assert_allclose(states[0][0, 6:], 0.)
+        np.testing.assert_allclose(states[1][0, 6:], np.array([.03]*6)/control()['max_delta'])
+        np.testing.assert_allclose(states[2][0, 6:], 0.)
 
     def test_rejects_diagnostic_checkpoint_wrong_camera_and_untrained_primitive(self):
         self.payload['diagnostic'] = True

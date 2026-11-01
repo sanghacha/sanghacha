@@ -7,7 +7,7 @@ from uuid import uuid4
 import numpy as np
 from PIL import Image
 
-from action_generator.goal import GOAL_DIM, GOAL_FIELDS, GOAL_VERSION, encode_goal
+from action_generator.goal import GOAL_DIM, GOAL_FIELDS, GOAL_VERSION, encode_goal, control_goal_error
 from pipeline.types import check
 
 DATA_VERSION = 'so101-demo-v1'
@@ -122,7 +122,10 @@ def read_segment(path):
 
 def discover_segments(root, *, allow_diagnostic=False):
     segments = []
-    for path in sorted(Path(root).rglob('metadata.json')):
+    roots = root if isinstance(root, (list, tuple)) else [root]
+    paths = [path for directory in roots for path in Path(directory).rglob('metadata.json')]
+    check(len({path.resolve() for path in paths}) == len(paths), 'overlapping demonstration roots')
+    for path in sorted(paths):
         if path.parent.suffix == '.partial':
             continue
         meta = json.loads(path.read_text(encoding='utf-8'))
@@ -177,6 +180,12 @@ class ChunkDataset:
         families = [(s['meta']['primitive'], s['meta']['object_id']) for s in segments]
         self.family_names = sorted(set(families))
         self.family_ids = [self.family_names.index(family) for family in families]
+        self._goal_errors = None
+        if config.include_goal_error:
+            from action_generator.kinematics import SO101Kinematics
+            kinematics = SO101Kinematics()
+            self._goal_errors = [np.array([control_goal_error(segment['goal'], kinematics.pose(state))
+                                          for state in segment['states']]) for segment in segments]
 
     def sampling_weights(self):
         counts = {family: sum(len(s['actions']) for i, s in enumerate(self.segments) if self.family_ids[i] == family)
@@ -201,9 +210,16 @@ class ChunkDataset:
             if self._images is not None:
                 self._images[index] = rgb
         state_stats = self.stats['states']
+        state = ((segment['states'][t]-state_stats['mean'])/state_stats['std']).astype(np.float32)
+        if self.config.include_velocity:
+            previous = segment['states'][max(0, t-1)]
+            velocity = (segment['states'][t]-previous)/np.asarray(segment['meta']['max_delta'])
+            state = np.r_[state, velocity].astype(np.float32)
+        if self.config.include_goal_error:
+            state = np.r_[state, self._goal_errors[s][t]].astype(np.float32)
         return {
             'image': preprocess_rgb(rgb, self.config.image_size),
-            'state': ((segment['states'][t]-state_stats['mean'])/state_stats['std']).astype(np.float32),
+            'state': state,
             'goal': (segment['goal']/self.stats['goal_scale']).astype(np.float32),
             'actions': actions, 'padding': padding,
             'family': np.int64(self.family_ids[s]),

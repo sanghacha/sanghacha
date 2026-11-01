@@ -11,6 +11,12 @@
 [RGB-D HSSG 패키지](docs/rgbd_hssg.md)를 사용한다. `rgbd_hssg`는 현재의 네 관계와
 스냅샷 간 변경 내역을 생성하며 기존 GT 기반 A/B/C 인터페이스는 유지한다.
 
+**RGB-D 인식 결과를 B/C와 연결하는 실행 경로도 제공한다.**
+색상 블록용 로컬 분할 또는 외부 SAM/DINO 명령을 선택하며,
+설치·목표 지정·실행·검증 범위는 [RGB-D 통합 실행](docs/rgbd_integration.md)을 따른다.
+RGB-D와 학습된 ACT를 함께 쓰는 Python 3.11 CUDA 환경 및 평가 결과는
+[RGB-D ACT 검증 기록](training/RGBD_VALIDATION.md)에 있다.
+
 ## 처음 설치하기
 
 uv와 Python 3.13을 기준으로 저장소 루트에서:

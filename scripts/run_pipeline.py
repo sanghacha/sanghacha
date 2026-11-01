@@ -1,10 +1,12 @@
 """uv run python scripts/run_pipeline.py"""
 
 import argparse
+import json
 from importlib import import_module
 import os
 from pathlib import Path
 import time
+from uuid import uuid4
 
 from pipeline.environment import MockEnvironment
 from pipeline.runner import run_pipeline
@@ -22,11 +24,24 @@ def main() -> int:
     parser.add_argument('--controller', choices=('auto', 'expert', 'act', 'hold'), default='auto')
     parser.add_argument('--checkpoint', type=Path, help='ACT checkpoint; also accepts HSSG_ACT_CHECKPOINT')
     parser.add_argument('--device', choices=('auto', 'cpu', 'cuda'))
+    parser.add_argument('--act-execute-steps', type=int)
+    parser.add_argument('--act-temporal-ensemble', action='store_true')
     parser.add_argument('--gui', action='store_true', help='show the autonomous MuJoCo rollout')
     parser.add_argument('--physics-only', action='store_true', help='expert CPU checks without RGB rendering')
     parser.add_argument('--snapshot', type=Path, help='save the final GUI view or camera RGB as a PNG')
+    parser.add_argument('--perception', choices=('gt', 'rgbd-color', 'rgbd-command'), default='gt')
+    parser.add_argument('--target-spec', type=Path, help='JSON observable target attributes for RGB-D')
+    parser.add_argument('--perception-command', type=Path, help='JSON argv; placeholders {inputs}, {output}')
+    parser.add_argument('--perception-output', type=Path)
     args = parser.parse_args()
     args.case = args.case or ("shelves" if args.backend == "mujoco" else "blocked")
+    if args.perception != 'gt':
+        if args.backend != 'mujoco' or args.physics_only or not args.target_spec:
+            parser.error('RGB-D requires --backend mujoco, rendered RGB, and --target-spec')
+        if args.hssg_module != 'hssg_generator':
+            parser.error('RGB-D uses its graph adapter; omit --hssg-module')
+        if args.perception == 'rgbd-command' and not args.perception_command:
+            parser.error('rgbd-command requires --perception-command')
     if args.snapshot and (args.backend != 'mujoco' or (args.physics_only and not args.gui)):
         parser.error('--snapshot requires rendered MuJoCo RGB or --gui')
     if args.backend == "mujoco" and args.case == "missing_target":
@@ -40,8 +55,26 @@ def main() -> int:
             os.environ['HSSG_ACT_CHECKPOINT'] = str(args.checkpoint.resolve())
         if args.device:
             os.environ['HSSG_ACT_DEVICE'] = args.device
+        if args.act_execute_steps is not None:
+            os.environ['HSSG_ACT_EXECUTE_STEPS'] = str(args.act_execute_steps)
+        if args.act_temporal_ensemble:
+            os.environ['HSSG_ACT_TEMPORAL_ENSEMBLE'] = '1'
         env = MujocoEnvironment(args.case, args.config, render=not args.physics_only) if args.config else MujocoEnvironment(
             args.case, render=not args.physics_only)
+        if args.perception != 'gt':
+            from pipeline.rgbd_env import RGBDEnvironment
+            from pipeline.types import TargetSpec
+            try:
+                spec = TargetSpec(**json.loads(args.target_spec.read_text(encoding='utf-8')))
+                command = json.loads(args.perception_command.read_text(encoding='utf-8')) if args.perception_command else None
+                output = args.perception_output or Path('outputs/rgbd_pipeline')/args.case/f'seed_{args.seed}_{uuid4().hex[:8]}'
+                env = RGBDEnvironment(env, spec, output=output,
+                                      method='color' if args.perception == 'rgbd-color' else 'command',
+                                      inference_command=command)
+            except Exception:
+                env.close()
+                raise
+            print('Perception:', args.perception, '| output:', output)
         if args.action_module == 'action_generator':
             selected = args.controller if args.controller != 'auto' else ('act' if os.environ.get('HSSG_ACT_CHECKPOINT') else 'expert')
             print('Module C:', selected, '(simulation only)')
@@ -68,10 +101,12 @@ def main() -> int:
         clock = time.perf_counter()
     try:
         subgoals = run_pipeline(env, env.task, seed=args.seed,
-                               generate_graph=import_module(args.hssg_module).generate_scene_graph,
+                               generate_graph=(env.generate_scene_graph if args.perception != 'gt' else
+                                               import_module(args.hssg_module).generate_scene_graph),
                                plan_subgoal=import_module(args.planner_module).plan_next_subgoal,
                                predict_action=import_module(args.action_module).predict_action_chunk,
-                               on_step=display if args.gui else None)
+                               on_step=display if args.gui else None,
+                               refresh_observation=env.refresh if args.perception != 'gt' else None)
         for goal in subgoals:
             print(f"{goal.primitive}({goal.object_id})")
         if args.snapshot:

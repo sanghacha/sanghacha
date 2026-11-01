@@ -11,6 +11,20 @@ GOAL_FIELDS = ("primitive_onehot[2]", "initial_object_xyz[3]", "initial_object_x
                "object_in_ee_xyz[3]", "object_in_ee_xyzw[4]", "grasp_valid[1]")
 
 
+def control_goal_error(goal, ee_pose: Pose) -> np.ndarray:
+    """Observable Cartesian feedback feature, in 0.1m units; never an action."""
+    current = np.array(ee_pose.position, dtype=float)
+    place = goal[1] > .5
+    if place:
+        x, y, z, w = ee_pose.quaternion_xyzw
+        rotation = np.array([[1-2*(y*y+z*z), 2*(x*y-z*w), 2*(x*z+y*w)],
+                             [2*(x*y+z*w), 1-2*(x*x+z*z), 2*(y*z-x*w)],
+                             [2*(x*z-y*w), 2*(y*z+x*w), 1-2*(x*x+y*y)]])
+        current += rotation @ goal[17:20]
+    target = goal[9:12] if place else goal[2:5]
+    return ((target-current)/.1).astype(np.float32)
+
+
 def encode_goal(subgoal: Subgoal, ee_pose: Pose | None = None) -> np.ndarray:
     """Freeze object_pose at subgoal start; IDs and mock EE targets are not features.
 

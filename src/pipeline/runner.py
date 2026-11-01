@@ -9,22 +9,31 @@ from planner import plan_next_subgoal
 from .environment import MockEnvironment
 from .mujoco_env import MujocoEnvironment
 from .types import ActionChunk, SceneGraph, Subgoal, TaskRequest, check
+from .target import TargetResolver
 
 
 def run_pipeline(env: MockEnvironment | MujocoEnvironment, task: TaskRequest, *, seed: int = 0,
                  generate_graph=generate_scene_graph, plan_subgoal=plan_next_subgoal,
-                 predict_action=predict_action_chunk, on_step=None) -> list[Subgoal]:
+                 predict_action=predict_action_chunk, on_step=None, refresh_observation=None) -> list[Subgoal]:
     """자기 팀 함수 하나만 keyword argument로 교체해서 통합할 수 있다."""
     completed = []
     seen_ids = set()
+    resolver = TargetResolver()
     try:
         observation = env.reset(seed)
         check(env.contains(task.destination.position), "destination outside workspace")
         for _ in range(env.config["max_subgoals"] + 1):
+            if refresh_observation is not None:
+                refreshed = refresh_observation()
+                check(refreshed.episode_id == observation.episode_id and
+                      np.isclose(refreshed.timestamp, observation.timestamp, rtol=0, atol=1e-9),
+                      "scene refresh must not advance physics")
+                observation = refreshed
             graph = generate_graph(observation)
             check(isinstance(graph, SceneGraph), "A must return SceneGraph")
             check(graph.episode_id == observation.episode_id and graph.source == observation.source and
                   np.isclose(graph.timestamp, observation.timestamp, rtol=0, atol=1e-9), "stale/mismatched graph")
+            task = resolver.resolve(graph, task)
             if env.task_complete(task):
                 return completed
             check(len(completed) < env.config["max_subgoals"], "subgoal count budget exhausted")

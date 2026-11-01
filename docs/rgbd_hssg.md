@@ -89,7 +89,10 @@ JSON 최상위는 `objects` 배열과 `metadata` 객체입니다. 실행 가능�
 
 예상 변화는 `inside(instance_0020, shelf_2)` 제거와 `inside(instance_0020, buffer_tray)` 추가, 추정 중심 변위 약 0.19476 m입니다. 패키지는 이 관측 결과를 그래프로 표현하며 이동 명령을 해석하거나 자체적으로 성공을 판정하지 않습니다.
 
-기존 A/B/C의 `pipeline.types.SceneGraph`와 새 패키지의 NetworkX 그래프는 서로 다른 인터페이스입니다. 기존 플래너에 연결하려면 별도 어댑터가 필요하며 이 변경에서 기존 연결을 바꾸지 않습니다.
+기존 A/B/C의 `pipeline.types.SceneGraph`와 이 패키지의 NetworkX 그래프는 서로 다른 인터페이스입니다.
+`perception.bridge.to_scene_graph()`가 현재 관측 객체와 영역을 공통 타입으로 변환합니다.
+history는 원본 그래프에 보존하되 현재 집기·충돌 대상으로 넘기지 않습니다.
+기본 GT 실행은 유지하며, [RGB-D 통합 실행](rgbd_integration.md)의 옵션으로 새 경로를 선택합니다.
 
 검증:
 

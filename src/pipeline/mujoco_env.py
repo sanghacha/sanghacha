@@ -139,7 +139,7 @@ class MujocoEnvironment:
                             (self.raw_upper[5] - self.raw_lower[5]), 0, 1)
         return result.astype(np.float32)
 
-    def reset(self, seed: int = 0) -> Observation:
+    def reset(self, seed: int = 0, *, privileged: bool = True) -> Observation:
         check(not self.closed and type(seed) is int and seed >= 0, "invalid reset")
         mujoco.mj_resetData(self.model, self.data)
         self._episode, self.stopped = f"so101-{self.case}-{seed}", False
@@ -170,7 +170,7 @@ class MujocoEnvironment:
         for _ in range(round(self.config["settle_seconds"] / self.model.opt.timestep)):
             mujoco.mj_step(self.model, self.data)
         self._start_time, self._reset_done = self.data.time, True
-        return self.observe()
+        return self.observe(privileged=privileged)
 
     def _contacts(self) -> tuple[Contact, ...]:
         contacts = []
@@ -216,7 +216,7 @@ class MujocoEnvironment:
     def _object_region(self, position):
         return self._placement_region(position) or (self.shelf_scene.region_of(position) if self.shelf_scene else None)
 
-    def observe(self) -> Observation:
+    def observe(self, *, privileged: bool = True) -> Observation:
         check(self._reset_done and not self.closed, "call reset first")
         c = self.config
         rgb = np.zeros((c["image_height"], c["image_width"], 3), dtype=np.uint8)
@@ -235,18 +235,18 @@ class MujocoEnvironment:
                                               wxyz_to_xyzw(tuple(self.data.xquat[body]))),
                                     tuple(self.object_definitions[key]["size"]),
                                     parent_id=self._object_region(self.data.xpos[body]))
-                        for key, body in self.object_bodies.items())
+                        for key, body in self.object_bodies.items()) if privileged else None
         ee = Pose(tuple(self.data.site_xpos[self.ee_site]), self._site_quaternion())
         fy = c["image_height"] / (2 * np.tan(np.deg2rad(self.model.cam_fovy[self.camera_id])/2))
         k = np.array([[fy, 0, c["image_width"]/2], [0, fy, c["image_height"]/2], [0, 0, 1.]])
         transform = np.eye(4)
         transform[:3, :3] = self.data.cam_xmat[self.camera_id].reshape(3, 3) @ np.diag([1., -1., -1.])
         transform[:3, 3] = self.data.cam_xpos[self.camera_id]
-        return Observation(rgb, self.joint_state(), objects, self._held_object(),
+        return Observation(rgb, self.joint_state(), objects, self._held_object() if privileged else None,
                            timestamp=float(self.data.time - self._start_time), episode_id=self._episode,
-                           source="mujoco_gt", robot_id="so101", control_dt=c["control_dt"], depth=depth,
+                           source="mujoco_gt" if privileged else 'rgbd', robot_id="so101", control_dt=c["control_dt"], depth=depth,
                            camera_intrinsics=k, camera_to_robot_base=transform,
-                           contacts=self._contacts(), ee_pose=ee, rgb_valid=self.render_enabled)
+                           contacts=self._contacts() if privileged else (), ee_pose=ee, rgb_valid=self.render_enabled)
 
     def _site_quaternion(self):
         q = np.empty(4)
@@ -264,14 +264,14 @@ class MujocoEnvironment:
         check(np.all(np.abs(command.astype(float) - self.joint_state()) <= np.array(self.config["max_delta"]) + 1e-6),
               "command exceeds per-step delta limit")
 
-    def step(self, command: np.ndarray) -> Observation:
+    def step(self, command: np.ndarray, *, privileged: bool = True) -> Observation:
         check(self._reset_done and not self.closed and not self.stopped, "reset environment before stepping")
         self.validate_command(command)
         self.data.ctrl[self.actuators] = self._to_ctrl(command)
         for _ in range(self.config["physics_substeps"]):
             mujoco.mj_step(self.model, self.data)
         check(np.isfinite(self.data.qpos).all() and np.isfinite(self.data.qvel).all(), "nonfinite simulation state")
-        return self.observe()
+        return self.observe(privileged=privileged)
 
     def subgoal_complete(self, subgoal: Subgoal) -> bool:
         if subgoal.primitive == "PICK":

@@ -28,10 +28,15 @@ def capture(env, directory):
     h,w = env.config['image_height'],env.config['image_width']
     result = dict(schema_version=3, episode_id=env._episode, timestamp=timestamp,
                   frame_id='robot_base', depth_units='m', camera_convention='OpenCV x-right y-down z-forward',
-                  cameras={}, regions=configured_regions(env.config) if env.shelf_scene else [],
+                  cameras={}, regions=configured_regions(env.config),
                   floor_top_m=env.config['shelf_scene']['floor_thickness'],
                   geometry_source='configured static shelves and trays; no simulator object state')
     result['robot']=capture_robot(env)
+    if not env.shelf_scene:
+        result['regions'] = [r for r in result['regions'] if r['region_type'] == 'tray']
+        result['floor_top_m'] = 0.
+    result['regions'].append(dict(id='tabletop', center=[.15, 0.], size=[.60, .60],
+                                 region_type='table', floor_top_m=0.))
     # No physics step occurs between these renders.
     with mujoco.Renderer(m,height=h,width=w) as renderer:
         for name in CAMERAS:

@@ -45,7 +45,8 @@ def select_device(name):
     return device
 
 
-def train_run(data_dir, output, config, *, allow_diagnostic=False, init_checkpoint=None):
+def train_run(data_dir, output, config, *, allow_diagnostic=False, init_checkpoint=None, transfer_camera=False):
+    check(not transfer_camera or init_checkpoint is not None, 'camera transfer requires an initialization checkpoint')
     seed = int(config['seed'])
     check(config['epochs'] > 0 and config['batch_size'] > 0 and config['learning_rate'] > 0 and
           config['kl_weight'] >= 0 and config['weight_decay'] >= 0, 'invalid training hyperparameters')
@@ -67,7 +68,27 @@ def train_run(data_dir, output, config, *, allow_diagnostic=False, init_checkpoi
         upgrading = initial['checkpoint_version'] == 'so101-act-v2' and initial['goal_version'] == 'so101-goal-v1'
         check((initial['checkpoint_version'] == CHECKPOINT_VERSION and initial['goal_version'] == GOAL_VERSION) or upgrading,
               'incompatible initialization checkpoint')
-        check(ACTConfig(**initial['model_config']).to_dict() == model_config.to_dict(), 'initial model architecture differs')
+        old_model_config = ACTConfig(**initial['model_config']).to_dict()
+        new_model_config = model_config.to_dict()
+        action_mode_changed = old_model_config.pop('residual_actions') != new_model_config.pop('residual_actions')
+        old_velocity, new_velocity = old_model_config.pop('include_velocity'), new_model_config.pop('include_velocity')
+        old_error, new_error = old_model_config.pop('include_goal_error'), new_model_config.pop('include_goal_error')
+        check(old_velocity == new_velocity or not old_velocity and new_velocity and config.get('allow_velocity_transfer', False),
+              'velocity input transfer requires allow_velocity_transfer')
+        check(old_error == new_error or not old_error and new_error and config.get('allow_goal_error_transfer', False),
+              'goal error input transfer requires allow_goal_error_transfer')
+        if old_velocity != new_velocity or old_error != new_error:
+            weight = initial['model']['state_proj.weight']
+            expanded = weight.new_zeros((weight.shape[0], 6+6*new_velocity+3*new_error))
+            expanded[:, :6] = weight[:, :6]
+            if old_velocity:
+                expanded[:, 6:12] = weight[:, 6:12]
+            if old_error:
+                expanded[:, 6+6*new_velocity:] = weight[:, 6+6*old_velocity:]
+            initial['model']['state_proj.weight'] = expanded
+        check(old_model_config == new_model_config, 'initial model architecture differs')
+        check(not action_mode_changed or config.get('allow_action_mode_transfer', False),
+              'changing action mode requires allow_action_mode_transfer')
         old_train = {s['group_id'] for s in initial['split']['train']}
         new_val = {s['meta']['group_id'] for s in val_segments}
         check(not old_train & new_val, 'initial checkpoint trained on the new validation scenes')
@@ -75,14 +96,15 @@ def train_run(data_dir, output, config, *, allow_diagnostic=False, init_checkpoi
         for key in ('command_dt', 'lower', 'upper', 'max_delta'):
             check(np.allclose(initial['control'][key], segments[0]['meta'][key]), 'initial control settings differ')
         for key in ('camera_intrinsics', 'camera_to_robot_base'):
-            check(np.allclose(initial['camera'][key], segments[0]['meta'][key]), 'initial camera calibration differs')
+            check(transfer_camera or np.allclose(initial['camera'][key], segments[0]['meta'][key]),
+                  'initial camera calibration differs; use explicit --transfer-camera for fine-tuning')
         if upgrading:
             old = initial['model']['goal_proj.weight']
             expanded = old.new_zeros((old.shape[0], 25))
             expanded[:, :17] = old
             initial['model']['goal_proj.weight'] = expanded
             initial['stats']['goal_scale'] = initial['stats']['goal_scale'][:17]+[.03]*3+[1.]*5
-    stats = initial['stats'] if initial else compute_stats(train_segments)
+    stats = initial['stats'] if initial and not transfer_camera else compute_stats(train_segments)
     train_data = ChunkDataset(train_segments, stats, model_config, cache_images=config.get('cache_images', False))
     val_data = ChunkDataset(val_segments, stats, model_config, cache_images=config.get('cache_images', False))
     generator = torch.Generator().manual_seed(seed)
@@ -106,6 +128,10 @@ def train_run(data_dir, output, config, *, allow_diagnostic=False, init_checkpoi
     model.set_normalization(stats)
     if initial:
         model.load_state_dict(initial['model'], strict=True)
+        model.set_normalization(stats)
+        if action_mode_changed:
+            torch.nn.init.normal_(model.action_head.weight, std=.001)
+            torch.nn.init.zeros_(model.action_head.bias)
     optimizer = torch.optim.AdamW(model.parameters(), lr=config['learning_rate'], weight_decay=config['weight_decay'])
     first = segments[0]['meta']
     checkpoint_meta = {
@@ -119,6 +145,7 @@ def train_run(data_dir, output, config, *, allow_diagnostic=False, init_checkpoi
         'training_sources': sorted({s['meta']['source'] for s in train_segments}),
         'split': split,
         'initial_checkpoint': str(Path(init_checkpoint).resolve()) if init_checkpoint else None,
+        'camera_transfer': bool(transfer_camera),
     }
     print(f'device={device}; train={len(train_data)} frames; validation={len(val_data)} frames; '
           f'primitives={checkpoint_meta["primitives"]}', flush=True)
@@ -178,12 +205,13 @@ def train_run(data_dir, output, config, *, allow_diagnostic=False, init_checkpoi
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--data', type=Path, required=True)
+    parser.add_argument('--data', type=Path, nargs='+', required=True)
     parser.add_argument('--output', type=Path, required=True)
     parser.add_argument('--config', type=Path, default=DEFAULT_CONFIG)
     parser.add_argument('--device', choices=('auto', 'cpu', 'cuda'))
     parser.add_argument('--epochs', type=int)
     parser.add_argument('--init-checkpoint', type=Path, help='warm-start weights/stats without optimizer state; rejects split leakage')
+    parser.add_argument('--transfer-camera', action='store_true', help='explicit camera transfer; recompute normalization on new train split')
     args = parser.parse_args()
     config = json.loads(args.config.read_text(encoding='utf-8'))
     if args.device:
@@ -191,7 +219,9 @@ def main():
     if args.epochs is not None:
         config['epochs'] = args.epochs
     try:
-        checkpoint = train_run(args.data, args.output, config, init_checkpoint=args.init_checkpoint)
+        check(not args.transfer_camera or args.init_checkpoint is not None, '--transfer-camera needs --init-checkpoint')
+        checkpoint = train_run(args.data, args.output, config, init_checkpoint=args.init_checkpoint,
+                               transfer_camera=args.transfer_camera)
     except (ValueError, FileExistsError) as exc:
         parser.exit(1, f'{exc}\n')
     print('checkpoint:', checkpoint)

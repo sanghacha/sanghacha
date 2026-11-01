@@ -28,14 +28,16 @@ def describe(p):
     pts=np.asarray(p.points)
     assert len(pts)>=4 and np.isfinite(pts).all()
     # Open3D's robust OBB also supports partial/coplanar visible surfaces.
+    covariance=np.cov(pts.T)
+    eig=np.linalg.eigvalsh(covariance)
     try:
+        if eig[0] < 1e-12:
+            raise RuntimeError('Planar observed surface')
         box=p.get_oriented_bounding_box(robust=True)
         center=np.asarray(box.center);rotation=np.asarray(box.R);extent=np.asarray(box.extent)
     except RuntimeError:
         lo,hi=pts.min(0),pts.max(0)
         center=(lo+hi)/2;rotation=np.eye(3);extent=hi-lo
-    covariance=np.cov(pts.T)
-    eig=np.linalg.eigvalsh(covariance)
     return dict(visible_surface_centroid_m=np.median(pts,axis=0).tolist(),
                 aabb_min_m=pts.min(0).tolist(),aabb_max_m=pts.max(0).tolist(),
                 mean_rgb=np.asarray(p.colors).mean(0).tolist(),
