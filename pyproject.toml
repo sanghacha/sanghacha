@@ -16,4 +16,8 @@ dependencies = [
 
 [tool.setuptools.packages.find]
 where = ["src"]
-include = ["hssg_generator*", "planner*", "action_generator*", "pipeline*"]
+include = ["hssg_generator*", "planner*", "action_generator*", "pipeline*", "rgbd_hssg*"]
+
+[project.optional-dependencies]
+sg = ["networkx>=3.4,<4"]
+
