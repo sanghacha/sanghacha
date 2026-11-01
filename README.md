@@ -4,6 +4,10 @@
 세 사람이 A/B/C 모듈 하나씩 개발한 뒤 연결하는 프로젝트**이다.
 `example.md`의 네 모듈 구조를 유지한다. 실물 로봇과는 통신하지 않는다.
 
+이미 인식·추적된 3D 객체에서 별도로 그래프를 생성하려면
+[RGB-D HSSG 패키지](docs/rgbd_hssg.md)를 사용한다. `rgbd_hssg`는 현재의 네 관계와
+스냅샷 간 변경 내역을 생성하며 기존 GT 기반 A/B/C 인터페이스는 유지한다.
+
 ## 처음 설치하기
 
 uv와 Python 3.13을 기준으로 저장소 루트에서:
@@ -144,3 +148,4 @@ uv run python -m unittest discover -s tests -v
 
 기본 테스트는 렌더링 없이 CPU 물리로 실행한다. 모델이 없으면 MuJoCo 테스트를 건너뛰므로
 전체 검증 전 `setup_assets.py`를 실행한다. 이전 초안은 로컬 `outputs/legacy_v0_1/`에 보존되어 있다.
+
