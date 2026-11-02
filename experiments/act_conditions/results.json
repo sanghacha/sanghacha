@@ -1,0 +1,3042 @@
+{
+  "protocol": "fixed-act-abc-v1",
+  "metadata": {
+    "protocol": "fixed-act-abc-v1",
+    "manifest_sha256": "d1b257858c9799707158eb0933f84b375942177762c90ca91a83b7fbe2ae9cd0",
+    "checkpoint_sha256": "51e247a60ea1d275c86a392a0084c265463b2321e3794562c748693b2225efa3",
+    "checkpoint": "C:\\dev_repos\\sanghacha\\training\\runs\\act_rgbd_shelves_absolute\\best.pt",
+    "controller": "act",
+    "device": "cuda",
+    "execute_steps": 4,
+    "temporal_ensemble": false,
+    "dataset_seeds": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      13,
+      14,
+      42,
+      43,
+      44,
+      45,
+      1002,
+      1003,
+      1005,
+      1007,
+      1009
+    ],
+    "evaluation_seeds": [
+      7200,
+      7201,
+      7202,
+      7203
+    ],
+    "torch": "2.9.0+cu128",
+    "source_sha256": {
+      "src/planner/act_comparison.py": "1b7cd0ab0cececeb69cd0627216c49d928c627362aa34859b7ff54966c5222c7",
+      "src/planner/indexed.py": "77676383157eb7d00d913beb58eb1c961b05d4ca25c3c3cadedd0ec38249cf21",
+      "src/planner/baselines.py": "a5177bee66dba5f3ed25db32486512c31ea4cf8c5b0ddd7d3c88e26274c66e1c",
+      "src/planner/planner.py": "9a1be9e3dace6612961f097ae09c87159a3934eb8bba2c4097698870d945e885",
+      "src/action_generator/goal.py": "ef3e9f9fa2f65bd6f6111ad57e784056e761baff6e6a6fbac9ed5a1af08ae30f",
+      "training/so101_act/policy.py": "6beaa94ec4cc547916eb55ec0c3c3a77c78e3d7f568a0e1a6fc686d936695f04",
+      "src/pipeline/rgbd_env.py": "c40a935b7f510e7611f4e09e76bccc1edd067cb5941830e28636cb0ad5abd04b",
+      "src/pipeline/runner.py": "a874ae7cc908e2d3dd60b39cef973541960e86e86f10b5c2b3d0fd1d1331ded8",
+      "scripts/benchmark_act_conditions.py": "8dcc9cb7bd41f25663b165701593ac8718faaee538b24a7b2200bb03cb56f89b"
+    },
+    "gpu": "NVIDIA GeForce RTX 4060"
+  },
+  "summary": {
+    "a_greedy": {
+      "n": 4,
+      "successes": 0,
+      "failure_counts": {
+        "execution_budget": 4
+      },
+      "completed_removals": 0,
+      "attempted_picks": 4
+    },
+    "b_no_hidden": {
+      "n": 4,
+      "successes": 0,
+      "failure_counts": {
+        "execution_budget": 4
+      },
+      "completed_removals": 0,
+      "attempted_picks": 4
+    },
+    "c_full": {
+      "n": 4,
+      "successes": 0,
+      "failure_counts": {
+        "execution_budget": 4
+      },
+      "completed_removals": 1,
+      "attempted_picks": 5
+    }
+  },
+  "rows": [
+    {
+      "manifest_sha256": "d1b257858c9799707158eb0933f84b375942177762c90ca91a83b7fbe2ae9cd0",
+      "method": "a_greedy",
+      "controller": "act",
+      "checkpoint_sha256": "51e247a60ea1d275c86a392a0084c265463b2321e3794562c748693b2225efa3",
+      "case_id": "scene_000",
+      "seed": 7200,
+      "group": "visible_free",
+      "success": false,
+      "error": "subgoal step budget exhausted",
+      "failed_stage": "control",
+      "failed_subgoal": {
+        "subgoal_id": "so101-shelves-7200:0.000000000:PICK:instance_0014",
+        "primitive": "PICK",
+        "object_id": "instance_0014",
+        "object_pose": {
+          "position": [
+            0.2888761913652791,
+            -0.20805253732289802,
+            0.05171159648895264
+          ],
+          "quaternion_xyzw": [
+            0.0,
+            0.0,
+            0.20680540730517338,
+            0.9783820948429818
+          ]
+        },
+        "target_ee_pose": {
+          "position": [
+            0.2888761913652791,
+            -0.20805253732289802,
+            0.13171159648895264
+          ],
+          "quaternion_xyzw": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        "place_pose": null,
+        "frame_id": "robot_base"
+      },
+      "final_binding_correct": true,
+      "simulation_seconds": 15.000000000001679,
+      "wall_seconds": 59.75078790006228,
+      "initial_state_sha256": "50cf46d971a88ccf8ebe7ab768ce614d3ddd3c7c720e69762739dcb1932b354e",
+      "completed_subgoals": 0,
+      "completed_picks": 0,
+      "completed_removals": 0,
+      "attempted_picks": 1,
+      "unique_picked_tracks": 0,
+      "trace": [
+        {
+          "event": "planned",
+          "timestamp": 0.0,
+          "primitive": "PICK",
+          "object_id": "instance_0014",
+          "goal": {
+            "subgoal_id": "so101-shelves-7200:0.000000000:PICK:instance_0014",
+            "primitive": "PICK",
+            "object_id": "instance_0014",
+            "object_pose": {
+              "position": [
+                0.2888761913652791,
+                -0.20805253732289802,
+                0.05171159648895264
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.20680540730517338,
+                0.9783820948429818
+              ]
+            },
+            "target_ee_pose": {
+              "position": [
+                0.2888761913652791,
+                -0.20805253732289802,
+                0.13171159648895264
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            },
+            "place_pose": null,
+            "frame_id": "robot_base"
+          },
+          "target": true,
+          "physical_id": "shelf_1_obj_03"
+        }
+      ],
+      "control_ticks": 450,
+      "privacy_checked_ticks": 450,
+      "plan_seconds": 0.002011400065384805,
+      "perception_seconds": 38.893399999826215,
+      "perception_refreshes": 20,
+      "planning_calls": 1,
+      "discovered_at_sim_seconds": 0.0,
+      "discovery_after_completed_removals": 0,
+      "observational_complete": false
+    },
+    {
+      "manifest_sha256": "d1b257858c9799707158eb0933f84b375942177762c90ca91a83b7fbe2ae9cd0",
+      "method": "b_no_hidden",
+      "controller": "act",
+      "checkpoint_sha256": "51e247a60ea1d275c86a392a0084c265463b2321e3794562c748693b2225efa3",
+      "case_id": "scene_000",
+      "seed": 7200,
+      "group": "visible_free",
+      "success": false,
+      "error": "subgoal step budget exhausted",
+      "failed_stage": "control",
+      "failed_subgoal": {
+        "subgoal_id": "so101-shelves-7200:0.000000000:PICK:instance_0014",
+        "primitive": "PICK",
+        "object_id": "instance_0014",
+        "object_pose": {
+          "position": [
+            0.2888761913652791,
+            -0.20805253732289802,
+            0.05171159648895264
+          ],
+          "quaternion_xyzw": [
+            0.0,
+            0.0,
+            0.20680540730517338,
+            0.9783820948429818
+          ]
+        },
+        "target_ee_pose": {
+          "position": [
+            0.2888761913652791,
+            -0.20805253732289802,
+            0.13171159648895264
+          ],
+          "quaternion_xyzw": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        "place_pose": null,
+        "frame_id": "robot_base"
+      },
+      "final_binding_correct": true,
+      "simulation_seconds": 15.000000000001679,
+      "wall_seconds": 58.51808720000554,
+      "initial_state_sha256": "50cf46d971a88ccf8ebe7ab768ce614d3ddd3c7c720e69762739dcb1932b354e",
+      "completed_subgoals": 0,
+      "completed_picks": 0,
+      "completed_removals": 0,
+      "attempted_picks": 1,
+      "unique_picked_tracks": 0,
+      "trace": [
+        {
+          "event": "planned",
+          "timestamp": 0.0,
+          "primitive": "PICK",
+          "object_id": "instance_0014",
+          "goal": {
+            "subgoal_id": "so101-shelves-7200:0.000000000:PICK:instance_0014",
+            "primitive": "PICK",
+            "object_id": "instance_0014",
+            "object_pose": {
+              "position": [
+                0.2888761913652791,
+                -0.20805253732289802,
+                0.05171159648895264
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.20680540730517338,
+                0.9783820948429818
+              ]
+            },
+            "target_ee_pose": {
+              "position": [
+                0.2888761913652791,
+                -0.20805253732289802,
+                0.13171159648895264
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            },
+            "place_pose": null,
+            "frame_id": "robot_base"
+          },
+          "target": true,
+          "physical_id": "shelf_1_obj_03"
+        }
+      ],
+      "control_ticks": 450,
+      "privacy_checked_ticks": 450,
+      "plan_seconds": 0.002620500046759844,
+      "perception_seconds": 38.44665259984322,
+      "perception_refreshes": 20,
+      "planning_calls": 1,
+      "discovered_at_sim_seconds": 0.0,
+      "discovery_after_completed_removals": 0,
+      "observational_complete": false
+    },
+    {
+      "manifest_sha256": "d1b257858c9799707158eb0933f84b375942177762c90ca91a83b7fbe2ae9cd0",
+      "method": "c_full",
+      "controller": "act",
+      "checkpoint_sha256": "51e247a60ea1d275c86a392a0084c265463b2321e3794562c748693b2225efa3",
+      "case_id": "scene_000",
+      "seed": 7200,
+      "group": "visible_free",
+      "success": false,
+      "error": "subgoal step budget exhausted",
+      "failed_stage": "control",
+      "failed_subgoal": {
+        "subgoal_id": "so101-shelves-7200:0.000000000:PICK:instance_0014",
+        "primitive": "PICK",
+        "object_id": "instance_0014",
+        "object_pose": {
+          "position": [
+            0.2888761913652791,
+            -0.20805253732289802,
+            0.05171159648895264
+          ],
+          "quaternion_xyzw": [
+            0.0,
+            0.0,
+            0.20680540730517338,
+            0.9783820948429818
+          ]
+        },
+        "target_ee_pose": {
+          "position": [
+            0.2888761913652791,
+            -0.20805253732289802,
+            0.13171159648895264
+          ],
+          "quaternion_xyzw": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        "place_pose": null,
+        "frame_id": "robot_base"
+      },
+      "final_binding_correct": true,
+      "simulation_seconds": 15.000000000001679,
+      "wall_seconds": 58.773223700001836,
+      "initial_state_sha256": "50cf46d971a88ccf8ebe7ab768ce614d3ddd3c7c720e69762739dcb1932b354e",
+      "completed_subgoals": 0,
+      "completed_picks": 0,
+      "completed_removals": 0,
+      "attempted_picks": 1,
+      "unique_picked_tracks": 0,
+      "trace": [
+        {
+          "event": "planned",
+          "timestamp": 0.0,
+          "primitive": "PICK",
+          "object_id": "instance_0014",
+          "goal": {
+            "subgoal_id": "so101-shelves-7200:0.000000000:PICK:instance_0014",
+            "primitive": "PICK",
+            "object_id": "instance_0014",
+            "object_pose": {
+              "position": [
+                0.2888761913652791,
+                -0.20805253732289802,
+                0.05171159648895264
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.20680540730517338,
+                0.9783820948429818
+              ]
+            },
+            "target_ee_pose": {
+              "position": [
+                0.2888761913652791,
+                -0.20805253732289802,
+                0.13171159648895264
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            },
+            "place_pose": null,
+            "frame_id": "robot_base"
+          },
+          "target": true,
+          "physical_id": "shelf_1_obj_03"
+        }
+      ],
+      "control_ticks": 450,
+      "privacy_checked_ticks": 450,
+      "plan_seconds": 0.0016702000284567475,
+      "perception_seconds": 38.674889599788,
+      "perception_refreshes": 20,
+      "planning_calls": 1,
+      "discovered_at_sim_seconds": 0.0,
+      "discovery_after_completed_removals": 0,
+      "observational_complete": false
+    },
+    {
+      "manifest_sha256": "d1b257858c9799707158eb0933f84b375942177762c90ca91a83b7fbe2ae9cd0",
+      "method": "a_greedy",
+      "controller": "act",
+      "checkpoint_sha256": "51e247a60ea1d275c86a392a0084c265463b2321e3794562c748693b2225efa3",
+      "case_id": "scene_001",
+      "seed": 7201,
+      "group": "visible_blocked",
+      "success": false,
+      "error": "subgoal step budget exhausted",
+      "failed_stage": "control",
+      "failed_subgoal": {
+        "subgoal_id": "so101-shelves-7201:3.033333333:PLACE:instance_0003",
+        "primitive": "PLACE",
+        "object_id": "instance_0003",
+        "object_pose": {
+          "position": [
+            0.1921507971976904,
+            0.023050890806760038,
+            0.03542608976691323
+          ],
+          "quaternion_xyzw": [
+            -0.00527360311738912,
+            -0.0027329991932764364,
+            0.012690747008126583,
+            0.9999018275640591
+          ]
+        },
+        "target_ee_pose": {
+          "position": [
+            0.10500000000000001,
+            -0.18,
+            0.10700000000000001
+          ],
+          "quaternion_xyzw": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        "place_pose": {
+          "position": [
+            0.10500000000000001,
+            -0.18,
+            0.027000000000000003
+          ],
+          "quaternion_xyzw": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        "frame_id": "robot_base"
+      },
+      "final_binding_correct": true,
+      "simulation_seconds": 18.03333333333225,
+      "wall_seconds": 74.66919939999934,
+      "initial_state_sha256": "c73bd3cb6d1a36cb54df14a5d56dd608f667540e6d9644d4d6b2ed16e2c12e3e",
+      "completed_subgoals": 1,
+      "completed_picks": 1,
+      "completed_removals": 0,
+      "attempted_picks": 1,
+      "unique_picked_tracks": 1,
+      "trace": [
+        {
+          "event": "planned",
+          "timestamp": 0.0,
+          "primitive": "PICK",
+          "object_id": "instance_0003",
+          "goal": {
+            "subgoal_id": "so101-shelves-7201:0.000000000:PICK:instance_0003",
+            "primitive": "PICK",
+            "object_id": "instance_0003",
+            "object_pose": {
+              "position": [
+                0.19058621564040637,
+                0.027895554231943773,
+                0.02339224338531494
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.018461418348017358,
+                0.9998295734936927
+              ]
+            },
+            "target_ee_pose": {
+              "position": [
+                0.19058621564040637,
+                0.027895554231943773,
+                0.10339224338531494
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            },
+            "place_pose": null,
+            "frame_id": "robot_base"
+          },
+          "target": false,
+          "physical_id": "shelf_2_obj_04"
+        },
+        {
+          "event": "completed",
+          "timestamp": 3.0333333333331405,
+          "primitive": "PICK",
+          "object_id": "instance_0003",
+          "target": false,
+          "steps": 91
+        },
+        {
+          "event": "planned",
+          "timestamp": 3.0333333333331405,
+          "primitive": "PLACE",
+          "object_id": "instance_0003",
+          "goal": {
+            "subgoal_id": "so101-shelves-7201:3.033333333:PLACE:instance_0003",
+            "primitive": "PLACE",
+            "object_id": "instance_0003",
+            "object_pose": {
+              "position": [
+                0.1921507971976904,
+                0.023050890806760038,
+                0.03542608976691323
+              ],
+              "quaternion_xyzw": [
+                -0.00527360311738912,
+                -0.0027329991932764364,
+                0.012690747008126583,
+                0.9999018275640591
+              ]
+            },
+            "target_ee_pose": {
+              "position": [
+                0.10500000000000001,
+                -0.18,
+                0.10700000000000001
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            },
+            "place_pose": {
+              "position": [
+                0.10500000000000001,
+                -0.18,
+                0.027000000000000003
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            },
+            "frame_id": "robot_base"
+          },
+          "target": false,
+          "physical_id": "shelf_2_obj_04"
+        }
+      ],
+      "control_ticks": 541,
+      "privacy_checked_ticks": 541,
+      "plan_seconds": 0.004410700057633221,
+      "perception_seconds": 47.73790460068267,
+      "perception_refreshes": 25,
+      "planning_calls": 2,
+      "discovered_at_sim_seconds": 0.0,
+      "discovery_after_completed_removals": 0,
+      "observational_complete": false
+    },
+    {
+      "manifest_sha256": "d1b257858c9799707158eb0933f84b375942177762c90ca91a83b7fbe2ae9cd0",
+      "method": "b_no_hidden",
+      "controller": "act",
+      "checkpoint_sha256": "51e247a60ea1d275c86a392a0084c265463b2321e3794562c748693b2225efa3",
+      "case_id": "scene_001",
+      "seed": 7201,
+      "group": "visible_blocked",
+      "success": false,
+      "error": "subgoal step budget exhausted",
+      "failed_stage": "control",
+      "failed_subgoal": {
+        "subgoal_id": "so101-shelves-7201:0.000000000:PICK:instance_0024",
+        "primitive": "PICK",
+        "object_id": "instance_0024",
+        "object_pose": {
+          "position": [
+            0.24,
+            -0.026914034381042284,
+            0.07937333726882935
+          ],
+          "quaternion_xyzw": [
+            0.0,
+            0.0,
+            0.33100694143550036,
+            0.9436283191604178
+          ]
+        },
+        "target_ee_pose": {
+          "position": [
+            0.24,
+            -0.026914034381042284,
+            0.15937333726882935
+          ],
+          "quaternion_xyzw": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        "place_pose": null,
+        "frame_id": "robot_base"
+      },
+      "final_binding_correct": null,
+      "simulation_seconds": 15.000000000001679,
+      "wall_seconds": 57.238112900056876,
+      "initial_state_sha256": "c73bd3cb6d1a36cb54df14a5d56dd608f667540e6d9644d4d6b2ed16e2c12e3e",
+      "completed_subgoals": 0,
+      "completed_picks": 0,
+      "completed_removals": 0,
+      "attempted_picks": 1,
+      "unique_picked_tracks": 0,
+      "trace": [
+        {
+          "event": "planned",
+          "timestamp": 0.0,
+          "primitive": "PICK",
+          "object_id": "instance_0024",
+          "goal": {
+            "subgoal_id": "so101-shelves-7201:0.000000000:PICK:instance_0024",
+            "primitive": "PICK",
+            "object_id": "instance_0024",
+            "object_pose": {
+              "position": [
+                0.24,
+                -0.026914034381042284,
+                0.07937333726882935
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.33100694143550036,
+                0.9436283191604178
+              ]
+            },
+            "target_ee_pose": {
+              "position": [
+                0.24,
+                -0.026914034381042284,
+                0.15937333726882935
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            },
+            "place_pose": null,
+            "frame_id": "robot_base"
+          },
+          "target": false,
+          "physical_id": "shelf_2_obj_09"
+        }
+      ],
+      "control_ticks": 450,
+      "privacy_checked_ticks": 450,
+      "plan_seconds": 0.002006900031119585,
+      "perception_seconds": 37.09413560014218,
+      "perception_refreshes": 19,
+      "planning_calls": 1,
+      "discovered_at_sim_seconds": 0.0,
+      "discovery_after_completed_removals": 0,
+      "observational_complete": false
+    },
+    {
+      "manifest_sha256": "d1b257858c9799707158eb0933f84b375942177762c90ca91a83b7fbe2ae9cd0",
+      "method": "c_full",
+      "controller": "act",
+      "checkpoint_sha256": "51e247a60ea1d275c86a392a0084c265463b2321e3794562c748693b2225efa3",
+      "case_id": "scene_001",
+      "seed": 7201,
+      "group": "visible_blocked",
+      "success": false,
+      "error": "subgoal step budget exhausted",
+      "failed_stage": "control",
+      "failed_subgoal": {
+        "subgoal_id": "so101-shelves-7201:0.000000000:PICK:instance_0024",
+        "primitive": "PICK",
+        "object_id": "instance_0024",
+        "object_pose": {
+          "position": [
+            0.24,
+            -0.026914034381042284,
+            0.07937333726882935
+          ],
+          "quaternion_xyzw": [
+            0.0,
+            0.0,
+            0.33100694143550036,
+            0.9436283191604178
+          ]
+        },
+        "target_ee_pose": {
+          "position": [
+            0.24,
+            -0.026914034381042284,
+            0.15937333726882935
+          ],
+          "quaternion_xyzw": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        "place_pose": null,
+        "frame_id": "robot_base"
+      },
+      "final_binding_correct": null,
+      "simulation_seconds": 15.000000000001679,
+      "wall_seconds": 56.98924860008992,
+      "initial_state_sha256": "c73bd3cb6d1a36cb54df14a5d56dd608f667540e6d9644d4d6b2ed16e2c12e3e",
+      "completed_subgoals": 0,
+      "completed_picks": 0,
+      "completed_removals": 0,
+      "attempted_picks": 1,
+      "unique_picked_tracks": 0,
+      "trace": [
+        {
+          "event": "planned",
+          "timestamp": 0.0,
+          "primitive": "PICK",
+          "object_id": "instance_0024",
+          "goal": {
+            "subgoal_id": "so101-shelves-7201:0.000000000:PICK:instance_0024",
+            "primitive": "PICK",
+            "object_id": "instance_0024",
+            "object_pose": {
+              "position": [
+                0.24,
+                -0.026914034381042284,
+                0.07937333726882935
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.33100694143550036,
+                0.9436283191604178
+              ]
+            },
+            "target_ee_pose": {
+              "position": [
+                0.24,
+                -0.026914034381042284,
+                0.15937333726882935
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            },
+            "place_pose": null,
+            "frame_id": "robot_base"
+          },
+          "target": false,
+          "physical_id": "shelf_2_obj_09"
+        }
+      ],
+      "control_ticks": 450,
+      "privacy_checked_ticks": 450,
+      "plan_seconds": 0.0030565999913960695,
+      "perception_seconds": 36.60734099987894,
+      "perception_refreshes": 19,
+      "planning_calls": 1,
+      "discovered_at_sim_seconds": 0.0,
+      "discovery_after_completed_removals": 0,
+      "observational_complete": false
+    },
+    {
+      "manifest_sha256": "d1b257858c9799707158eb0933f84b375942177762c90ca91a83b7fbe2ae9cd0",
+      "method": "a_greedy",
+      "controller": "act",
+      "checkpoint_sha256": "51e247a60ea1d275c86a392a0084c265463b2321e3794562c748693b2225efa3",
+      "case_id": "scene_002",
+      "seed": 7202,
+      "group": "unlocalized_known_region",
+      "success": false,
+      "error": "subgoal step budget exhausted",
+      "failed_stage": "control",
+      "failed_subgoal": {
+        "subgoal_id": "so101-shelves-7202:0.000000000:PICK:instance_0014",
+        "primitive": "PICK",
+        "object_id": "instance_0014",
+        "object_pose": {
+          "position": [
+            0.18878203291908532,
+            0.15310287211134144,
+            0.02309540190114081
+          ],
+          "quaternion_xyzw": [
+            0.0,
+            0.0,
+            0.1215840625339326,
+            0.9925811381130234
+          ]
+        },
+        "target_ee_pose": {
+          "position": [
+            0.18878203291908532,
+            0.15310287211134144,
+            0.1030954019011408
+          ],
+          "quaternion_xyzw": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        "place_pose": null,
+        "frame_id": "robot_base"
+      },
+      "final_binding_correct": null,
+      "simulation_seconds": 15.000000000001679,
+      "wall_seconds": 20.99253609997686,
+      "initial_state_sha256": "c1aafd1f7a4fc8cd1fa98e785e3e77f54078b0261202fd3ed65261a4bddf950b",
+      "completed_subgoals": 0,
+      "completed_picks": 0,
+      "completed_removals": 0,
+      "attempted_picks": 1,
+      "unique_picked_tracks": 0,
+      "trace": [
+        {
+          "event": "planned",
+          "timestamp": 0.0,
+          "primitive": "PICK",
+          "object_id": "instance_0014",
+          "goal": {
+            "subgoal_id": "so101-shelves-7202:0.000000000:PICK:instance_0014",
+            "primitive": "PICK",
+            "object_id": "instance_0014",
+            "object_pose": {
+              "position": [
+                0.18878203291908532,
+                0.15310287211134144,
+                0.02309540190114081
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.1215840625339326,
+                0.9925811381130234
+              ]
+            },
+            "target_ee_pose": {
+              "position": [
+                0.18878203291908532,
+                0.15310287211134144,
+                0.1030954019011408
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            },
+            "place_pose": null,
+            "frame_id": "robot_base"
+          },
+          "target": false,
+          "physical_id": "shelf_3_obj_04"
+        }
+      ],
+      "control_ticks": 450,
+      "privacy_checked_ticks": 450,
+      "plan_seconds": 0.0019526999676600099,
+      "perception_seconds": 1.8637913999846205,
+      "perception_refreshes": 1,
+      "planning_calls": 1,
+      "discovered_at_sim_seconds": null,
+      "discovery_after_completed_removals": null,
+      "observational_complete": false
+    },
+    {
+      "manifest_sha256": "d1b257858c9799707158eb0933f84b375942177762c90ca91a83b7fbe2ae9cd0",
+      "method": "b_no_hidden",
+      "controller": "act",
+      "checkpoint_sha256": "51e247a60ea1d275c86a392a0084c265463b2321e3794562c748693b2225efa3",
+      "case_id": "scene_002",
+      "seed": 7202,
+      "group": "unlocalized_known_region",
+      "success": false,
+      "error": "subgoal step budget exhausted",
+      "failed_stage": "control",
+      "failed_subgoal": {
+        "subgoal_id": "so101-shelves-7202:0.000000000:PICK:instance_0014",
+        "primitive": "PICK",
+        "object_id": "instance_0014",
+        "object_pose": {
+          "position": [
+            0.18878203291908532,
+            0.15310287211134144,
+            0.02309540190114081
+          ],
+          "quaternion_xyzw": [
+            0.0,
+            0.0,
+            0.1215840625339326,
+            0.9925811381130234
+          ]
+        },
+        "target_ee_pose": {
+          "position": [
+            0.18878203291908532,
+            0.15310287211134144,
+            0.1030954019011408
+          ],
+          "quaternion_xyzw": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        "place_pose": null,
+        "frame_id": "robot_base"
+      },
+      "final_binding_correct": null,
+      "simulation_seconds": 15.000000000001679,
+      "wall_seconds": 21.050711799995042,
+      "initial_state_sha256": "c1aafd1f7a4fc8cd1fa98e785e3e77f54078b0261202fd3ed65261a4bddf950b",
+      "completed_subgoals": 0,
+      "completed_picks": 0,
+      "completed_removals": 0,
+      "attempted_picks": 1,
+      "unique_picked_tracks": 0,
+      "trace": [
+        {
+          "event": "planned",
+          "timestamp": 0.0,
+          "primitive": "PICK",
+          "object_id": "instance_0014",
+          "goal": {
+            "subgoal_id": "so101-shelves-7202:0.000000000:PICK:instance_0014",
+            "primitive": "PICK",
+            "object_id": "instance_0014",
+            "object_pose": {
+              "position": [
+                0.18878203291908532,
+                0.15310287211134144,
+                0.02309540190114081
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.1215840625339326,
+                0.9925811381130234
+              ]
+            },
+            "target_ee_pose": {
+              "position": [
+                0.18878203291908532,
+                0.15310287211134144,
+                0.1030954019011408
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            },
+            "place_pose": null,
+            "frame_id": "robot_base"
+          },
+          "target": false,
+          "physical_id": "shelf_3_obj_04"
+        }
+      ],
+      "control_ticks": 450,
+      "privacy_checked_ticks": 450,
+      "plan_seconds": 0.0020016999915242195,
+      "perception_seconds": 1.8077965000411496,
+      "perception_refreshes": 1,
+      "planning_calls": 1,
+      "discovered_at_sim_seconds": null,
+      "discovery_after_completed_removals": null,
+      "observational_complete": false
+    },
+    {
+      "manifest_sha256": "d1b257858c9799707158eb0933f84b375942177762c90ca91a83b7fbe2ae9cd0",
+      "method": "c_full",
+      "controller": "act",
+      "checkpoint_sha256": "51e247a60ea1d275c86a392a0084c265463b2321e3794562c748693b2225efa3",
+      "case_id": "scene_002",
+      "seed": 7202,
+      "group": "unlocalized_known_region",
+      "success": false,
+      "error": "subgoal step budget exhausted",
+      "failed_stage": "control",
+      "failed_subgoal": {
+        "subgoal_id": "so101-shelves-7202:0.000000000:PICK:instance_0016",
+        "primitive": "PICK",
+        "object_id": "instance_0016",
+        "object_pose": {
+          "position": [
+            0.24022500476668684,
+            0.20812035852692545,
+            0.07334349298477173
+          ],
+          "quaternion_xyzw": [
+            0.0,
+            0.0,
+            0.30251622827150737,
+            0.9531442344327438
+          ]
+        },
+        "target_ee_pose": {
+          "position": [
+            0.24022500476668684,
+            0.20812035852692545,
+            0.15334349298477173
+          ],
+          "quaternion_xyzw": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        "place_pose": null,
+        "frame_id": "robot_base"
+      },
+      "final_binding_correct": null,
+      "simulation_seconds": 15.000000000001679,
+      "wall_seconds": 69.30843770003412,
+      "initial_state_sha256": "c1aafd1f7a4fc8cd1fa98e785e3e77f54078b0261202fd3ed65261a4bddf950b",
+      "completed_subgoals": 0,
+      "completed_picks": 0,
+      "completed_removals": 0,
+      "attempted_picks": 1,
+      "unique_picked_tracks": 0,
+      "trace": [
+        {
+          "event": "planned",
+          "timestamp": 0.0,
+          "primitive": "PICK",
+          "object_id": "instance_0016",
+          "goal": {
+            "subgoal_id": "so101-shelves-7202:0.000000000:PICK:instance_0016",
+            "primitive": "PICK",
+            "object_id": "instance_0016",
+            "object_pose": {
+              "position": [
+                0.24022500476668684,
+                0.20812035852692545,
+                0.07334349298477173
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.30251622827150737,
+                0.9531442344327438
+              ]
+            },
+            "target_ee_pose": {
+              "position": [
+                0.24022500476668684,
+                0.20812035852692545,
+                0.15334349298477173
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            },
+            "place_pose": null,
+            "frame_id": "robot_base"
+          },
+          "target": false,
+          "physical_id": "shelf_3_obj_06"
+        }
+      ],
+      "control_ticks": 450,
+      "privacy_checked_ticks": 450,
+      "plan_seconds": 0.003487899899482727,
+      "perception_seconds": 46.39150240004528,
+      "perception_refreshes": 20,
+      "planning_calls": 1,
+      "discovered_at_sim_seconds": null,
+      "discovery_after_completed_removals": null,
+      "observational_complete": false
+    },
+    {
+      "manifest_sha256": "d1b257858c9799707158eb0933f84b375942177762c90ca91a83b7fbe2ae9cd0",
+      "method": "a_greedy",
+      "controller": "act",
+      "checkpoint_sha256": "51e247a60ea1d275c86a392a0084c265463b2321e3794562c748693b2225efa3",
+      "case_id": "scene_003",
+      "seed": 7203,
+      "group": "unlocalized_unknown_region",
+      "success": false,
+      "error": "subgoal step budget exhausted",
+      "failed_stage": "control",
+      "failed_subgoal": {
+        "subgoal_id": "so101-shelves-7203:0.000000000:PICK:instance_0004",
+        "primitive": "PICK",
+        "object_id": "instance_0004",
+        "object_pose": {
+          "position": [
+            0.19114745576968112,
+            0.02909246984099897,
+            0.08191952560567184
+          ],
+          "quaternion_xyzw": [
+            0.0,
+            0.0,
+            0.011067751040043702,
+            0.9999387505677113
+          ]
+        },
+        "target_ee_pose": {
+          "position": [
+            0.19114745576968112,
+            0.02909246984099897,
+            0.16191952560567185
+          ],
+          "quaternion_xyzw": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        "place_pose": null,
+        "frame_id": "robot_base"
+      },
+      "final_binding_correct": null,
+      "simulation_seconds": 15.000000000001679,
+      "wall_seconds": 22.671586100012064,
+      "initial_state_sha256": "697bae7c7a4879274e0b12ce54616654faaae37a4e330f3382b589c6cb21f694",
+      "completed_subgoals": 0,
+      "completed_picks": 0,
+      "completed_removals": 0,
+      "attempted_picks": 1,
+      "unique_picked_tracks": 0,
+      "trace": [
+        {
+          "event": "planned",
+          "timestamp": 0.0,
+          "primitive": "PICK",
+          "object_id": "instance_0004",
+          "goal": {
+            "subgoal_id": "so101-shelves-7203:0.000000000:PICK:instance_0004",
+            "primitive": "PICK",
+            "object_id": "instance_0004",
+            "object_pose": {
+              "position": [
+                0.19114745576968112,
+                0.02909246984099897,
+                0.08191952560567184
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.011067751040043702,
+                0.9999387505677113
+              ]
+            },
+            "target_ee_pose": {
+              "position": [
+                0.19114745576968112,
+                0.02909246984099897,
+                0.16191952560567185
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            },
+            "place_pose": null,
+            "frame_id": "robot_base"
+          },
+          "target": false,
+          "physical_id": "shelf_2_obj_02"
+        }
+      ],
+      "control_ticks": 450,
+      "privacy_checked_ticks": 450,
+      "plan_seconds": 0.003574000089429319,
+      "perception_seconds": 1.9140560999512672,
+      "perception_refreshes": 1,
+      "planning_calls": 1,
+      "discovered_at_sim_seconds": null,
+      "discovery_after_completed_removals": null,
+      "observational_complete": false
+    },
+    {
+      "manifest_sha256": "d1b257858c9799707158eb0933f84b375942177762c90ca91a83b7fbe2ae9cd0",
+      "method": "b_no_hidden",
+      "controller": "act",
+      "checkpoint_sha256": "51e247a60ea1d275c86a392a0084c265463b2321e3794562c748693b2225efa3",
+      "case_id": "scene_003",
+      "seed": 7203,
+      "group": "unlocalized_unknown_region",
+      "success": false,
+      "error": "subgoal step budget exhausted",
+      "failed_stage": "control",
+      "failed_subgoal": {
+        "subgoal_id": "so101-shelves-7203:0.000000000:PICK:instance_0004",
+        "primitive": "PICK",
+        "object_id": "instance_0004",
+        "object_pose": {
+          "position": [
+            0.19114745576968112,
+            0.02909246984099897,
+            0.08191952560567184
+          ],
+          "quaternion_xyzw": [
+            0.0,
+            0.0,
+            0.011067751040043702,
+            0.9999387505677113
+          ]
+        },
+        "target_ee_pose": {
+          "position": [
+            0.19114745576968112,
+            0.02909246984099897,
+            0.16191952560567185
+          ],
+          "quaternion_xyzw": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        "place_pose": null,
+        "frame_id": "robot_base"
+      },
+      "final_binding_correct": null,
+      "simulation_seconds": 15.000000000001679,
+      "wall_seconds": 22.973468599957414,
+      "initial_state_sha256": "697bae7c7a4879274e0b12ce54616654faaae37a4e330f3382b589c6cb21f694",
+      "completed_subgoals": 0,
+      "completed_picks": 0,
+      "completed_removals": 0,
+      "attempted_picks": 1,
+      "unique_picked_tracks": 0,
+      "trace": [
+        {
+          "event": "planned",
+          "timestamp": 0.0,
+          "primitive": "PICK",
+          "object_id": "instance_0004",
+          "goal": {
+            "subgoal_id": "so101-shelves-7203:0.000000000:PICK:instance_0004",
+            "primitive": "PICK",
+            "object_id": "instance_0004",
+            "object_pose": {
+              "position": [
+                0.19114745576968112,
+                0.02909246984099897,
+                0.08191952560567184
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.011067751040043702,
+                0.9999387505677113
+              ]
+            },
+            "target_ee_pose": {
+              "position": [
+                0.19114745576968112,
+                0.02909246984099897,
+                0.16191952560567185
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            },
+            "place_pose": null,
+            "frame_id": "robot_base"
+          },
+          "target": false,
+          "physical_id": "shelf_2_obj_02"
+        }
+      ],
+      "control_ticks": 450,
+      "privacy_checked_ticks": 450,
+      "plan_seconds": 0.0024555999552831054,
+      "perception_seconds": 1.824065599939786,
+      "perception_refreshes": 1,
+      "planning_calls": 1,
+      "discovered_at_sim_seconds": null,
+      "discovery_after_completed_removals": null,
+      "observational_complete": false
+    },
+    {
+      "manifest_sha256": "d1b257858c9799707158eb0933f84b375942177762c90ca91a83b7fbe2ae9cd0",
+      "method": "c_full",
+      "controller": "act",
+      "checkpoint_sha256": "51e247a60ea1d275c86a392a0084c265463b2321e3794562c748693b2225efa3",
+      "case_id": "scene_003",
+      "seed": 7203,
+      "group": "unlocalized_unknown_region",
+      "success": false,
+      "error": "subgoal step budget exhausted",
+      "failed_stage": "control",
+      "failed_subgoal": {
+        "subgoal_id": "so101-shelves-7203:5.766666667:PICK:instance_0028",
+        "primitive": "PICK",
+        "object_id": "instance_0028",
+        "object_pose": {
+          "position": [
+            0.2887603287717835,
+            -0.027940453362351077,
+            0.051712073326110844
+          ],
+          "quaternion_xyzw": [
+            0.0,
+            0.0,
+            -0.27727359723555844,
+            0.9607910034320957
+          ]
+        },
+        "target_ee_pose": {
+          "position": [
+            0.2887603287717835,
+            -0.027940453362351077,
+            0.13171207332611085
+          ],
+          "quaternion_xyzw": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        "place_pose": null,
+        "frame_id": "robot_base"
+      },
+      "final_binding_correct": false,
+      "simulation_seconds": 20.7666666666631,
+      "wall_seconds": 33.794511200045235,
+      "initial_state_sha256": "697bae7c7a4879274e0b12ce54616654faaae37a4e330f3382b589c6cb21f694",
+      "completed_subgoals": 2,
+      "completed_picks": 1,
+      "completed_removals": 1,
+      "attempted_picks": 2,
+      "unique_picked_tracks": 1,
+      "trace": [
+        {
+          "event": "planned",
+          "timestamp": 0.0,
+          "primitive": "PICK",
+          "object_id": "instance_0013",
+          "goal": {
+            "subgoal_id": "so101-shelves-7203:0.000000000:PICK:instance_0013",
+            "primitive": "PICK",
+            "object_id": "instance_0013",
+            "object_pose": {
+              "position": [
+                0.2890747130290931,
+                -0.02781190173540735,
+                0.07334349298477173
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                -0.27829695816080907,
+                0.9604950822770728
+              ]
+            },
+            "target_ee_pose": {
+              "position": [
+                0.2890747130290931,
+                -0.02781190173540735,
+                0.15334349298477173
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            },
+            "place_pose": null,
+            "frame_id": "robot_base"
+          },
+          "target": false,
+          "physical_id": "shelf_2_obj_06"
+        },
+        {
+          "event": "completed",
+          "timestamp": 2.2666666666665503,
+          "primitive": "PICK",
+          "object_id": "instance_0013",
+          "target": false,
+          "steps": 68
+        },
+        {
+          "event": "planned",
+          "timestamp": 2.2666666666665503,
+          "primitive": "PLACE",
+          "object_id": "instance_0013",
+          "goal": {
+            "subgoal_id": "so101-shelves-7203:2.266666667:PLACE:instance_0013",
+            "primitive": "PLACE",
+            "object_id": "instance_0013",
+            "object_pose": {
+              "position": [
+                0.29025910911771596,
+                -0.02371655609000678,
+                0.08540941061468572
+              ],
+              "quaternion_xyzw": [
+                -0.0017831242683278745,
+                -0.005470326750267143,
+                -0.2660426451840408,
+                0.9639440891133507
+              ]
+            },
+            "target_ee_pose": {
+              "position": [
+                0.10500000000000001,
+                -0.18,
+                0.097
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            },
+            "place_pose": {
+              "position": [
+                0.10500000000000001,
+                -0.18,
+                0.017
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            },
+            "frame_id": "robot_base"
+          },
+          "target": false,
+          "physical_id": null
+        },
+        {
+          "event": "completed",
+          "timestamp": 5.766666666666901,
+          "primitive": "PLACE",
+          "object_id": "instance_0013",
+          "target": false,
+          "steps": 105
+        },
+        {
+          "event": "planned",
+          "timestamp": 5.766666666666901,
+          "primitive": "PICK",
+          "object_id": "instance_0028",
+          "goal": {
+            "subgoal_id": "so101-shelves-7203:5.766666667:PICK:instance_0028",
+            "primitive": "PICK",
+            "object_id": "instance_0028",
+            "object_pose": {
+              "position": [
+                0.2887603287717835,
+                -0.027940453362351077,
+                0.051712073326110844
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                -0.27727359723555844,
+                0.9607910034320957
+              ]
+            },
+            "target_ee_pose": {
+              "position": [
+                0.2887603287717835,
+                -0.027940453362351077,
+                0.13171207332611085
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            },
+            "place_pose": null,
+            "frame_id": "robot_base"
+          },
+          "target": true,
+          "physical_id": "shelf_2_obj_09"
+        }
+      ],
+      "control_ticks": 623,
+      "privacy_checked_ticks": 623,
+      "plan_seconds": 0.005860100034624338,
+      "perception_seconds": 5.973933000001125,
+      "perception_refreshes": 3,
+      "planning_calls": 3,
+      "discovered_at_sim_seconds": 5.766666666666901,
+      "discovery_after_completed_removals": 1,
+      "observational_complete": false
+    }
+  ],
+  "audits": [
+    {
+      "condition": "a_greedy",
+      "checkpoint_sha256": "51e247a60ea1d275c86a392a0084c265463b2321e3794562c748693b2225efa3",
+      "runtime": {
+        "execute_steps": 4,
+        "temporal_ensemble": false,
+        "model_config": {
+          "image_size": [
+            120,
+            160
+          ],
+          "chunk_size": 16,
+          "hidden_dim": 128,
+          "latent_dim": 16,
+          "nheads": 4,
+          "encoder_layers": 2,
+          "decoder_layers": 2,
+          "posterior_layers": 2,
+          "feedforward_dim": 512,
+          "dropout": 0.1,
+          "residual_actions": false,
+          "include_velocity": false,
+          "include_goal_error": false
+        },
+        "goal_dim": 25
+      },
+      "command_sha256": "88c2a1782c874c0b33156f192bd4534dbd6edd2d8026b11e10006f94388ee48c",
+      "decisions": [
+        {
+          "timestamp": 0.0,
+          "goal": {
+            "subgoal_id": "so101-shelves-7200:0.000000000:PICK:instance_0014",
+            "primitive": "PICK",
+            "object_id": "instance_0014",
+            "object_pose": {
+              "position": [
+                0.2888761913652791,
+                -0.20805253732289802,
+                0.05171159648895264
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.20680540730517338,
+                0.9783820948429818
+              ]
+            },
+            "target_ee_pose": {
+              "position": [
+                0.2888761913652791,
+                -0.20805253732289802,
+                0.13171159648895264
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            },
+            "place_pose": null,
+            "frame_id": "robot_base"
+          },
+          "decision": {
+            "mode": "target_pick",
+            "hidden_estimates_used": false,
+            "selected": "instance_0014"
+          }
+        }
+      ],
+      "placed_tracks": []
+    },
+    {
+      "condition": "b_no_hidden",
+      "checkpoint_sha256": "51e247a60ea1d275c86a392a0084c265463b2321e3794562c748693b2225efa3",
+      "runtime": {
+        "execute_steps": 4,
+        "temporal_ensemble": false,
+        "model_config": {
+          "image_size": [
+            120,
+            160
+          ],
+          "chunk_size": 16,
+          "hidden_dim": 128,
+          "latent_dim": 16,
+          "nheads": 4,
+          "encoder_layers": 2,
+          "decoder_layers": 2,
+          "posterior_layers": 2,
+          "feedforward_dim": 512,
+          "dropout": 0.1,
+          "residual_actions": false,
+          "include_velocity": false,
+          "include_goal_error": false
+        },
+        "goal_dim": 25
+      },
+      "command_sha256": "d5ac62a87a94f5e8e348641b0040714a94f92934cdc21be3b68f12d387b2d975",
+      "decisions": [
+        {
+          "timestamp": 0.0,
+          "goal": {
+            "subgoal_id": "so101-shelves-7200:0.000000000:PICK:instance_0014",
+            "primitive": "PICK",
+            "object_id": "instance_0014",
+            "object_pose": {
+              "position": [
+                0.2888761913652791,
+                -0.20805253732289802,
+                0.05171159648895264
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.20680540730517338,
+                0.9783820948429818
+              ]
+            },
+            "target_ee_pose": {
+              "position": [
+                0.2888761913652791,
+                -0.20805253732289802,
+                0.13171159648895264
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            },
+            "place_pose": null,
+            "frame_id": "robot_base"
+          },
+          "decision": {
+            "mode": "target_pick",
+            "hidden_estimates_used": false,
+            "selected": "instance_0014"
+          }
+        }
+      ],
+      "placed_tracks": []
+    },
+    {
+      "condition": "c_full",
+      "checkpoint_sha256": "51e247a60ea1d275c86a392a0084c265463b2321e3794562c748693b2225efa3",
+      "runtime": {
+        "execute_steps": 4,
+        "temporal_ensemble": false,
+        "model_config": {
+          "image_size": [
+            120,
+            160
+          ],
+          "chunk_size": 16,
+          "hidden_dim": 128,
+          "latent_dim": 16,
+          "nheads": 4,
+          "encoder_layers": 2,
+          "decoder_layers": 2,
+          "posterior_layers": 2,
+          "feedforward_dim": 512,
+          "dropout": 0.1,
+          "residual_actions": false,
+          "include_velocity": false,
+          "include_goal_error": false
+        },
+        "goal_dim": 25
+      },
+      "command_sha256": "88c2a1782c874c0b33156f192bd4534dbd6edd2d8026b11e10006f94388ee48c",
+      "decisions": [
+        {
+          "timestamp": 0.0,
+          "goal": {
+            "subgoal_id": "so101-shelves-7200:0.000000000:PICK:instance_0014",
+            "primitive": "PICK",
+            "object_id": "instance_0014",
+            "object_pose": {
+              "position": [
+                0.2888761913652791,
+                -0.20805253732289802,
+                0.05171159648895264
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.20680540730517338,
+                0.9783820948429818
+              ]
+            },
+            "target_ee_pose": {
+              "position": [
+                0.2888761913652791,
+                -0.20805253732289802,
+                0.13171159648895264
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            },
+            "place_pose": null,
+            "frame_id": "robot_base"
+          },
+          "decision": {
+            "mode": "target_pick",
+            "hidden_estimates_used": false,
+            "selected": "instance_0014"
+          }
+        }
+      ],
+      "placed_tracks": []
+    },
+    {
+      "condition": "a_greedy",
+      "checkpoint_sha256": "51e247a60ea1d275c86a392a0084c265463b2321e3794562c748693b2225efa3",
+      "runtime": {
+        "execute_steps": 4,
+        "temporal_ensemble": false,
+        "model_config": {
+          "image_size": [
+            120,
+            160
+          ],
+          "chunk_size": 16,
+          "hidden_dim": 128,
+          "latent_dim": 16,
+          "nheads": 4,
+          "encoder_layers": 2,
+          "decoder_layers": 2,
+          "posterior_layers": 2,
+          "feedforward_dim": 512,
+          "dropout": 0.1,
+          "residual_actions": false,
+          "include_velocity": false,
+          "include_goal_error": false
+        },
+        "goal_dim": 25
+      },
+      "command_sha256": "7606f9a3598e5f248d57fba42428f7f912412011c1eb1afcac89f374c7f8a692",
+      "decisions": [
+        {
+          "timestamp": 0.0,
+          "goal": {
+            "subgoal_id": "so101-shelves-7201:0.000000000:PICK:instance_0003",
+            "primitive": "PICK",
+            "object_id": "instance_0003",
+            "object_pose": {
+              "position": [
+                0.19058621564040637,
+                0.027895554231943773,
+                0.02339224338531494
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.018461418348017358,
+                0.9998295734936927
+              ]
+            },
+            "target_ee_pose": {
+              "position": [
+                0.19058621564040637,
+                0.027895554231943773,
+                0.10339224338531494
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            },
+            "place_pose": null,
+            "frame_id": "robot_base"
+          },
+          "decision": {
+            "mode": "unblock",
+            "condition": "a_greedy",
+            "hidden_estimates_used": false,
+            "selected": "instance_0003",
+            "candidates": [
+              {
+                "object_id": "instance_0003",
+                "distance_to_robot_base_m": 0.1940321225690133
+              },
+              {
+                "object_id": "instance_0012",
+                "distance_to_robot_base_m": 0.24294014782228535
+              },
+              {
+                "object_id": "instance_0001",
+                "distance_to_robot_base_m": 0.24470515615803037
+              },
+              {
+                "object_id": "instance_0008",
+                "distance_to_robot_base_m": 0.24747933698084584
+              },
+              {
+                "object_id": "instance_0024",
+                "distance_to_robot_base_m": 0.2542134770539423
+              },
+              {
+                "object_id": "instance_0006",
+                "distance_to_robot_base_m": 0.28546677115538555
+              },
+              {
+                "object_id": "instance_0023",
+                "distance_to_robot_base_m": 0.2855895888580708
+              },
+              {
+                "object_id": "instance_0009",
+                "distance_to_robot_base_m": 0.28653355296846017
+              },
+              {
+                "object_id": "instance_0020",
+                "distance_to_robot_base_m": 0.30097318498353426
+              },
+              {
+                "object_id": "instance_0002",
+                "distance_to_robot_base_m": 0.31865355991557875
+              },
+              {
+                "object_id": "instance_0019",
+                "distance_to_robot_base_m": 0.3210644991856717
+              },
+              {
+                "object_id": "instance_0010",
+                "distance_to_robot_base_m": 0.3282993355151928
+              },
+              {
+                "object_id": "instance_0021",
+                "distance_to_robot_base_m": 0.33239044699464526
+              },
+              {
+                "object_id": "instance_0013",
+                "distance_to_robot_base_m": 0.3350948244538115
+              },
+              {
+                "object_id": "instance_0004",
+                "distance_to_robot_base_m": 0.35657671858989265
+              },
+              {
+                "object_id": "instance_0005",
+                "distance_to_robot_base_m": 0.3609682061617556
+              }
+            ]
+          }
+        },
+        {
+          "timestamp": 3.0333333333331405,
+          "goal": {
+            "subgoal_id": "so101-shelves-7201:3.033333333:PLACE:instance_0003",
+            "primitive": "PLACE",
+            "object_id": "instance_0003",
+            "object_pose": {
+              "position": [
+                0.1921507971976904,
+                0.023050890806760038,
+                0.03542608976691323
+              ],
+              "quaternion_xyzw": [
+                -0.00527360311738912,
+                -0.0027329991932764364,
+                0.012690747008126583,
+                0.9999018275640591
+              ]
+            },
+            "target_ee_pose": {
+              "position": [
+                0.10500000000000001,
+                -0.18,
+                0.10700000000000001
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            },
+            "place_pose": {
+              "position": [
+                0.10500000000000001,
+                -0.18,
+                0.027000000000000003
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            },
+            "frame_id": "robot_base"
+          },
+          "decision": {
+            "mode": "place",
+            "hidden_estimates_used": false,
+            "selected": "instance_0003"
+          }
+        }
+      ],
+      "placed_tracks": []
+    },
+    {
+      "condition": "b_no_hidden",
+      "checkpoint_sha256": "51e247a60ea1d275c86a392a0084c265463b2321e3794562c748693b2225efa3",
+      "runtime": {
+        "execute_steps": 4,
+        "temporal_ensemble": false,
+        "model_config": {
+          "image_size": [
+            120,
+            160
+          ],
+          "chunk_size": 16,
+          "hidden_dim": 128,
+          "latent_dim": 16,
+          "nheads": 4,
+          "encoder_layers": 2,
+          "decoder_layers": 2,
+          "posterior_layers": 2,
+          "feedforward_dim": 512,
+          "dropout": 0.1,
+          "residual_actions": false,
+          "include_velocity": false,
+          "include_goal_error": false
+        },
+        "goal_dim": 25
+      },
+      "command_sha256": "b6e1aa8c4b1bdca1dfaca2233bc716776e440d59020fd1bf6a293fff830f4b03",
+      "decisions": [
+        {
+          "timestamp": 0.0,
+          "goal": {
+            "subgoal_id": "so101-shelves-7201:0.000000000:PICK:instance_0024",
+            "primitive": "PICK",
+            "object_id": "instance_0024",
+            "object_pose": {
+              "position": [
+                0.24,
+                -0.026914034381042284,
+                0.07937333726882935
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.33100694143550036,
+                0.9436283191604178
+              ]
+            },
+            "target_ee_pose": {
+              "position": [
+                0.24,
+                -0.026914034381042284,
+                0.15937333726882935
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            },
+            "place_pose": null,
+            "frame_id": "robot_base"
+          },
+          "decision": {
+            "mode": "unblock",
+            "condition": "b_no_hidden",
+            "hidden_estimates_used": false,
+            "selected": "instance_0024",
+            "candidates": []
+          }
+        }
+      ],
+      "placed_tracks": []
+    },
+    {
+      "condition": "c_full",
+      "checkpoint_sha256": "51e247a60ea1d275c86a392a0084c265463b2321e3794562c748693b2225efa3",
+      "runtime": {
+        "execute_steps": 4,
+        "temporal_ensemble": false,
+        "model_config": {
+          "image_size": [
+            120,
+            160
+          ],
+          "chunk_size": 16,
+          "hidden_dim": 128,
+          "latent_dim": 16,
+          "nheads": 4,
+          "encoder_layers": 2,
+          "decoder_layers": 2,
+          "posterior_layers": 2,
+          "feedforward_dim": 512,
+          "dropout": 0.1,
+          "residual_actions": false,
+          "include_velocity": false,
+          "include_goal_error": false
+        },
+        "goal_dim": 25
+      },
+      "command_sha256": "b980dfc464fc74967675b15c87f7334c148228e7810ebd32ca64914d93a5d6a2",
+      "decisions": [
+        {
+          "timestamp": 0.0,
+          "goal": {
+            "subgoal_id": "so101-shelves-7201:0.000000000:PICK:instance_0024",
+            "primitive": "PICK",
+            "object_id": "instance_0024",
+            "object_pose": {
+              "position": [
+                0.24,
+                -0.026914034381042284,
+                0.07937333726882935
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.33100694143550036,
+                0.9436283191604178
+              ]
+            },
+            "target_ee_pose": {
+              "position": [
+                0.24,
+                -0.026914034381042284,
+                0.15937333726882935
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            },
+            "place_pose": null,
+            "frame_id": "robot_base"
+          },
+          "decision": {
+            "mode": "unblock",
+            "condition": "c_full",
+            "hidden_estimates_used": false,
+            "selected": "instance_0024",
+            "candidates": []
+          }
+        }
+      ],
+      "placed_tracks": []
+    },
+    {
+      "condition": "a_greedy",
+      "checkpoint_sha256": "51e247a60ea1d275c86a392a0084c265463b2321e3794562c748693b2225efa3",
+      "runtime": {
+        "execute_steps": 4,
+        "temporal_ensemble": false,
+        "model_config": {
+          "image_size": [
+            120,
+            160
+          ],
+          "chunk_size": 16,
+          "hidden_dim": 128,
+          "latent_dim": 16,
+          "nheads": 4,
+          "encoder_layers": 2,
+          "decoder_layers": 2,
+          "posterior_layers": 2,
+          "feedforward_dim": 512,
+          "dropout": 0.1,
+          "residual_actions": false,
+          "include_velocity": false,
+          "include_goal_error": false
+        },
+        "goal_dim": 25
+      },
+      "command_sha256": "0e40867ec2465b5a171bc8d32f025f760fbc2e15a4fc6d4aadce8e6e39a0748c",
+      "decisions": [
+        {
+          "timestamp": 0.0,
+          "goal": {
+            "subgoal_id": "so101-shelves-7202:0.000000000:PICK:instance_0014",
+            "primitive": "PICK",
+            "object_id": "instance_0014",
+            "object_pose": {
+              "position": [
+                0.18878203291908532,
+                0.15310287211134144,
+                0.02309540190114081
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.1215840625339326,
+                0.9925811381130234
+              ]
+            },
+            "target_ee_pose": {
+              "position": [
+                0.18878203291908532,
+                0.15310287211134144,
+                0.1030954019011408
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            },
+            "place_pose": null,
+            "frame_id": "robot_base"
+          },
+          "decision": {
+            "mode": "search",
+            "condition": "a_greedy",
+            "hidden_estimates_used": false,
+            "selected": "instance_0014",
+            "candidates": [
+              {
+                "object_id": "instance_0014",
+                "distance_to_robot_base_m": 0.24415680000929652
+              },
+              {
+                "object_id": "instance_0006",
+                "distance_to_robot_base_m": 0.2836853834372247
+              },
+              {
+                "object_id": "instance_0001",
+                "distance_to_robot_base_m": 0.28390557865530514
+              },
+              {
+                "object_id": "instance_0007",
+                "distance_to_robot_base_m": 0.31854052034827446
+              },
+              {
+                "object_id": "instance_0016",
+                "distance_to_robot_base_m": 0.3261922815023954
+              },
+              {
+                "object_id": "instance_0005",
+                "distance_to_robot_base_m": 0.32881582217590943
+              },
+              {
+                "object_id": "instance_0004",
+                "distance_to_robot_base_m": 0.3592067278883566
+              }
+            ]
+          }
+        }
+      ],
+      "placed_tracks": []
+    },
+    {
+      "condition": "b_no_hidden",
+      "checkpoint_sha256": "51e247a60ea1d275c86a392a0084c265463b2321e3794562c748693b2225efa3",
+      "runtime": {
+        "execute_steps": 4,
+        "temporal_ensemble": false,
+        "model_config": {
+          "image_size": [
+            120,
+            160
+          ],
+          "chunk_size": 16,
+          "hidden_dim": 128,
+          "latent_dim": 16,
+          "nheads": 4,
+          "encoder_layers": 2,
+          "decoder_layers": 2,
+          "posterior_layers": 2,
+          "feedforward_dim": 512,
+          "dropout": 0.1,
+          "residual_actions": false,
+          "include_velocity": false,
+          "include_goal_error": false
+        },
+        "goal_dim": 25
+      },
+      "command_sha256": "5cb18210c4cf16c159c45aad003bc30e38adaa0b379afe77afdb3ff5b3c91069",
+      "decisions": [
+        {
+          "timestamp": 0.0,
+          "goal": {
+            "subgoal_id": "so101-shelves-7202:0.000000000:PICK:instance_0014",
+            "primitive": "PICK",
+            "object_id": "instance_0014",
+            "object_pose": {
+              "position": [
+                0.18878203291908532,
+                0.15310287211134144,
+                0.02309540190114081
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.1215840625339326,
+                0.9925811381130234
+              ]
+            },
+            "target_ee_pose": {
+              "position": [
+                0.18878203291908532,
+                0.15310287211134144,
+                0.1030954019011408
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            },
+            "place_pose": null,
+            "frame_id": "robot_base"
+          },
+          "decision": {
+            "mode": "search",
+            "condition": "b_no_hidden",
+            "hidden_estimates_used": false,
+            "selected": "instance_0014",
+            "candidates": [
+              {
+                "object_id": "instance_0014",
+                "region": "shelf_3",
+                "hidden_count": 0,
+                "region_hidden_count": 0,
+                "distance_to_robot_base_m": 0.24415680000929652
+              },
+              {
+                "object_id": "instance_0006",
+                "region": "shelf_3",
+                "hidden_count": 0,
+                "region_hidden_count": 0,
+                "distance_to_robot_base_m": 0.2836853834372247
+              },
+              {
+                "object_id": "instance_0001",
+                "region": "shelf_3",
+                "hidden_count": 0,
+                "region_hidden_count": 0,
+                "distance_to_robot_base_m": 0.28390557865530514
+              },
+              {
+                "object_id": "instance_0007",
+                "region": "shelf_3",
+                "hidden_count": 0,
+                "region_hidden_count": 0,
+                "distance_to_robot_base_m": 0.31854052034827446
+              },
+              {
+                "object_id": "instance_0016",
+                "region": "shelf_3",
+                "hidden_count": 0,
+                "region_hidden_count": 0,
+                "distance_to_robot_base_m": 0.3261922815023954
+              },
+              {
+                "object_id": "instance_0005",
+                "region": "shelf_3",
+                "hidden_count": 0,
+                "region_hidden_count": 0,
+                "distance_to_robot_base_m": 0.32881582217590943
+              },
+              {
+                "object_id": "instance_0004",
+                "region": "shelf_3",
+                "hidden_count": 0,
+                "region_hidden_count": 0,
+                "distance_to_robot_base_m": 0.3592067278883566
+              }
+            ]
+          }
+        }
+      ],
+      "placed_tracks": []
+    },
+    {
+      "condition": "c_full",
+      "checkpoint_sha256": "51e247a60ea1d275c86a392a0084c265463b2321e3794562c748693b2225efa3",
+      "runtime": {
+        "execute_steps": 4,
+        "temporal_ensemble": false,
+        "model_config": {
+          "image_size": [
+            120,
+            160
+          ],
+          "chunk_size": 16,
+          "hidden_dim": 128,
+          "latent_dim": 16,
+          "nheads": 4,
+          "encoder_layers": 2,
+          "decoder_layers": 2,
+          "posterior_layers": 2,
+          "feedforward_dim": 512,
+          "dropout": 0.1,
+          "residual_actions": false,
+          "include_velocity": false,
+          "include_goal_error": false
+        },
+        "goal_dim": 25
+      },
+      "command_sha256": "e0866c5c9359ef7fcf8a1643721f2997c2b58a6c7eb62023513ddfd42b0b18ff",
+      "decisions": [
+        {
+          "timestamp": 0.0,
+          "goal": {
+            "subgoal_id": "so101-shelves-7202:0.000000000:PICK:instance_0016",
+            "primitive": "PICK",
+            "object_id": "instance_0016",
+            "object_pose": {
+              "position": [
+                0.24022500476668684,
+                0.20812035852692545,
+                0.07334349298477173
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.30251622827150737,
+                0.9531442344327438
+              ]
+            },
+            "target_ee_pose": {
+              "position": [
+                0.24022500476668684,
+                0.20812035852692545,
+                0.15334349298477173
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            },
+            "place_pose": null,
+            "frame_id": "robot_base"
+          },
+          "decision": {
+            "mode": "search",
+            "condition": "c_full",
+            "hidden_estimates_used": true,
+            "selected": "instance_0016",
+            "candidates": [
+              {
+                "object_id": "instance_0016",
+                "region": "shelf_3",
+                "hidden_count": 2,
+                "region_hidden_count": 2,
+                "distance_to_robot_base_m": 0.3261922815023954
+              },
+              {
+                "object_id": "instance_0014",
+                "region": "shelf_3",
+                "hidden_count": 0,
+                "region_hidden_count": 2,
+                "distance_to_robot_base_m": 0.24415680000929652
+              },
+              {
+                "object_id": "instance_0006",
+                "region": "shelf_3",
+                "hidden_count": 0,
+                "region_hidden_count": 2,
+                "distance_to_robot_base_m": 0.2836853834372247
+              },
+              {
+                "object_id": "instance_0001",
+                "region": "shelf_3",
+                "hidden_count": 0,
+                "region_hidden_count": 2,
+                "distance_to_robot_base_m": 0.28390557865530514
+              },
+              {
+                "object_id": "instance_0007",
+                "region": "shelf_3",
+                "hidden_count": 0,
+                "region_hidden_count": 2,
+                "distance_to_robot_base_m": 0.31854052034827446
+              },
+              {
+                "object_id": "instance_0005",
+                "region": "shelf_3",
+                "hidden_count": 0,
+                "region_hidden_count": 2,
+                "distance_to_robot_base_m": 0.32881582217590943
+              },
+              {
+                "object_id": "instance_0004",
+                "region": "shelf_3",
+                "hidden_count": 0,
+                "region_hidden_count": 2,
+                "distance_to_robot_base_m": 0.3592067278883566
+              }
+            ]
+          }
+        }
+      ],
+      "placed_tracks": []
+    },
+    {
+      "condition": "a_greedy",
+      "checkpoint_sha256": "51e247a60ea1d275c86a392a0084c265463b2321e3794562c748693b2225efa3",
+      "runtime": {
+        "execute_steps": 4,
+        "temporal_ensemble": false,
+        "model_config": {
+          "image_size": [
+            120,
+            160
+          ],
+          "chunk_size": 16,
+          "hidden_dim": 128,
+          "latent_dim": 16,
+          "nheads": 4,
+          "encoder_layers": 2,
+          "decoder_layers": 2,
+          "posterior_layers": 2,
+          "feedforward_dim": 512,
+          "dropout": 0.1,
+          "residual_actions": false,
+          "include_velocity": false,
+          "include_goal_error": false
+        },
+        "goal_dim": 25
+      },
+      "command_sha256": "6793d20ed583d66065aadf73c52cbae8f52cfc5bcd4af05097909cd3b35c68f2",
+      "decisions": [
+        {
+          "timestamp": 0.0,
+          "goal": {
+            "subgoal_id": "so101-shelves-7203:0.000000000:PICK:instance_0004",
+            "primitive": "PICK",
+            "object_id": "instance_0004",
+            "object_pose": {
+              "position": [
+                0.19114745576968112,
+                0.02909246984099897,
+                0.08191952560567184
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.011067751040043702,
+                0.9999387505677113
+              ]
+            },
+            "target_ee_pose": {
+              "position": [
+                0.19114745576968112,
+                0.02909246984099897,
+                0.16191952560567185
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            },
+            "place_pose": null,
+            "frame_id": "robot_base"
+          },
+          "decision": {
+            "mode": "search",
+            "condition": "a_greedy",
+            "hidden_estimates_used": false,
+            "selected": "instance_0004",
+            "candidates": [
+              {
+                "object_id": "instance_0004",
+                "distance_to_robot_base_m": 0.20998697655838078
+              },
+              {
+                "object_id": "instance_0021",
+                "distance_to_robot_base_m": 0.2450493067981883
+              },
+              {
+                "object_id": "instance_0014",
+                "distance_to_robot_base_m": 0.2460880346294225
+              },
+              {
+                "object_id": "instance_0026",
+                "distance_to_robot_base_m": 0.24735794780937598
+              },
+              {
+                "object_id": "instance_0010",
+                "distance_to_robot_base_m": 0.2857516920363125
+              },
+              {
+                "object_id": "instance_0023",
+                "distance_to_robot_base_m": 0.28637299136904737
+              },
+              {
+                "object_id": "instance_0005",
+                "distance_to_robot_base_m": 0.29104270052741593
+              },
+              {
+                "object_id": "instance_0011",
+                "distance_to_robot_base_m": 0.2914062137743311
+              },
+              {
+                "object_id": "instance_0016",
+                "distance_to_robot_base_m": 0.29388259152005114
+              },
+              {
+                "object_id": "instance_0013",
+                "distance_to_robot_base_m": 0.2995278944509171
+              },
+              {
+                "object_id": "instance_0007",
+                "distance_to_robot_base_m": 0.3203507693886292
+              },
+              {
+                "object_id": "instance_0008",
+                "distance_to_robot_base_m": 0.3270115032215567
+              },
+              {
+                "object_id": "instance_0001",
+                "distance_to_robot_base_m": 0.3283712120128553
+              },
+              {
+                "object_id": "instance_0002",
+                "distance_to_robot_base_m": 0.3305299414035044
+              },
+              {
+                "object_id": "instance_0018",
+                "distance_to_robot_base_m": 0.3559000930662085
+              }
+            ]
+          }
+        }
+      ],
+      "placed_tracks": []
+    },
+    {
+      "condition": "b_no_hidden",
+      "checkpoint_sha256": "51e247a60ea1d275c86a392a0084c265463b2321e3794562c748693b2225efa3",
+      "runtime": {
+        "execute_steps": 4,
+        "temporal_ensemble": false,
+        "model_config": {
+          "image_size": [
+            120,
+            160
+          ],
+          "chunk_size": 16,
+          "hidden_dim": 128,
+          "latent_dim": 16,
+          "nheads": 4,
+          "encoder_layers": 2,
+          "decoder_layers": 2,
+          "posterior_layers": 2,
+          "feedforward_dim": 512,
+          "dropout": 0.1,
+          "residual_actions": false,
+          "include_velocity": false,
+          "include_goal_error": false
+        },
+        "goal_dim": 25
+      },
+      "command_sha256": "871c3840532e1e07800bfae37361248a5f0b7b09139320f62de1a95cb7acc467",
+      "decisions": [
+        {
+          "timestamp": 0.0,
+          "goal": {
+            "subgoal_id": "so101-shelves-7203:0.000000000:PICK:instance_0004",
+            "primitive": "PICK",
+            "object_id": "instance_0004",
+            "object_pose": {
+              "position": [
+                0.19114745576968112,
+                0.02909246984099897,
+                0.08191952560567184
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.011067751040043702,
+                0.9999387505677113
+              ]
+            },
+            "target_ee_pose": {
+              "position": [
+                0.19114745576968112,
+                0.02909246984099897,
+                0.16191952560567185
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            },
+            "place_pose": null,
+            "frame_id": "robot_base"
+          },
+          "decision": {
+            "mode": "search",
+            "condition": "b_no_hidden",
+            "hidden_estimates_used": false,
+            "selected": "instance_0004",
+            "candidates": [
+              {
+                "object_id": "instance_0004",
+                "region": "shelf_2",
+                "hidden_count": 0,
+                "region_hidden_count": 0,
+                "distance_to_robot_base_m": 0.20998697655838078
+              },
+              {
+                "object_id": "instance_0021",
+                "region": "shelf_2",
+                "hidden_count": 0,
+                "region_hidden_count": 0,
+                "distance_to_robot_base_m": 0.2450493067981883
+              },
+              {
+                "object_id": "instance_0014",
+                "region": "shelf_3",
+                "hidden_count": 0,
+                "region_hidden_count": 0,
+                "distance_to_robot_base_m": 0.2460880346294225
+              },
+              {
+                "object_id": "instance_0026",
+                "region": "shelf_1",
+                "hidden_count": 0,
+                "region_hidden_count": 0,
+                "distance_to_robot_base_m": 0.24735794780937598
+              },
+              {
+                "object_id": "instance_0010",
+                "region": "shelf_1",
+                "hidden_count": 0,
+                "region_hidden_count": 0,
+                "distance_to_robot_base_m": 0.2857516920363125
+              },
+              {
+                "object_id": "instance_0023",
+                "region": "shelf_1",
+                "hidden_count": 0,
+                "region_hidden_count": 0,
+                "distance_to_robot_base_m": 0.28637299136904737
+              },
+              {
+                "object_id": "instance_0005",
+                "region": "shelf_2",
+                "hidden_count": 0,
+                "region_hidden_count": 0,
+                "distance_to_robot_base_m": 0.29104270052741593
+              },
+              {
+                "object_id": "instance_0011",
+                "region": "shelf_3",
+                "hidden_count": 0,
+                "region_hidden_count": 0,
+                "distance_to_robot_base_m": 0.2914062137743311
+              },
+              {
+                "object_id": "instance_0016",
+                "region": "shelf_2",
+                "hidden_count": 0,
+                "region_hidden_count": 0,
+                "distance_to_robot_base_m": 0.29388259152005114
+              },
+              {
+                "object_id": "instance_0013",
+                "region": "shelf_2",
+                "hidden_count": 0,
+                "region_hidden_count": 0,
+                "distance_to_robot_base_m": 0.2995278944509171
+              },
+              {
+                "object_id": "instance_0007",
+                "region": "shelf_1",
+                "hidden_count": 0,
+                "region_hidden_count": 0,
+                "distance_to_robot_base_m": 0.3203507693886292
+              },
+              {
+                "object_id": "instance_0008",
+                "region": "shelf_3",
+                "hidden_count": 0,
+                "region_hidden_count": 0,
+                "distance_to_robot_base_m": 0.3270115032215567
+              },
+              {
+                "object_id": "instance_0001",
+                "region": "shelf_1",
+                "hidden_count": 0,
+                "region_hidden_count": 0,
+                "distance_to_robot_base_m": 0.3283712120128553
+              },
+              {
+                "object_id": "instance_0002",
+                "region": "shelf_3",
+                "hidden_count": 0,
+                "region_hidden_count": 0,
+                "distance_to_robot_base_m": 0.3305299414035044
+              },
+              {
+                "object_id": "instance_0018",
+                "region": "shelf_1",
+                "hidden_count": 0,
+                "region_hidden_count": 0,
+                "distance_to_robot_base_m": 0.3559000930662085
+              }
+            ]
+          }
+        }
+      ],
+      "placed_tracks": []
+    },
+    {
+      "condition": "c_full",
+      "checkpoint_sha256": "51e247a60ea1d275c86a392a0084c265463b2321e3794562c748693b2225efa3",
+      "runtime": {
+        "execute_steps": 4,
+        "temporal_ensemble": false,
+        "model_config": {
+          "image_size": [
+            120,
+            160
+          ],
+          "chunk_size": 16,
+          "hidden_dim": 128,
+          "latent_dim": 16,
+          "nheads": 4,
+          "encoder_layers": 2,
+          "decoder_layers": 2,
+          "posterior_layers": 2,
+          "feedforward_dim": 512,
+          "dropout": 0.1,
+          "residual_actions": false,
+          "include_velocity": false,
+          "include_goal_error": false
+        },
+        "goal_dim": 25
+      },
+      "command_sha256": "5298df7bb9931f50934ac20ef39a367f44ef961809bd0839720b83cb63ddaeaf",
+      "decisions": [
+        {
+          "timestamp": 0.0,
+          "goal": {
+            "subgoal_id": "so101-shelves-7203:0.000000000:PICK:instance_0013",
+            "primitive": "PICK",
+            "object_id": "instance_0013",
+            "object_pose": {
+              "position": [
+                0.2890747130290931,
+                -0.02781190173540735,
+                0.07334349298477173
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                -0.27829695816080907,
+                0.9604950822770728
+              ]
+            },
+            "target_ee_pose": {
+              "position": [
+                0.2890747130290931,
+                -0.02781190173540735,
+                0.15334349298477173
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            },
+            "place_pose": null,
+            "frame_id": "robot_base"
+          },
+          "decision": {
+            "mode": "search",
+            "condition": "c_full",
+            "hidden_estimates_used": true,
+            "selected": "instance_0013",
+            "candidates": [
+              {
+                "object_id": "instance_0013",
+                "region": "shelf_2",
+                "hidden_count": 2,
+                "region_hidden_count": 2,
+                "distance_to_robot_base_m": 0.2995278944509171
+              },
+              {
+                "object_id": "instance_0004",
+                "region": "shelf_2",
+                "hidden_count": 0,
+                "region_hidden_count": 2,
+                "distance_to_robot_base_m": 0.20998697655838078
+              },
+              {
+                "object_id": "instance_0021",
+                "region": "shelf_2",
+                "hidden_count": 0,
+                "region_hidden_count": 2,
+                "distance_to_robot_base_m": 0.2450493067981883
+              },
+              {
+                "object_id": "instance_0005",
+                "region": "shelf_2",
+                "hidden_count": 0,
+                "region_hidden_count": 2,
+                "distance_to_robot_base_m": 0.29104270052741593
+              },
+              {
+                "object_id": "instance_0016",
+                "region": "shelf_2",
+                "hidden_count": 0,
+                "region_hidden_count": 2,
+                "distance_to_robot_base_m": 0.29388259152005114
+              },
+              {
+                "object_id": "instance_0014",
+                "region": "shelf_3",
+                "hidden_count": 0,
+                "region_hidden_count": 0,
+                "distance_to_robot_base_m": 0.2460880346294225
+              },
+              {
+                "object_id": "instance_0026",
+                "region": "shelf_1",
+                "hidden_count": 0,
+                "region_hidden_count": 0,
+                "distance_to_robot_base_m": 0.24735794780937598
+              },
+              {
+                "object_id": "instance_0010",
+                "region": "shelf_1",
+                "hidden_count": 0,
+                "region_hidden_count": 0,
+                "distance_to_robot_base_m": 0.2857516920363125
+              },
+              {
+                "object_id": "instance_0023",
+                "region": "shelf_1",
+                "hidden_count": 0,
+                "region_hidden_count": 0,
+                "distance_to_robot_base_m": 0.28637299136904737
+              },
+              {
+                "object_id": "instance_0011",
+                "region": "shelf_3",
+                "hidden_count": 0,
+                "region_hidden_count": 0,
+                "distance_to_robot_base_m": 0.2914062137743311
+              },
+              {
+                "object_id": "instance_0007",
+                "region": "shelf_1",
+                "hidden_count": 0,
+                "region_hidden_count": 0,
+                "distance_to_robot_base_m": 0.3203507693886292
+              },
+              {
+                "object_id": "instance_0008",
+                "region": "shelf_3",
+                "hidden_count": 0,
+                "region_hidden_count": 0,
+                "distance_to_robot_base_m": 0.3270115032215567
+              },
+              {
+                "object_id": "instance_0001",
+                "region": "shelf_1",
+                "hidden_count": 0,
+                "region_hidden_count": 0,
+                "distance_to_robot_base_m": 0.3283712120128553
+              },
+              {
+                "object_id": "instance_0002",
+                "region": "shelf_3",
+                "hidden_count": 0,
+                "region_hidden_count": 0,
+                "distance_to_robot_base_m": 0.3305299414035044
+              },
+              {
+                "object_id": "instance_0018",
+                "region": "shelf_1",
+                "hidden_count": 0,
+                "region_hidden_count": 0,
+                "distance_to_robot_base_m": 0.3559000930662085
+              }
+            ]
+          }
+        },
+        {
+          "timestamp": 2.2666666666665503,
+          "goal": {
+            "subgoal_id": "so101-shelves-7203:2.266666667:PLACE:instance_0013",
+            "primitive": "PLACE",
+            "object_id": "instance_0013",
+            "object_pose": {
+              "position": [
+                0.29025910911771596,
+                -0.02371655609000678,
+                0.08540941061468572
+              ],
+              "quaternion_xyzw": [
+                -0.0017831242683278745,
+                -0.005470326750267143,
+                -0.2660426451840408,
+                0.9639440891133507
+              ]
+            },
+            "target_ee_pose": {
+              "position": [
+                0.10500000000000001,
+                -0.18,
+                0.097
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            },
+            "place_pose": {
+              "position": [
+                0.10500000000000001,
+                -0.18,
+                0.017
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            },
+            "frame_id": "robot_base"
+          },
+          "decision": {
+            "mode": "place",
+            "hidden_estimates_used": false,
+            "selected": "instance_0013"
+          }
+        },
+        {
+          "timestamp": 5.766666666666901,
+          "goal": {
+            "subgoal_id": "so101-shelves-7203:5.766666667:PICK:instance_0028",
+            "primitive": "PICK",
+            "object_id": "instance_0028",
+            "object_pose": {
+              "position": [
+                0.2887603287717835,
+                -0.027940453362351077,
+                0.051712073326110844
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                -0.27727359723555844,
+                0.9607910034320957
+              ]
+            },
+            "target_ee_pose": {
+              "position": [
+                0.2887603287717835,
+                -0.027940453362351077,
+                0.13171207332611085
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            },
+            "place_pose": null,
+            "frame_id": "robot_base"
+          },
+          "decision": {
+            "mode": "target_pick",
+            "hidden_estimates_used": false,
+            "selected": "instance_0028"
+          }
+        }
+      ],
+      "placed_tracks": [
+        "instance_0013"
+      ]
+    }
+  ]
+}

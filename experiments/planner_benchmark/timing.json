@@ -1,0 +1,1453 @@
+{
+  "protocol": "serial common initial inputs; first call warm-up; rotating method order; no A or C",
+  "repeats": 21,
+  "robot_state": "configured home; current planners only validate this argument",
+  "rows": [
+    {
+      "case_id": "scene_000",
+      "group": "visible_free",
+      "outcomes": {
+        "greedy": {
+          "primitive": "PICK",
+          "object_id": "instance_0010"
+        },
+        "flat": {
+          "primitive": "PICK",
+          "object_id": "instance_0010"
+        },
+        "hsg": {
+          "primitive": "PICK",
+          "object_id": "instance_0010"
+        }
+      },
+      "hidden_counts_by_region": {
+        "shelf_2": [
+          1
+        ]
+      },
+      "median_milliseconds": {
+        "greedy": 0.9794,
+        "flat": 1.5291,
+        "hsg": 1.6453
+      }
+    },
+    {
+      "case_id": "scene_001",
+      "group": "visible_blocked",
+      "outcomes": {
+        "greedy": {
+          "primitive": "PICK",
+          "object_id": "instance_0008"
+        },
+        "flat": {
+          "primitive": "PICK",
+          "object_id": "instance_0008"
+        },
+        "hsg": {
+          "primitive": "PICK",
+          "object_id": "instance_0008"
+        }
+      },
+      "hidden_counts_by_region": {
+        "shelf_1": [
+          2
+        ],
+        "shelf_3": [
+          1
+        ]
+      },
+      "median_milliseconds": {
+        "greedy": 0.8718,
+        "flat": 1.2402,
+        "hsg": 1.2517
+      }
+    },
+    {
+      "case_id": "scene_002",
+      "group": "unlocalized_known_region",
+      "outcomes": {
+        "greedy": {
+          "primitive": "PICK",
+          "object_id": "instance_0013"
+        },
+        "flat": {
+          "error": "target not visible and no hidden space left"
+        },
+        "hsg": {
+          "error": "target not visible and no hidden space left"
+        }
+      },
+      "hidden_counts_by_region": {},
+      "median_milliseconds": {
+        "greedy": 0.9471,
+        "flat": 1.6405,
+        "hsg": 1.5578
+      }
+    },
+    {
+      "case_id": "scene_003",
+      "group": "unlocalized_unknown_region",
+      "outcomes": {
+        "greedy": {
+          "primitive": "PICK",
+          "object_id": "instance_0013"
+        },
+        "flat": {
+          "error": "target not visible and no hidden space left"
+        },
+        "hsg": {
+          "error": "target not visible and no hidden space left"
+        }
+      },
+      "hidden_counts_by_region": {},
+      "median_milliseconds": {
+        "greedy": 1.1179,
+        "flat": 1.8533,
+        "hsg": 1.9044
+      }
+    },
+    {
+      "case_id": "scene_004",
+      "group": "visible_free",
+      "outcomes": {
+        "greedy": {
+          "primitive": "PICK",
+          "object_id": "instance_0022"
+        },
+        "flat": {
+          "primitive": "PICK",
+          "object_id": "instance_0022"
+        },
+        "hsg": {
+          "primitive": "PICK",
+          "object_id": "instance_0022"
+        }
+      },
+      "hidden_counts_by_region": {
+        "shelf_1": [
+          2
+        ]
+      },
+      "median_milliseconds": {
+        "greedy": 1.2754,
+        "flat": 2.1047,
+        "hsg": 2.064
+      }
+    },
+    {
+      "case_id": "scene_005",
+      "group": "visible_blocked",
+      "outcomes": {
+        "greedy": {
+          "primitive": "PICK",
+          "object_id": "instance_0013"
+        },
+        "flat": {
+          "primitive": "PICK",
+          "object_id": "instance_0013"
+        },
+        "hsg": {
+          "primitive": "PICK",
+          "object_id": "instance_0013"
+        }
+      },
+      "hidden_counts_by_region": {
+        "shelf_2": [
+          1
+        ]
+      },
+      "median_milliseconds": {
+        "greedy": 0.7871,
+        "flat": 1.2458,
+        "hsg": 1.3316
+      }
+    },
+    {
+      "case_id": "scene_006",
+      "group": "unlocalized_known_region",
+      "outcomes": {
+        "greedy": {
+          "primitive": "PICK",
+          "object_id": "instance_0022"
+        },
+        "flat": {
+          "error": "target not visible and no hidden space left"
+        },
+        "hsg": {
+          "error": "target not visible and no hidden space left"
+        }
+      },
+      "hidden_counts_by_region": {},
+      "median_milliseconds": {
+        "greedy": 0.9469,
+        "flat": 1.5102,
+        "hsg": 1.5952
+      }
+    },
+    {
+      "case_id": "scene_007",
+      "group": "unlocalized_unknown_region",
+      "outcomes": {
+        "greedy": {
+          "primitive": "PICK",
+          "object_id": "instance_0016"
+        },
+        "flat": {
+          "primitive": "PICK",
+          "object_id": "instance_0009"
+        },
+        "hsg": {
+          "primitive": "PICK",
+          "object_id": "instance_0009"
+        }
+      },
+      "hidden_counts_by_region": {
+        "shelf_1": [
+          1
+        ],
+        "shelf_3": [
+          2
+        ]
+      },
+      "median_milliseconds": {
+        "greedy": 0.9533,
+        "flat": 1.481,
+        "hsg": 1.4838
+      }
+    },
+    {
+      "case_id": "scene_008",
+      "group": "visible_free",
+      "outcomes": {
+        "greedy": {
+          "primitive": "PICK",
+          "object_id": "instance_0009"
+        },
+        "flat": {
+          "primitive": "PICK",
+          "object_id": "instance_0009"
+        },
+        "hsg": {
+          "primitive": "PICK",
+          "object_id": "instance_0009"
+        }
+      },
+      "hidden_counts_by_region": {
+        "shelf_2": [
+          2
+        ]
+      },
+      "median_milliseconds": {
+        "greedy": 0.9947,
+        "flat": 1.6796,
+        "hsg": 1.5492
+      }
+    },
+    {
+      "case_id": "scene_009",
+      "group": "visible_blocked",
+      "outcomes": {
+        "greedy": {
+          "primitive": "PICK",
+          "object_id": "instance_0009"
+        },
+        "flat": {
+          "primitive": "PICK",
+          "object_id": "instance_0009"
+        },
+        "hsg": {
+          "primitive": "PICK",
+          "object_id": "instance_0009"
+        }
+      },
+      "hidden_counts_by_region": {
+        "shelf_1": [
+          1
+        ]
+      },
+      "median_milliseconds": {
+        "greedy": 1.0177,
+        "flat": 1.5442,
+        "hsg": 1.5971
+      }
+    },
+    {
+      "case_id": "scene_010",
+      "group": "unlocalized_known_region",
+      "outcomes": {
+        "greedy": {
+          "primitive": "PICK",
+          "object_id": "instance_0024"
+        },
+        "flat": {
+          "primitive": "PICK",
+          "object_id": "instance_0024"
+        },
+        "hsg": {
+          "primitive": "PICK",
+          "object_id": "instance_0024"
+        }
+      },
+      "hidden_counts_by_region": {
+        "shelf_1": [
+          1
+        ],
+        "shelf_3": [
+          1
+        ]
+      },
+      "median_milliseconds": {
+        "greedy": 0.8075,
+        "flat": 1.6481,
+        "hsg": 1.5312
+      }
+    },
+    {
+      "case_id": "scene_011",
+      "group": "unlocalized_unknown_region",
+      "outcomes": {
+        "greedy": {
+          "primitive": "PICK",
+          "object_id": "instance_0027"
+        },
+        "flat": {
+          "primitive": "PICK",
+          "object_id": "instance_0021"
+        },
+        "hsg": {
+          "primitive": "PICK",
+          "object_id": "instance_0021"
+        }
+      },
+      "hidden_counts_by_region": {
+        "shelf_1": [
+          2
+        ]
+      },
+      "median_milliseconds": {
+        "greedy": 0.9073,
+        "flat": 1.4407,
+        "hsg": 1.4629
+      }
+    },
+    {
+      "case_id": "scene_012",
+      "group": "visible_free",
+      "outcomes": {
+        "greedy": {
+          "primitive": "PICK",
+          "object_id": "instance_0015"
+        },
+        "flat": {
+          "primitive": "PICK",
+          "object_id": "instance_0015"
+        },
+        "hsg": {
+          "primitive": "PICK",
+          "object_id": "instance_0015"
+        }
+      },
+      "hidden_counts_by_region": {},
+      "median_milliseconds": {
+        "greedy": 0.9573,
+        "flat": 1.5576,
+        "hsg": 1.53
+      }
+    },
+    {
+      "case_id": "scene_013",
+      "group": "visible_blocked",
+      "outcomes": {
+        "greedy": {
+          "primitive": "PICK",
+          "object_id": "instance_0026"
+        },
+        "flat": {
+          "primitive": "PICK",
+          "object_id": "instance_0026"
+        },
+        "hsg": {
+          "primitive": "PICK",
+          "object_id": "instance_0026"
+        }
+      },
+      "hidden_counts_by_region": {
+        "shelf_3": [
+          2
+        ]
+      },
+      "median_milliseconds": {
+        "greedy": 0.8129,
+        "flat": 1.403,
+        "hsg": 1.3404
+      }
+    },
+    {
+      "case_id": "scene_014",
+      "group": "unlocalized_known_region",
+      "outcomes": {
+        "greedy": {
+          "primitive": "PICK",
+          "object_id": "instance_0026"
+        },
+        "flat": {
+          "primitive": "PICK",
+          "object_id": "instance_0020"
+        },
+        "hsg": {
+          "primitive": "PICK",
+          "object_id": "instance_0020"
+        }
+      },
+      "hidden_counts_by_region": {
+        "shelf_1": [
+          1
+        ]
+      },
+      "median_milliseconds": {
+        "greedy": 1.2007,
+        "flat": 2.0606,
+        "hsg": 2.0493
+      }
+    },
+    {
+      "case_id": "scene_015",
+      "group": "unlocalized_unknown_region",
+      "outcomes": {
+        "greedy": {
+          "primitive": "PICK",
+          "object_id": "instance_0014"
+        },
+        "flat": {
+          "primitive": "PICK",
+          "object_id": "instance_0026"
+        },
+        "hsg": {
+          "primitive": "PICK",
+          "object_id": "instance_0026"
+        }
+      },
+      "hidden_counts_by_region": {
+        "shelf_1": [
+          2
+        ]
+      },
+      "median_milliseconds": {
+        "greedy": 0.8271,
+        "flat": 1.3634,
+        "hsg": 1.3901
+      }
+    },
+    {
+      "case_id": "scene_016",
+      "group": "visible_free",
+      "outcomes": {
+        "greedy": {
+          "primitive": "PICK",
+          "object_id": "instance_0002"
+        },
+        "flat": {
+          "primitive": "PICK",
+          "object_id": "instance_0002"
+        },
+        "hsg": {
+          "primitive": "PICK",
+          "object_id": "instance_0002"
+        }
+      },
+      "hidden_counts_by_region": {},
+      "median_milliseconds": {
+        "greedy": 0.8365,
+        "flat": 1.3484,
+        "hsg": 1.3472
+      }
+    },
+    {
+      "case_id": "scene_017",
+      "group": "visible_blocked",
+      "outcomes": {
+        "greedy": {
+          "primitive": "PICK",
+          "object_id": "instance_0004"
+        },
+        "flat": {
+          "primitive": "PICK",
+          "object_id": "instance_0004"
+        },
+        "hsg": {
+          "primitive": "PICK",
+          "object_id": "instance_0004"
+        }
+      },
+      "hidden_counts_by_region": {},
+      "median_milliseconds": {
+        "greedy": 0.9927,
+        "flat": 1.6103,
+        "hsg": 1.6233
+      }
+    },
+    {
+      "case_id": "scene_018",
+      "group": "unlocalized_known_region",
+      "outcomes": {
+        "greedy": {
+          "primitive": "PICK",
+          "object_id": "instance_0012"
+        },
+        "flat": {
+          "primitive": "PICK",
+          "object_id": "instance_0023"
+        },
+        "hsg": {
+          "primitive": "PICK",
+          "object_id": "instance_0023"
+        }
+      },
+      "hidden_counts_by_region": {
+        "shelf_1": [
+          1,
+          2
+        ]
+      },
+      "median_milliseconds": {
+        "greedy": 0.8464,
+        "flat": 1.3849,
+        "hsg": 1.3853
+      }
+    },
+    {
+      "case_id": "scene_019",
+      "group": "unlocalized_unknown_region",
+      "outcomes": {
+        "greedy": {
+          "primitive": "PICK",
+          "object_id": "instance_0003"
+        },
+        "flat": {
+          "error": "target not visible and no hidden space left"
+        },
+        "hsg": {
+          "error": "target not visible and no hidden space left"
+        }
+      },
+      "hidden_counts_by_region": {},
+      "median_milliseconds": {
+        "greedy": 0.8209,
+        "flat": 1.3691,
+        "hsg": 1.3588
+      }
+    },
+    {
+      "case_id": "scene_020",
+      "group": "visible_free",
+      "outcomes": {
+        "greedy": {
+          "primitive": "PICK",
+          "object_id": "instance_0002"
+        },
+        "flat": {
+          "primitive": "PICK",
+          "object_id": "instance_0002"
+        },
+        "hsg": {
+          "primitive": "PICK",
+          "object_id": "instance_0002"
+        }
+      },
+      "hidden_counts_by_region": {},
+      "median_milliseconds": {
+        "greedy": 0.8969,
+        "flat": 1.4922,
+        "hsg": 1.4972
+      }
+    },
+    {
+      "case_id": "scene_021",
+      "group": "visible_blocked",
+      "outcomes": {
+        "greedy": {
+          "primitive": "PICK",
+          "object_id": "instance_0006"
+        },
+        "flat": {
+          "primitive": "PICK",
+          "object_id": "instance_0006"
+        },
+        "hsg": {
+          "primitive": "PICK",
+          "object_id": "instance_0006"
+        }
+      },
+      "hidden_counts_by_region": {
+        "shelf_2": [
+          2
+        ]
+      },
+      "median_milliseconds": {
+        "greedy": 0.8855,
+        "flat": 1.3336,
+        "hsg": 1.3273
+      }
+    },
+    {
+      "case_id": "scene_022",
+      "group": "unlocalized_known_region",
+      "outcomes": {
+        "greedy": {
+          "primitive": "PICK",
+          "object_id": "instance_0023"
+        },
+        "flat": {
+          "error": "target not visible and no hidden space left"
+        },
+        "hsg": {
+          "error": "target not visible and no hidden space left"
+        }
+      },
+      "hidden_counts_by_region": {},
+      "median_milliseconds": {
+        "greedy": 0.9673,
+        "flat": 1.575,
+        "hsg": 1.5022
+      }
+    },
+    {
+      "case_id": "scene_023",
+      "group": "unlocalized_unknown_region",
+      "outcomes": {
+        "greedy": {
+          "primitive": "PICK",
+          "object_id": "instance_0021"
+        },
+        "flat": {
+          "error": "target not visible and no hidden space left"
+        },
+        "hsg": {
+          "error": "target not visible and no hidden space left"
+        }
+      },
+      "hidden_counts_by_region": {},
+      "median_milliseconds": {
+        "greedy": 0.9836,
+        "flat": 1.6265,
+        "hsg": 1.6679
+      }
+    },
+    {
+      "case_id": "scene_024",
+      "group": "visible_free",
+      "outcomes": {
+        "greedy": {
+          "primitive": "PICK",
+          "object_id": "instance_0020"
+        },
+        "flat": {
+          "primitive": "PICK",
+          "object_id": "instance_0020"
+        },
+        "hsg": {
+          "primitive": "PICK",
+          "object_id": "instance_0020"
+        }
+      },
+      "hidden_counts_by_region": {},
+      "median_milliseconds": {
+        "greedy": 1.0138,
+        "flat": 1.7781,
+        "hsg": 1.8952
+      }
+    },
+    {
+      "case_id": "scene_025",
+      "group": "visible_blocked",
+      "outcomes": {
+        "greedy": {
+          "primitive": "PICK",
+          "object_id": "instance_0010"
+        },
+        "flat": {
+          "primitive": "PICK",
+          "object_id": "instance_0010"
+        },
+        "hsg": {
+          "primitive": "PICK",
+          "object_id": "instance_0010"
+        }
+      },
+      "hidden_counts_by_region": {},
+      "median_milliseconds": {
+        "greedy": 0.8834,
+        "flat": 1.3381,
+        "hsg": 1.3661
+      }
+    },
+    {
+      "case_id": "scene_026",
+      "group": "unlocalized_known_region",
+      "outcomes": {
+        "greedy": {
+          "primitive": "PICK",
+          "object_id": "instance_0019"
+        },
+        "flat": {
+          "primitive": "PICK",
+          "object_id": "instance_0003"
+        },
+        "hsg": {
+          "primitive": "PICK",
+          "object_id": "instance_0003"
+        }
+      },
+      "hidden_counts_by_region": {
+        "shelf_1": [
+          1
+        ],
+        "shelf_2": [
+          1
+        ]
+      },
+      "median_milliseconds": {
+        "greedy": 0.8295,
+        "flat": 1.3509,
+        "hsg": 1.3538
+      }
+    },
+    {
+      "case_id": "scene_027",
+      "group": "unlocalized_unknown_region",
+      "outcomes": {
+        "greedy": {
+          "primitive": "PICK",
+          "object_id": "instance_0006"
+        },
+        "flat": {
+          "primitive": "PICK",
+          "object_id": "instance_0013"
+        },
+        "hsg": {
+          "primitive": "PICK",
+          "object_id": "instance_0013"
+        }
+      },
+      "hidden_counts_by_region": {
+        "shelf_3": [
+          1
+        ]
+      },
+      "median_milliseconds": {
+        "greedy": 0.9926,
+        "flat": 1.5484,
+        "hsg": 1.6486
+      }
+    },
+    {
+      "case_id": "scene_028",
+      "group": "visible_free",
+      "outcomes": {
+        "greedy": {
+          "primitive": "PICK",
+          "object_id": "instance_0004"
+        },
+        "flat": {
+          "primitive": "PICK",
+          "object_id": "instance_0004"
+        },
+        "hsg": {
+          "primitive": "PICK",
+          "object_id": "instance_0004"
+        }
+      },
+      "hidden_counts_by_region": {
+        "shelf_2": [
+          2
+        ]
+      },
+      "median_milliseconds": {
+        "greedy": 1.0403,
+        "flat": 1.8001,
+        "hsg": 1.8037
+      }
+    },
+    {
+      "case_id": "scene_029",
+      "group": "visible_blocked",
+      "outcomes": {
+        "greedy": {
+          "primitive": "PICK",
+          "object_id": "instance_0003"
+        },
+        "flat": {
+          "primitive": "PICK",
+          "object_id": "instance_0003"
+        },
+        "hsg": {
+          "primitive": "PICK",
+          "object_id": "instance_0003"
+        }
+      },
+      "hidden_counts_by_region": {
+        "shelf_1": [
+          2
+        ]
+      },
+      "median_milliseconds": {
+        "greedy": 1.0002,
+        "flat": 1.7414,
+        "hsg": 1.7886
+      }
+    },
+    {
+      "case_id": "scene_030",
+      "group": "unlocalized_known_region",
+      "outcomes": {
+        "greedy": {
+          "primitive": "PICK",
+          "object_id": "instance_0016"
+        },
+        "flat": {
+          "primitive": "PICK",
+          "object_id": "instance_0017"
+        },
+        "hsg": {
+          "primitive": "PICK",
+          "object_id": "instance_0017"
+        }
+      },
+      "hidden_counts_by_region": {
+        "shelf_2": [
+          1,
+          2
+        ]
+      },
+      "median_milliseconds": {
+        "greedy": 0.9105,
+        "flat": 1.5386,
+        "hsg": 1.5135
+      }
+    },
+    {
+      "case_id": "scene_031",
+      "group": "unlocalized_unknown_region",
+      "outcomes": {
+        "greedy": {
+          "primitive": "PICK",
+          "object_id": "instance_0014"
+        },
+        "flat": {
+          "primitive": "PICK",
+          "object_id": "instance_0023"
+        },
+        "hsg": {
+          "primitive": "PICK",
+          "object_id": "instance_0023"
+        }
+      },
+      "hidden_counts_by_region": {
+        "shelf_1": [
+          2
+        ]
+      },
+      "median_milliseconds": {
+        "greedy": 1.1723,
+        "flat": 1.6221,
+        "hsg": 1.7049
+      }
+    },
+    {
+      "case_id": "scene_032",
+      "group": "visible_free",
+      "outcomes": {
+        "greedy": {
+          "primitive": "PICK",
+          "object_id": "instance_0010"
+        },
+        "flat": {
+          "primitive": "PICK",
+          "object_id": "instance_0010"
+        },
+        "hsg": {
+          "primitive": "PICK",
+          "object_id": "instance_0010"
+        }
+      },
+      "hidden_counts_by_region": {
+        "shelf_1": [
+          1
+        ],
+        "shelf_2": [
+          2
+        ]
+      },
+      "median_milliseconds": {
+        "greedy": 0.9443,
+        "flat": 1.5882,
+        "hsg": 1.6083
+      }
+    },
+    {
+      "case_id": "scene_033",
+      "group": "visible_blocked",
+      "outcomes": {
+        "greedy": {
+          "primitive": "PICK",
+          "object_id": "instance_0018"
+        },
+        "flat": {
+          "primitive": "PICK",
+          "object_id": "instance_0018"
+        },
+        "hsg": {
+          "primitive": "PICK",
+          "object_id": "instance_0018"
+        }
+      },
+      "hidden_counts_by_region": {
+        "shelf_2": [
+          2
+        ]
+      },
+      "median_milliseconds": {
+        "greedy": 1.0148,
+        "flat": 1.4084,
+        "hsg": 1.3727
+      }
+    },
+    {
+      "case_id": "scene_034",
+      "group": "unlocalized_known_region",
+      "outcomes": {
+        "greedy": {
+          "primitive": "PICK",
+          "object_id": "instance_0008"
+        },
+        "flat": {
+          "primitive": "PICK",
+          "object_id": "instance_0017"
+        },
+        "hsg": {
+          "primitive": "PICK",
+          "object_id": "instance_0017"
+        }
+      },
+      "hidden_counts_by_region": {
+        "shelf_1": [
+          2
+        ],
+        "shelf_2": [
+          1
+        ]
+      },
+      "median_milliseconds": {
+        "greedy": 0.9031,
+        "flat": 1.3889,
+        "hsg": 1.3874
+      }
+    },
+    {
+      "case_id": "scene_035",
+      "group": "unlocalized_unknown_region",
+      "outcomes": {
+        "greedy": {
+          "primitive": "PICK",
+          "object_id": "instance_0003"
+        },
+        "flat": {
+          "primitive": "PICK",
+          "object_id": "instance_0019"
+        },
+        "hsg": {
+          "primitive": "PICK",
+          "object_id": "instance_0019"
+        }
+      },
+      "hidden_counts_by_region": {
+        "shelf_1": [
+          2
+        ]
+      },
+      "median_milliseconds": {
+        "greedy": 0.9898,
+        "flat": 1.4033,
+        "hsg": 1.4326
+      }
+    },
+    {
+      "case_id": "scene_036",
+      "group": "visible_free",
+      "outcomes": {
+        "greedy": {
+          "primitive": "PICK",
+          "object_id": "instance_0019"
+        },
+        "flat": {
+          "primitive": "PICK",
+          "object_id": "instance_0019"
+        },
+        "hsg": {
+          "primitive": "PICK",
+          "object_id": "instance_0019"
+        }
+      },
+      "hidden_counts_by_region": {
+        "shelf_1": [
+          1
+        ],
+        "shelf_2": [
+          1
+        ]
+      },
+      "median_milliseconds": {
+        "greedy": 1.0266,
+        "flat": 1.6207,
+        "hsg": 1.6323
+      }
+    },
+    {
+      "case_id": "scene_037",
+      "group": "visible_blocked",
+      "outcomes": {
+        "greedy": {
+          "primitive": "PICK",
+          "object_id": "instance_0024"
+        },
+        "flat": {
+          "primitive": "PICK",
+          "object_id": "instance_0024"
+        },
+        "hsg": {
+          "primitive": "PICK",
+          "object_id": "instance_0024"
+        }
+      },
+      "hidden_counts_by_region": {},
+      "median_milliseconds": {
+        "greedy": 1.0641,
+        "flat": 1.6008,
+        "hsg": 1.5681
+      }
+    },
+    {
+      "case_id": "scene_038",
+      "group": "unlocalized_known_region",
+      "outcomes": {
+        "greedy": {
+          "primitive": "PICK",
+          "object_id": "instance_0007"
+        },
+        "flat": {
+          "error": "target not visible and no hidden space left"
+        },
+        "hsg": {
+          "error": "target not visible and no hidden space left"
+        }
+      },
+      "hidden_counts_by_region": {
+        "shelf_2": [
+          2
+        ]
+      },
+      "median_milliseconds": {
+        "greedy": 0.8525,
+        "flat": 1.4322,
+        "hsg": 1.3597
+      }
+    },
+    {
+      "case_id": "scene_039",
+      "group": "unlocalized_unknown_region",
+      "outcomes": {
+        "greedy": {
+          "primitive": "PICK",
+          "object_id": "instance_0028"
+        },
+        "flat": {
+          "primitive": "PICK",
+          "object_id": "instance_0028"
+        },
+        "hsg": {
+          "primitive": "PICK",
+          "object_id": "instance_0028"
+        }
+      },
+      "hidden_counts_by_region": {
+        "shelf_2": [
+          1
+        ]
+      },
+      "median_milliseconds": {
+        "greedy": 1.081,
+        "flat": 1.7704,
+        "hsg": 1.7999
+      }
+    },
+    {
+      "case_id": "scene_040",
+      "group": "visible_free",
+      "outcomes": {
+        "greedy": {
+          "primitive": "PICK",
+          "object_id": "instance_0009"
+        },
+        "flat": {
+          "primitive": "PICK",
+          "object_id": "instance_0009"
+        },
+        "hsg": {
+          "primitive": "PICK",
+          "object_id": "instance_0009"
+        }
+      },
+      "hidden_counts_by_region": {
+        "shelf_1": [
+          1
+        ]
+      },
+      "median_milliseconds": {
+        "greedy": 0.912,
+        "flat": 1.5978,
+        "hsg": 1.6636
+      }
+    },
+    {
+      "case_id": "scene_041",
+      "group": "visible_blocked",
+      "outcomes": {
+        "greedy": {
+          "primitive": "PICK",
+          "object_id": "instance_0014"
+        },
+        "flat": {
+          "primitive": "PICK",
+          "object_id": "instance_0014"
+        },
+        "hsg": {
+          "primitive": "PICK",
+          "object_id": "instance_0014"
+        }
+      },
+      "hidden_counts_by_region": {
+        "shelf_2": [
+          2
+        ]
+      },
+      "median_milliseconds": {
+        "greedy": 1.048,
+        "flat": 1.6939,
+        "hsg": 1.6815
+      }
+    },
+    {
+      "case_id": "scene_042",
+      "group": "unlocalized_known_region",
+      "outcomes": {
+        "greedy": {
+          "primitive": "PICK",
+          "object_id": "instance_0011"
+        },
+        "flat": {
+          "error": "target not visible and no hidden space left"
+        },
+        "hsg": {
+          "error": "target not visible and no hidden space left"
+        }
+      },
+      "hidden_counts_by_region": {},
+      "median_milliseconds": {
+        "greedy": 1.1498,
+        "flat": 2.1513,
+        "hsg": 2.0666
+      }
+    },
+    {
+      "case_id": "scene_043",
+      "group": "unlocalized_unknown_region",
+      "outcomes": {
+        "greedy": {
+          "primitive": "PICK",
+          "object_id": "instance_0018"
+        },
+        "flat": {
+          "error": "target not visible and no hidden space left"
+        },
+        "hsg": {
+          "error": "target not visible and no hidden space left"
+        }
+      },
+      "hidden_counts_by_region": {},
+      "median_milliseconds": {
+        "greedy": 1.2525,
+        "flat": 1.9051,
+        "hsg": 1.9347
+      }
+    },
+    {
+      "case_id": "scene_044",
+      "group": "visible_free",
+      "outcomes": {
+        "greedy": {
+          "primitive": "PICK",
+          "object_id": "instance_0008"
+        },
+        "flat": {
+          "primitive": "PICK",
+          "object_id": "instance_0008"
+        },
+        "hsg": {
+          "primitive": "PICK",
+          "object_id": "instance_0008"
+        }
+      },
+      "hidden_counts_by_region": {
+        "shelf_1": [
+          2
+        ],
+        "shelf_3": [
+          1
+        ]
+      },
+      "median_milliseconds": {
+        "greedy": 1.0517,
+        "flat": 1.647,
+        "hsg": 1.9873
+      }
+    },
+    {
+      "case_id": "scene_045",
+      "group": "visible_blocked",
+      "outcomes": {
+        "greedy": {
+          "primitive": "PICK",
+          "object_id": "instance_0013"
+        },
+        "flat": {
+          "primitive": "PICK",
+          "object_id": "instance_0013"
+        },
+        "hsg": {
+          "primitive": "PICK",
+          "object_id": "instance_0013"
+        }
+      },
+      "hidden_counts_by_region": {
+        "shelf_3": [
+          2,
+          1
+        ]
+      },
+      "median_milliseconds": {
+        "greedy": 1.5743,
+        "flat": 2.7749,
+        "hsg": 2.8107
+      }
+    },
+    {
+      "case_id": "scene_046",
+      "group": "unlocalized_known_region",
+      "outcomes": {
+        "greedy": {
+          "primitive": "PICK",
+          "object_id": "instance_0024"
+        },
+        "flat": {
+          "primitive": "PICK",
+          "object_id": "instance_0020"
+        },
+        "hsg": {
+          "primitive": "PICK",
+          "object_id": "instance_0020"
+        }
+      },
+      "hidden_counts_by_region": {
+        "shelf_1": [
+          2
+        ],
+        "shelf_3": [
+          2,
+          1
+        ]
+      },
+      "median_milliseconds": {
+        "greedy": 0.9517,
+        "flat": 1.3849,
+        "hsg": 1.4447
+      }
+    },
+    {
+      "case_id": "scene_047",
+      "group": "unlocalized_unknown_region",
+      "outcomes": {
+        "greedy": {
+          "primitive": "PICK",
+          "object_id": "instance_0002"
+        },
+        "flat": {
+          "primitive": "PICK",
+          "object_id": "instance_0008"
+        },
+        "hsg": {
+          "primitive": "PICK",
+          "object_id": "instance_0008"
+        }
+      },
+      "hidden_counts_by_region": {
+        "shelf_1": [
+          2,
+          2
+        ]
+      },
+      "median_milliseconds": {
+        "greedy": 0.8608,
+        "flat": 1.3355,
+        "hsg": 1.4321
+      }
+    },
+    {
+      "case_id": "scene_048",
+      "group": "visible_free",
+      "outcomes": {
+        "greedy": {
+          "primitive": "PICK",
+          "object_id": "instance_0022"
+        },
+        "flat": {
+          "primitive": "PICK",
+          "object_id": "instance_0022"
+        },
+        "hsg": {
+          "primitive": "PICK",
+          "object_id": "instance_0022"
+        }
+      },
+      "hidden_counts_by_region": {
+        "shelf_1": [
+          1,
+          1
+        ]
+      },
+      "median_milliseconds": {
+        "greedy": 0.925,
+        "flat": 1.5096,
+        "hsg": 1.4412
+      }
+    },
+    {
+      "case_id": "scene_049",
+      "group": "visible_blocked",
+      "outcomes": {
+        "greedy": {
+          "primitive": "PICK",
+          "object_id": "instance_0004"
+        },
+        "flat": {
+          "primitive": "PICK",
+          "object_id": "instance_0004"
+        },
+        "hsg": {
+          "primitive": "PICK",
+          "object_id": "instance_0004"
+        }
+      },
+      "hidden_counts_by_region": {
+        "shelf_1": [
+          2
+        ],
+        "shelf_2": [
+          1
+        ]
+      },
+      "median_milliseconds": {
+        "greedy": 0.9728,
+        "flat": 1.523,
+        "hsg": 1.514
+      }
+    },
+    {
+      "case_id": "scene_050",
+      "group": "unlocalized_known_region",
+      "outcomes": {
+        "greedy": {
+          "primitive": "PICK",
+          "object_id": "instance_0003"
+        },
+        "flat": {
+          "primitive": "PICK",
+          "object_id": "instance_0020"
+        },
+        "hsg": {
+          "primitive": "PICK",
+          "object_id": "instance_0020"
+        }
+      },
+      "hidden_counts_by_region": {
+        "shelf_1": [
+          1,
+          2
+        ],
+        "shelf_2": [
+          1
+        ]
+      },
+      "median_milliseconds": {
+        "greedy": 0.9343,
+        "flat": 1.5056,
+        "hsg": 1.5296
+      }
+    },
+    {
+      "case_id": "scene_051",
+      "group": "unlocalized_unknown_region",
+      "outcomes": {
+        "greedy": {
+          "primitive": "PICK",
+          "object_id": "instance_0024"
+        },
+        "flat": {
+          "primitive": "PICK",
+          "object_id": "instance_0019"
+        },
+        "hsg": {
+          "primitive": "PICK",
+          "object_id": "instance_0019"
+        }
+      },
+      "hidden_counts_by_region": {
+        "shelf_1": [
+          2
+        ],
+        "shelf_2": [
+          1,
+          1
+        ]
+      },
+      "median_milliseconds": {
+        "greedy": 0.8144,
+        "flat": 1.351,
+        "hsg": 1.4331
+      }
+    }
+  ],
+  "aggregate": {
+    "greedy": {
+      "median_case_milliseconds": 0.9553,
+      "valid_initial_plans": 52
+    },
+    "flat": {
+      "median_case_milliseconds": 1.5413999999999999,
+      "valid_initial_plans": 43
+    },
+    "hsg": {
+      "median_case_milliseconds": 1.5306,
+      "valid_initial_plans": 43
+    }
+  },
+  "initial_hierarchy_diagnostic": {
+    "n": 13,
+    "initial_flat_hsg_selection_disagreements": 0,
+    "number_of_candidate_regions_histogram": {
+      "0": 4,
+      "2": 2,
+      "1": 7
+    }
+  },
+  "manifest_sha256": "5804f61b7ffd7784a3e4a756f25f64944b23526762293784492c5f36626a9ab5"
+}

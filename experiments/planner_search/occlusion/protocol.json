@@ -1,0 +1,41 @@
+{
+  "schema": "rgbd-ideal-removal-v1",
+  "count": 40,
+  "start_seed": 9100,
+  "max_scan": 500,
+  "max_picks": 28,
+  "primary": "non-target removals capped at 27 on failure",
+  "comparisons": [
+    "b_no_hidden vs a_greedy: all strata",
+    "c_full vs b_no_hidden: initially unlocalized strata"
+  ],
+  "secondary": [
+    "discovery removals",
+    "success within 1/2/3/5/8/12 removals",
+    "initial inferred-cue availability, no outcome-based subgroup definition",
+    "geometric base-object-buffer path proxy; not robot execution time"
+  ],
+  "selection": "fixed strata; uniform RNG choice among eligible targets; no planner outcomes/cue screening",
+  "execution": "oracle object correspondence and support check after decision; teleport outside scene",
+  "limits": [
+    "no ACT, IK, collision trajectory, placement congestion, grasp failures or object settling",
+    "all remaining object poses and the parked robot stay fixed",
+    "scene families are conditional strata, not the natural scene prevalence"
+  ],
+  "source_sha256": {
+    "scripts/benchmark_planner_search.py": "93d619cb216eb571755771a4a0d16e16ad226e2212d51e5c84ac055b619aeedf",
+    "src/planner/act_comparison.py": "1b7cd0ab0cececeb69cd0627216c49d928c627362aa34859b7ff54966c5222c7",
+    "src/planner/indexed.py": "77676383157eb7d00d913beb58eb1c961b05d4ca25c3c3cadedd0ec38249cf21",
+    "src/planner/baselines.py": "a5177bee66dba5f3ed25db32486512c31ea4cf8c5b0ddd7d3c88e26274c66e1c",
+    "src/planner/planner.py": "9a1be9e3dace6612961f097ae09c87159a3934eb8bba2c4097698870d945e885",
+    "src/pipeline/rgbd_env.py": "c40a935b7f510e7611f4e09e76bccc1edd067cb5941830e28636cb0ad5abd04b",
+    "src/pipeline/mujoco_env.py": "8011b698ba3caf4112120bb2b2cd3fca5fecb7a306fd04498a255dc84925dac2",
+    "src/pipeline/target.py": "146c1ea87f15097d84688155e703b5ef6bdfe3374d9e1bc18ee5a0d45951d649",
+    "src/perception/acquisition.py": "dd99edbcef1d83014aa1f97c8287435a080aba16c508057b5da4aaf60b957cf7",
+    "src/perception/association.py": "b082aec949b2f3b948346d65641259c12a71f5d4c7f269a9af786f8f104022da",
+    "src/perception/bridge.py": "956e16161dab41823d7177954d37753d39616c69cc7bec56f237aca62270ffe8",
+    "scripts/benchmark_planner_occlusion.py": "5a5ba247f13a1fad3dbb3b62eca9628c4b994bd1ed44f3fde2689a5ec38da60b",
+    "src/pipeline/shelf_scene.py": "1e211ea80b7acb9fbcb466764dac7b26d5666448b21e9eaf1779e22d63fbcd99"
+  },
+  "created_utc": "2026-11-02T00:44:16.907259+00:00"
+}

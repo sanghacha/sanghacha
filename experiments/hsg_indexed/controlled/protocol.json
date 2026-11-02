@@ -1,0 +1,36 @@
+{
+  "version": "indexed-ablation-v2",
+  "region_counts": [
+    3,
+    24,
+    192
+  ],
+  "objects_per_region": 9,
+  "seeds": [
+    6300,
+    6301,
+    6302,
+    6303,
+    6304,
+    6305,
+    6306,
+    6307,
+    6308,
+    6309,
+    6310,
+    6311
+  ],
+  "frames": 20,
+  "updates": [
+    "local",
+    "global"
+  ],
+  "queries": [
+    "hidden",
+    "visible"
+  ],
+  "noise_m": 5e-05,
+  "cell_size_m": 0.05,
+  "timing": "serial; order offset=(frame+seed)%4; cyclic GC disabled during timed B calls; snapshot diff and summary maintenance included",
+  "controls": "same policy, spatial hash, adjacency, object/region inputs and stream; only storage/incrementality differ"
+}

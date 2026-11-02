@@ -1,0 +1,21 @@
+{
+  "case": "scene_001",
+  "seed": 8101,
+  "selection": "illustrative first visible-blocked case with all methods successful and C using fewer removals than A; post-evaluation illustration only",
+  "sources": [
+    "outputs\\planner_search\\confirmatory\\runs\\a_greedy\\scene_001\\perception\\snapshot_000\\inputs\\frame_000\\fixed_oblique_rgb.png",
+    "outputs\\planner_search\\confirmatory\\runs\\a_greedy\\scene_001\\perception\\snapshot_001\\inputs\\frame_000\\fixed_oblique_rgb.png",
+    "outputs\\planner_search\\confirmatory\\runs\\a_greedy\\scene_001\\perception\\snapshot_009\\inputs\\frame_000\\fixed_oblique_rgb.png",
+    "outputs\\planner_search\\confirmatory\\runs\\b_no_hidden\\scene_001\\perception\\snapshot_000\\inputs\\frame_000\\fixed_oblique_rgb.png",
+    "outputs\\planner_search\\confirmatory\\runs\\b_no_hidden\\scene_001\\perception\\snapshot_001\\inputs\\frame_000\\fixed_oblique_rgb.png",
+    "outputs\\planner_search\\confirmatory\\runs\\b_no_hidden\\scene_001\\perception\\snapshot_002\\inputs\\frame_000\\fixed_oblique_rgb.png",
+    "outputs\\planner_search\\confirmatory\\runs\\c_full\\scene_001\\perception\\snapshot_000\\inputs\\frame_000\\fixed_oblique_rgb.png",
+    "outputs\\planner_search\\confirmatory\\runs\\c_full\\scene_001\\perception\\snapshot_001\\inputs\\frame_000\\fixed_oblique_rgb.png",
+    "outputs\\planner_search\\confirmatory\\runs\\c_full\\scene_001\\perception\\snapshot_002\\inputs\\frame_000\\fixed_oblique_rgb.png"
+  ],
+  "removals": {
+    "a_greedy": 9,
+    "b_no_hidden": 2,
+    "c_full": 2
+  }
+}

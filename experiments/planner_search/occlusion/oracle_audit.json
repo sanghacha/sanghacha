@@ -1,0 +1,478 @@
+{
+  "manifest_sha256": "96b8dfca1d29d600022a260f05c7e8cc86f68f1d390d547ef321709de15e5c66",
+  "rows": [
+    {
+      "case_id": "scene_000",
+      "seed": 9100,
+      "group": "visible_free",
+      "support_removal_lower_bound": 0,
+      "necessary_blockers": [],
+      "requested_target_has_geometric_candidate": true,
+      "physically_unrepresented_objects": 4,
+      "inferred_hidden_count": 0
+    },
+    {
+      "case_id": "scene_001",
+      "seed": 9101,
+      "group": "visible_blocked",
+      "support_removal_lower_bound": 1,
+      "necessary_blockers": [
+        "shelf_2_obj_06"
+      ],
+      "requested_target_has_geometric_candidate": true,
+      "physically_unrepresented_objects": 9,
+      "inferred_hidden_count": 0
+    },
+    {
+      "case_id": "scene_002",
+      "seed": 9102,
+      "group": "unlocalized_known_region",
+      "support_removal_lower_bound": 1,
+      "necessary_blockers": [
+        "shelf_2_obj_05"
+      ],
+      "requested_target_has_geometric_candidate": false,
+      "physically_unrepresented_objects": 5,
+      "inferred_hidden_count": 2
+    },
+    {
+      "case_id": "scene_003",
+      "seed": 9103,
+      "group": "unlocalized_unknown_region",
+      "support_removal_lower_bound": 1,
+      "necessary_blockers": [
+        "shelf_2_obj_01"
+      ],
+      "requested_target_has_geometric_candidate": false,
+      "physically_unrepresented_objects": 4,
+      "inferred_hidden_count": 5
+    },
+    {
+      "case_id": "scene_004",
+      "seed": 9104,
+      "group": "visible_free",
+      "support_removal_lower_bound": 0,
+      "necessary_blockers": [],
+      "requested_target_has_geometric_candidate": true,
+      "physically_unrepresented_objects": 2,
+      "inferred_hidden_count": 0
+    },
+    {
+      "case_id": "scene_005",
+      "seed": 9105,
+      "group": "visible_blocked",
+      "support_removal_lower_bound": 1,
+      "necessary_blockers": [
+        "shelf_3_obj_06"
+      ],
+      "requested_target_has_geometric_candidate": true,
+      "physically_unrepresented_objects": 4,
+      "inferred_hidden_count": 0
+    },
+    {
+      "case_id": "scene_006",
+      "seed": 9106,
+      "group": "unlocalized_known_region",
+      "support_removal_lower_bound": 1,
+      "necessary_blockers": [
+        "shelf_1_obj_01"
+      ],
+      "requested_target_has_geometric_candidate": false,
+      "physically_unrepresented_objects": 4,
+      "inferred_hidden_count": 2
+    },
+    {
+      "case_id": "scene_007",
+      "seed": 9107,
+      "group": "unlocalized_unknown_region",
+      "support_removal_lower_bound": 2,
+      "necessary_blockers": [
+        "shelf_3_obj_03",
+        "shelf_3_obj_07"
+      ],
+      "requested_target_has_geometric_candidate": false,
+      "physically_unrepresented_objects": 5,
+      "inferred_hidden_count": 5
+    },
+    {
+      "case_id": "scene_008",
+      "seed": 9108,
+      "group": "visible_free",
+      "support_removal_lower_bound": 0,
+      "necessary_blockers": [],
+      "requested_target_has_geometric_candidate": true,
+      "physically_unrepresented_objects": 7,
+      "inferred_hidden_count": 0
+    },
+    {
+      "case_id": "scene_009",
+      "seed": 9109,
+      "group": "visible_blocked",
+      "support_removal_lower_bound": 2,
+      "necessary_blockers": [
+        "shelf_1_obj_02",
+        "shelf_1_obj_06"
+      ],
+      "requested_target_has_geometric_candidate": true,
+      "physically_unrepresented_objects": 7,
+      "inferred_hidden_count": 0
+    },
+    {
+      "case_id": "scene_010",
+      "seed": 9110,
+      "group": "unlocalized_known_region",
+      "support_removal_lower_bound": 1,
+      "necessary_blockers": [
+        "shelf_3_obj_04"
+      ],
+      "requested_target_has_geometric_candidate": false,
+      "physically_unrepresented_objects": 4,
+      "inferred_hidden_count": 2
+    },
+    {
+      "case_id": "scene_011",
+      "seed": 9111,
+      "group": "unlocalized_unknown_region",
+      "support_removal_lower_bound": 2,
+      "necessary_blockers": [
+        "shelf_1_obj_03",
+        "shelf_1_obj_08"
+      ],
+      "requested_target_has_geometric_candidate": false,
+      "physically_unrepresented_objects": 5,
+      "inferred_hidden_count": 5
+    },
+    {
+      "case_id": "scene_012",
+      "seed": 9112,
+      "group": "visible_free",
+      "support_removal_lower_bound": 0,
+      "necessary_blockers": [],
+      "requested_target_has_geometric_candidate": true,
+      "physically_unrepresented_objects": 7,
+      "inferred_hidden_count": 0
+    },
+    {
+      "case_id": "scene_013",
+      "seed": 9113,
+      "group": "visible_blocked",
+      "support_removal_lower_bound": 1,
+      "necessary_blockers": [
+        "shelf_3_obj_05"
+      ],
+      "requested_target_has_geometric_candidate": true,
+      "physically_unrepresented_objects": 3,
+      "inferred_hidden_count": 0
+    },
+    {
+      "case_id": "scene_014",
+      "seed": 9114,
+      "group": "unlocalized_known_region",
+      "support_removal_lower_bound": 2,
+      "necessary_blockers": [
+        "shelf_3_obj_05",
+        "shelf_3_obj_08"
+      ],
+      "requested_target_has_geometric_candidate": false,
+      "physically_unrepresented_objects": 7,
+      "inferred_hidden_count": 3
+    },
+    {
+      "case_id": "scene_015",
+      "seed": 9115,
+      "group": "unlocalized_unknown_region",
+      "support_removal_lower_bound": 1,
+      "necessary_blockers": [
+        "shelf_2_obj_04"
+      ],
+      "requested_target_has_geometric_candidate": false,
+      "physically_unrepresented_objects": 5,
+      "inferred_hidden_count": 5
+    },
+    {
+      "case_id": "scene_016",
+      "seed": 9116,
+      "group": "visible_free",
+      "support_removal_lower_bound": 0,
+      "necessary_blockers": [],
+      "requested_target_has_geometric_candidate": true,
+      "physically_unrepresented_objects": 5,
+      "inferred_hidden_count": 0
+    },
+    {
+      "case_id": "scene_017",
+      "seed": 9117,
+      "group": "visible_blocked",
+      "support_removal_lower_bound": 1,
+      "necessary_blockers": [
+        "shelf_3_obj_03"
+      ],
+      "requested_target_has_geometric_candidate": true,
+      "physically_unrepresented_objects": 5,
+      "inferred_hidden_count": 0
+    },
+    {
+      "case_id": "scene_018",
+      "seed": 9118,
+      "group": "unlocalized_known_region",
+      "support_removal_lower_bound": 1,
+      "necessary_blockers": [
+        "shelf_1_obj_07"
+      ],
+      "requested_target_has_geometric_candidate": false,
+      "physically_unrepresented_objects": 4,
+      "inferred_hidden_count": 2
+    },
+    {
+      "case_id": "scene_019",
+      "seed": 9119,
+      "group": "unlocalized_unknown_region",
+      "support_removal_lower_bound": 2,
+      "necessary_blockers": [
+        "shelf_1_obj_03",
+        "shelf_1_obj_09"
+      ],
+      "requested_target_has_geometric_candidate": false,
+      "physically_unrepresented_objects": 7,
+      "inferred_hidden_count": 8
+    },
+    {
+      "case_id": "scene_020",
+      "seed": 9120,
+      "group": "visible_free",
+      "support_removal_lower_bound": 0,
+      "necessary_blockers": [],
+      "requested_target_has_geometric_candidate": true,
+      "physically_unrepresented_objects": 4,
+      "inferred_hidden_count": 0
+    },
+    {
+      "case_id": "scene_021",
+      "seed": 9121,
+      "group": "visible_blocked",
+      "support_removal_lower_bound": 1,
+      "necessary_blockers": [
+        "shelf_1_obj_05"
+      ],
+      "requested_target_has_geometric_candidate": true,
+      "physically_unrepresented_objects": 8,
+      "inferred_hidden_count": 0
+    },
+    {
+      "case_id": "scene_022",
+      "seed": 9122,
+      "group": "unlocalized_known_region",
+      "support_removal_lower_bound": 1,
+      "necessary_blockers": [
+        "shelf_1_obj_04"
+      ],
+      "requested_target_has_geometric_candidate": false,
+      "physically_unrepresented_objects": 6,
+      "inferred_hidden_count": 2
+    },
+    {
+      "case_id": "scene_023",
+      "seed": 9123,
+      "group": "unlocalized_unknown_region",
+      "support_removal_lower_bound": 2,
+      "necessary_blockers": [
+        "shelf_3_obj_05",
+        "shelf_3_obj_09"
+      ],
+      "requested_target_has_geometric_candidate": false,
+      "physically_unrepresented_objects": 5,
+      "inferred_hidden_count": 5
+    },
+    {
+      "case_id": "scene_024",
+      "seed": 9124,
+      "group": "visible_free",
+      "support_removal_lower_bound": 0,
+      "necessary_blockers": [],
+      "requested_target_has_geometric_candidate": true,
+      "physically_unrepresented_objects": 5,
+      "inferred_hidden_count": 0
+    },
+    {
+      "case_id": "scene_025",
+      "seed": 9125,
+      "group": "visible_blocked",
+      "support_removal_lower_bound": 1,
+      "necessary_blockers": [
+        "shelf_3_obj_09"
+      ],
+      "requested_target_has_geometric_candidate": true,
+      "physically_unrepresented_objects": 6,
+      "inferred_hidden_count": 0
+    },
+    {
+      "case_id": "scene_026",
+      "seed": 9126,
+      "group": "unlocalized_known_region",
+      "support_removal_lower_bound": 2,
+      "necessary_blockers": [
+        "shelf_1_obj_06",
+        "shelf_1_obj_09"
+      ],
+      "requested_target_has_geometric_candidate": false,
+      "physically_unrepresented_objects": 4,
+      "inferred_hidden_count": 1
+    },
+    {
+      "case_id": "scene_027",
+      "seed": 9127,
+      "group": "unlocalized_unknown_region",
+      "support_removal_lower_bound": 1,
+      "necessary_blockers": [
+        "shelf_1_obj_05"
+      ],
+      "requested_target_has_geometric_candidate": false,
+      "physically_unrepresented_objects": 6,
+      "inferred_hidden_count": 6
+    },
+    {
+      "case_id": "scene_028",
+      "seed": 9128,
+      "group": "visible_free",
+      "support_removal_lower_bound": 0,
+      "necessary_blockers": [],
+      "requested_target_has_geometric_candidate": true,
+      "physically_unrepresented_objects": 3,
+      "inferred_hidden_count": 0
+    },
+    {
+      "case_id": "scene_029",
+      "seed": 9129,
+      "group": "visible_blocked",
+      "support_removal_lower_bound": 1,
+      "necessary_blockers": [
+        "shelf_1_obj_07"
+      ],
+      "requested_target_has_geometric_candidate": true,
+      "physically_unrepresented_objects": 4,
+      "inferred_hidden_count": 0
+    },
+    {
+      "case_id": "scene_030",
+      "seed": 9130,
+      "group": "unlocalized_known_region",
+      "support_removal_lower_bound": 2,
+      "necessary_blockers": [
+        "shelf_3_obj_06",
+        "shelf_3_obj_07"
+      ],
+      "requested_target_has_geometric_candidate": false,
+      "physically_unrepresented_objects": 4,
+      "inferred_hidden_count": 1
+    },
+    {
+      "case_id": "scene_031",
+      "seed": 9131,
+      "group": "unlocalized_unknown_region",
+      "support_removal_lower_bound": 2,
+      "necessary_blockers": [
+        "shelf_1_obj_06",
+        "shelf_1_obj_07"
+      ],
+      "requested_target_has_geometric_candidate": false,
+      "physically_unrepresented_objects": 3,
+      "inferred_hidden_count": 4
+    },
+    {
+      "case_id": "scene_032",
+      "seed": 9132,
+      "group": "visible_free",
+      "support_removal_lower_bound": 0,
+      "necessary_blockers": [],
+      "requested_target_has_geometric_candidate": true,
+      "physically_unrepresented_objects": 5,
+      "inferred_hidden_count": 0
+    },
+    {
+      "case_id": "scene_033",
+      "seed": 9133,
+      "group": "visible_blocked",
+      "support_removal_lower_bound": 1,
+      "necessary_blockers": [
+        "shelf_2_obj_06"
+      ],
+      "requested_target_has_geometric_candidate": true,
+      "physically_unrepresented_objects": 8,
+      "inferred_hidden_count": 0
+    },
+    {
+      "case_id": "scene_034",
+      "seed": 9134,
+      "group": "unlocalized_known_region",
+      "support_removal_lower_bound": 1,
+      "necessary_blockers": [
+        "shelf_1_obj_04"
+      ],
+      "requested_target_has_geometric_candidate": false,
+      "physically_unrepresented_objects": 6,
+      "inferred_hidden_count": 3
+    },
+    {
+      "case_id": "scene_035",
+      "seed": 9135,
+      "group": "unlocalized_unknown_region",
+      "support_removal_lower_bound": 1,
+      "necessary_blockers": [
+        "shelf_1_obj_07"
+      ],
+      "requested_target_has_geometric_candidate": false,
+      "physically_unrepresented_objects": 5,
+      "inferred_hidden_count": 6
+    },
+    {
+      "case_id": "scene_036",
+      "seed": 9136,
+      "group": "visible_free",
+      "support_removal_lower_bound": 0,
+      "necessary_blockers": [],
+      "requested_target_has_geometric_candidate": true,
+      "physically_unrepresented_objects": 6,
+      "inferred_hidden_count": 0
+    },
+    {
+      "case_id": "scene_037",
+      "seed": 9137,
+      "group": "visible_blocked",
+      "support_removal_lower_bound": 2,
+      "necessary_blockers": [
+        "shelf_3_obj_01",
+        "shelf_3_obj_06"
+      ],
+      "requested_target_has_geometric_candidate": true,
+      "physically_unrepresented_objects": 4,
+      "inferred_hidden_count": 0
+    },
+    {
+      "case_id": "scene_038",
+      "seed": 9138,
+      "group": "unlocalized_known_region",
+      "support_removal_lower_bound": 2,
+      "necessary_blockers": [
+        "shelf_1_obj_02",
+        "shelf_1_obj_05"
+      ],
+      "requested_target_has_geometric_candidate": false,
+      "physically_unrepresented_objects": 2,
+      "inferred_hidden_count": 1
+    },
+    {
+      "case_id": "scene_039",
+      "seed": 9139,
+      "group": "unlocalized_unknown_region",
+      "support_removal_lower_bound": 1,
+      "necessary_blockers": [
+        "shelf_2_obj_04"
+      ],
+      "requested_target_has_geometric_candidate": false,
+      "physically_unrepresented_objects": 7,
+      "inferred_hidden_count": 8
+    }
+  ],
+  "scope": "independent oracle diagnostic; initial vertical-support lower bound under one-object top-clear removal",
+  "warning": "unrepresented is not synonymous with zero visible camera pixels; 15mm control-pose association"
+}

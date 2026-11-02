@@ -1,0 +1,9 @@
+{
+  "manifest_sha256": "7e8f9f983bad1514df800186e7ec1e8c90fe7ce3e449f3e78cc76774116c62c1",
+  "trials": 240,
+  "decisions": 1411,
+  "every_goal_and_explanation_reproduced": true,
+  "no_physical_object_ids_in_public_inputs": true,
+  "max_initial_graph_numeric_error": 4.436163605681109e-06,
+  "q_note": "zero q only for offline selection replay; current planners use q for validation, fixed base for distances"
+}

@@ -1,0 +1,4851 @@
+{
+  "schema_version": 1,
+  "created_utc": "2026-11-01T23:58:02.589788+00:00",
+  "protocol": "fixed-act-abc-v1",
+  "config": {
+    "backend": "mujoco",
+    "robot_id": "so101",
+    "control_dt": 0.03333333333333333,
+    "physics_substeps": 20,
+    "settle_seconds": 1.0,
+    "image_width": 640,
+    "image_height": 480,
+    "camera_name": "front",
+    "camera_position": [
+      0.65,
+      -0.55,
+      0.45
+    ],
+    "camera_target": [
+      0.18,
+      0.0,
+      0.1
+    ],
+    "camera_fovy": 50,
+    "joint_names": [
+      "shoulder_pan",
+      "shoulder_lift",
+      "elbow_flex",
+      "wrist_flex",
+      "wrist_roll",
+      "gripper"
+    ],
+    "home": [
+      0.0,
+      -1.0471975512,
+      1.0471975512,
+      0.6108652382,
+      0.0,
+      0.0
+    ],
+    "max_delta": [
+      0.06,
+      0.06,
+      0.06,
+      0.06,
+      0.06,
+      0.1
+    ],
+    "workspace_min": [
+      -0.25,
+      -0.3,
+      0.0
+    ],
+    "workspace_max": [
+      0.45,
+      0.3,
+      0.55
+    ],
+    "cube_size": 0.03,
+    "cube_mass": 0.015,
+    "objects": {
+      "A": [
+        0.22,
+        0.0,
+        0.045
+      ],
+      "B": [
+        0.22,
+        0.0,
+        0.015
+      ],
+      "C": [
+        0.16,
+        -0.09,
+        0.015
+      ]
+    },
+    "buffer_position": [
+      0.08,
+      -0.18,
+      0.015
+    ],
+    "destination": [
+      0.08,
+      0.18,
+      0.015
+    ],
+    "placement_trays": {
+      "size": [
+        0.11,
+        0.11
+      ],
+      "floor_thickness": 0.006,
+      "wall_thickness": 0.006,
+      "wall_height": 0.018,
+      "floor_color": [
+        0.5,
+        0.48,
+        0.42,
+        1.0
+      ],
+      "buffer_color": [
+        0.38,
+        0.26,
+        0.14,
+        1.0
+      ],
+      "destination_color": [
+        0.3,
+        0.36,
+        0.2,
+        1.0
+      ]
+    },
+    "random_xy": 0.005,
+    "target_object_id": "B",
+    "n_action_steps": 4,
+    "max_steps_per_subgoal": 450,
+    "max_subgoals": 12,
+    "shelf_scene": {
+      "shelves": [
+        {
+          "id": "shelf_1",
+          "center": [
+            0.24,
+            -0.18
+          ],
+          "size": [
+            0.17,
+            0.13
+          ]
+        },
+        {
+          "id": "shelf_2",
+          "center": [
+            0.24,
+            0.0
+          ],
+          "size": [
+            0.17,
+            0.13
+          ]
+        },
+        {
+          "id": "shelf_3",
+          "center": [
+            0.24,
+            0.18
+          ],
+          "size": [
+            0.17,
+            0.13
+          ]
+        }
+      ],
+      "objects_per_shelf": 9,
+      "object_sizes": [
+        [
+          0.032,
+          0.032,
+          0.035
+        ],
+        [
+          0.028,
+          0.028,
+          0.028
+        ],
+        [
+          0.024,
+          0.024,
+          0.022
+        ]
+      ],
+      "density": 550.0,
+      "floor_thickness": 0.006,
+      "wall_thickness": 0.006,
+      "wall_height": 0.018,
+      "min_stacks": 4,
+      "max_stack_height": 3,
+      "position_jitter": 0.0015,
+      "yaw_range": 0.65,
+      "target_object_id": "shelf_2_obj_01",
+      "home": [
+        0.0,
+        -1.5,
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "camera_position": [
+        0.62,
+        -0.48,
+        0.56
+      ],
+      "camera_target": [
+        0.18,
+        0.0,
+        0.1
+      ]
+    }
+  },
+  "config_sha256": "c1daf9f21fd882239065682c88696ff8d5cd060539f51131de53beda3ebf2208",
+  "groups": [
+    "visible_free",
+    "visible_blocked",
+    "unlocalized_known_region",
+    "unlocalized_unknown_region"
+  ],
+  "selection": "initial observation and cue availability only; no ACT outcomes or method success used",
+  "target_gt_id_usage": "screening labels and independent evaluation only; not passed to A/B/C",
+  "screening": [
+    {
+      "seed": 7200,
+      "requested_group": "visible_free",
+      "eligible": 6
+    },
+    {
+      "seed": 7201,
+      "requested_group": "visible_blocked",
+      "eligible": 7
+    },
+    {
+      "seed": 7202,
+      "requested_group": "unlocalized_known_region",
+      "eligible": 3
+    },
+    {
+      "seed": 7203,
+      "requested_group": "unlocalized_unknown_region",
+      "eligible": 1
+    },
+    {
+      "seed": 7204,
+      "requested_group": "visible_free",
+      "eligible": 6
+    },
+    {
+      "seed": 7205,
+      "requested_group": "visible_blocked",
+      "eligible": 9
+    },
+    {
+      "seed": 7206,
+      "requested_group": "unlocalized_known_region",
+      "eligible": 2
+    },
+    {
+      "seed": 7207,
+      "requested_group": "unlocalized_unknown_region",
+      "eligible": 0
+    },
+    {
+      "seed": 7208,
+      "requested_group": "unlocalized_unknown_region",
+      "eligible": 0
+    },
+    {
+      "seed": 7209,
+      "requested_group": "unlocalized_unknown_region",
+      "eligible": 1
+    },
+    {
+      "seed": 7210,
+      "requested_group": "visible_free",
+      "eligible": 5
+    },
+    {
+      "seed": 7211,
+      "requested_group": "visible_blocked",
+      "eligible": 10
+    },
+    {
+      "seed": 7212,
+      "requested_group": "unlocalized_known_region",
+      "eligible": 1
+    },
+    {
+      "seed": 7213,
+      "requested_group": "unlocalized_unknown_region",
+      "eligible": 0
+    },
+    {
+      "seed": 7214,
+      "requested_group": "unlocalized_unknown_region",
+      "eligible": 1
+    },
+    {
+      "seed": 7215,
+      "requested_group": "visible_free",
+      "eligible": 6
+    },
+    {
+      "seed": 7216,
+      "requested_group": "visible_blocked",
+      "eligible": 9
+    },
+    {
+      "seed": 7217,
+      "requested_group": "unlocalized_known_region",
+      "eligible": 3
+    },
+    {
+      "seed": 7218,
+      "requested_group": "unlocalized_unknown_region",
+      "eligible": 0
+    },
+    {
+      "seed": 7219,
+      "requested_group": "unlocalized_unknown_region",
+      "eligible": 1
+    }
+  ],
+  "cases": [
+    {
+      "case_id": "scene_000",
+      "seed": 7200,
+      "group": "visible_free",
+      "target_gt_id": "shelf_1_obj_03",
+      "target_spec": {
+        "reference_rgb": [
+          0.5926909956299996,
+          0.9,
+          0.16200000000000006
+        ],
+        "region": null,
+        "category": "box",
+        "size_m": [
+          0.024,
+          0.024,
+          0.022
+        ],
+        "color_tolerance": 0.08,
+        "ambiguity_margin": 0.015
+      },
+      "initial_track": "instance_0014",
+      "initial_state_sha256": "50cf46d971a88ccf8ebe7ab768ce614d3ddd3c7c720e69762739dcb1932b354e",
+      "initial_graph": {
+        "nodes": [
+          {
+            "object_id": "instance_0001",
+            "pose": {
+              "position": [
+                0.29090708136938276,
+                0.20665831984629465,
+                0.0233557653427124
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                -0.044130779382973544,
+                0.9990257625862565
+              ]
+            },
+            "size": [
+              0.032,
+              0.032,
+              0.035
+            ],
+            "label": "box",
+            "parent_id": "shelf_3",
+            "color_rgb": [
+              0.07937203825090261,
+              0.36614502047804437,
+              0.16227689339122353
+            ]
+          },
+          {
+            "object_id": "instance_0002",
+            "pose": {
+              "position": [
+                0.2908875524231479,
+                0.15325336221051938,
+                0.02306776254060424
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.16621010683297135,
+                0.9860903611670546
+              ]
+            },
+            "size": [
+              0.032,
+              0.032,
+              0.035
+            ],
+            "label": "box",
+            "parent_id": "shelf_3",
+            "color_rgb": [
+              0.20278089013383155,
+              0.30303869696026753,
+              0.05556178026766266
+            ]
+          },
+          {
+            "object_id": "instance_0003",
+            "pose": {
+              "position": [
+                0.18892066539097635,
+                0.15398963842122101,
+                0.023096183363509368
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.034697108428117414,
+                0.9993978740555373
+              ]
+            },
+            "size": [
+              0.032,
+              0.032,
+              0.035
+            ],
+            "label": "box",
+            "parent_id": "shelf_3",
+            "color_rgb": [
+              0.320266098120771,
+              0.197160765672876,
+              0.05987673738538784
+            ]
+          },
+          {
+            "object_id": "instance_0004",
+            "pose": {
+              "position": [
+                0.24012592316715864,
+                -0.02807686233735848,
+                0.023036781373667117
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.015046304936251035,
+                0.9998867979465302
+              ]
+            },
+            "size": [
+              0.032,
+              0.032,
+              0.035
+            ],
+            "label": "box",
+            "parent_id": "shelf_2",
+            "color_rgb": [
+              0.6183408935713585,
+              0.24657716320359085,
+              0.11281948102624172
+            ]
+          },
+          {
+            "object_id": "instance_0005",
+            "pose": {
+              "position": [
+                0.18902848602204936,
+                0.2085769375261101,
+                0.019892214298248292
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                -0.022373100035720985,
+                0.9997496908700656
+              ]
+            },
+            "size": [
+              0.028,
+              0.028,
+              0.028
+            ],
+            "label": "box",
+            "parent_id": "shelf_3",
+            "color_rgb": [
+              0.21576172109155703,
+              0.11903661949705081,
+              0.5135022509952762
+            ]
+          },
+          {
+            "object_id": "instance_0006",
+            "pose": {
+              "position": [
+                0.23898246337521484,
+                0.20659291163420201,
+                0.019793316144120207
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                -0.31182428367621434,
+                0.9501397876680124
+              ]
+            },
+            "size": [
+              0.028,
+              0.028,
+              0.028
+            ],
+            "label": "box",
+            "parent_id": "shelf_3",
+            "color_rgb": [
+              0.5349234330484335,
+              0.12280721049103555,
+              0.1279249413440596
+            ]
+          },
+          {
+            "object_id": "instance_0007",
+            "pose": {
+              "position": [
+                0.2907344132162875,
+                -0.1516877119601261,
+                0.05428415352644632
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.008578857557966118,
+                0.999963200924414
+              ]
+            },
+            "size": [
+              0.028,
+              0.028,
+              0.028
+            ],
+            "label": "box",
+            "parent_id": "shelf_1",
+            "color_rgb": [
+              0.11722970312623124,
+              0.5406252460823697,
+              0.098771556815497
+            ]
+          },
+          {
+            "object_id": "instance_0008",
+            "pose": {
+              "position": [
+                0.2911912955989342,
+                0.027373482995396912,
+                0.0233557653427124
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.2888320861577638,
+                0.9573797710447793
+              ]
+            },
+            "size": [
+              0.032,
+              0.032,
+              0.035
+            ],
+            "label": "box",
+            "parent_id": "shelf_2",
+            "color_rgb": [
+              0.36391465299812914,
+              0.39838567515526396,
+              0.11158198410761487
+            ]
+          },
+          {
+            "object_id": "instance_0009",
+            "pose": {
+              "position": [
+                0.24106923384292023,
+                0.027037602148604165,
+                0.04466686391830445
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.05864919384002384,
+                0.9982786545158197
+              ]
+            },
+            "size": [
+              0.024,
+              0.024,
+              0.022
+            ],
+            "label": "box",
+            "parent_id": "shelf_2",
+            "color_rgb": [
+              0.6575369363431675,
+              0.5955291920689862,
+              0.21667971110012757
+            ]
+          },
+          {
+            "object_id": "instance_0010",
+            "pose": {
+              "position": [
+                0.24066030608472921,
+                0.15321969416868175,
+                0.01976603038857505
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.0006986076361988714,
+                0.9999997559736555
+              ]
+            },
+            "size": [
+              0.028,
+              0.028,
+              0.028
+            ],
+            "label": "box",
+            "parent_id": "shelf_3",
+            "color_rgb": [
+              0.5620620776559191,
+              0.14855018278497886,
+              0.5307632657582813
+            ]
+          },
+          {
+            "object_id": "instance_0011",
+            "pose": {
+              "position": [
+                0.1910599855784303,
+                -0.02576060471312102,
+                0.02339224338531494
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                -0.19469945866408123,
+                0.9808629469991788
+              ]
+            },
+            "size": [
+              0.032,
+              0.032,
+              0.035
+            ],
+            "label": "box",
+            "parent_id": "shelf_2",
+            "color_rgb": [
+              0.6890964016996296,
+              0.2288361636951386,
+              0.5546210420813396
+            ]
+          },
+          {
+            "object_id": "instance_0012",
+            "pose": {
+              "position": [
+                0.2906805824074522,
+                0.20650714658161543,
+                0.051595655146274
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                -0.03347097858325645,
+                0.9994396898225921
+              ]
+            },
+            "size": [
+              0.024,
+              0.024,
+              0.022
+            ],
+            "label": "box",
+            "parent_id": "shelf_3",
+            "color_rgb": [
+              0.1259854198089499,
+              0.4792085039143884,
+              0.1059207785678388
+            ]
+          },
+          {
+            "object_id": "instance_0013",
+            "pose": {
+              "position": [
+                0.2914912654104365,
+                0.027352706438239612,
+                0.05171159648895264
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.28880528285101903,
+                0.9573878569301696
+              ]
+            },
+            "size": [
+              0.024,
+              0.024,
+              0.022
+            ],
+            "label": "box",
+            "parent_id": "shelf_2",
+            "color_rgb": [
+              0.22110632871034613,
+              0.6893968378186481,
+              0.5420938220077394
+            ]
+          },
+          {
+            "object_id": "instance_0014",
+            "pose": {
+              "position": [
+                0.2888761913652791,
+                -0.20805253732289802,
+                0.05171159648895264
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.20680540730517338,
+                0.9783820948429818
+              ]
+            },
+            "size": [
+              0.024,
+              0.024,
+              0.022
+            ],
+            "label": "box",
+            "parent_id": "shelf_1",
+            "color_rgb": [
+              0.5722677160578042,
+              0.7208407260816173,
+              0.2032831384680722
+            ]
+          },
+          {
+            "object_id": "instance_0015",
+            "pose": {
+              "position": [
+                0.1898159662066546,
+                0.027496514084642057,
+                0.04466686391830445
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.049201524968325076,
+                0.9987888715543397
+              ]
+            },
+            "size": [
+              0.024,
+              0.024,
+              0.022
+            ],
+            "label": "box",
+            "parent_id": "shelf_2",
+            "color_rgb": [
+              0.22612859097127352,
+              0.437230582155344,
+              0.12775421796625702
+            ]
+          },
+          {
+            "object_id": "instance_0016",
+            "pose": {
+              "position": [
+                0.19081646408202366,
+                -0.15137102960492085,
+                0.023558262654205325
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.23907944309068999,
+                0.9710000102427628
+              ]
+            },
+            "size": [
+              0.032,
+              0.032,
+              0.035
+            ],
+            "label": "box",
+            "parent_id": "shelf_1",
+            "color_rgb": [
+              0.40166347240650707,
+              0.10202316794164049,
+              0.3706117144713604
+            ]
+          },
+          {
+            "object_id": "instance_0017",
+            "pose": {
+              "position": [
+                0.29121440533986914,
+                -0.14912894799817145,
+                0.02648903364690538
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.008615466362039453,
+                0.9999628861809645
+              ]
+            },
+            "size": [
+              0.028,
+              0.028,
+              0.028
+            ],
+            "label": "box",
+            "parent_id": "shelf_1",
+            "color_rgb": [
+              0.30894639185597467,
+              0.056832656336191584,
+              0.05701318890727629
+            ]
+          },
+          {
+            "object_id": "instance_0018",
+            "pose": {
+              "position": [
+                0.2905825475563765,
+                0.15316533295112789,
+                0.05143665146316928
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.16642692015947938,
+                0.9860537917609923
+              ]
+            },
+            "size": [
+              0.024,
+              0.024,
+              0.022
+            ],
+            "label": "box",
+            "parent_id": "shelf_3",
+            "color_rgb": [
+              0.0883644408507961,
+              0.46474939918693703,
+              0.3984884217146194
+            ]
+          },
+          {
+            "object_id": "instance_0019",
+            "pose": {
+              "position": [
+                0.18903944912732432,
+                0.15362907279224253,
+                0.05169971214635942
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.0348308533151918,
+                0.9993932217387387
+              ]
+            },
+            "size": [
+              0.024,
+              0.024,
+              0.022
+            ],
+            "label": "box",
+            "parent_id": "shelf_3",
+            "color_rgb": [
+              0.13579209461562475,
+              0.2657878583532196,
+              0.5318787391499811
+            ]
+          },
+          {
+            "object_id": "instance_0020",
+            "pose": {
+              "position": [
+                0.24031801777850223,
+                -0.15396699217530424,
+                0.02001593894368918
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                -0.1902645886458709,
+                0.981732848746245
+              ]
+            },
+            "size": [
+              0.028,
+              0.028,
+              0.028
+            ],
+            "label": "box",
+            "parent_id": "shelf_1",
+            "color_rgb": [
+              0.2302809066889157,
+              0.4109524926992071,
+              0.701512741621473
+            ]
+          },
+          {
+            "object_id": "instance_0021",
+            "pose": {
+              "position": [
+                0.18996324799570882,
+                0.02853185040799193,
+                0.01948192285857237
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.042228061330682104,
+                0.999107997583971
+              ]
+            },
+            "size": [
+              0.028,
+              0.028,
+              0.028
+            ],
+            "label": "box",
+            "parent_id": "shelf_2",
+            "color_rgb": [
+              0.05457330659536526,
+              0.06274509803921548,
+              0.30275363933452054
+            ]
+          },
+          {
+            "object_id": "instance_0022",
+            "pose": {
+              "position": [
+                0.28909432515984873,
+                -0.028157668696896593,
+                0.019892214298248292
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                -0.17796321776662216,
+                0.984037140113192
+              ]
+            },
+            "size": [
+              0.028,
+              0.028,
+              0.028
+            ],
+            "label": "box",
+            "parent_id": "shelf_2",
+            "color_rgb": [
+              0.6523434687884794,
+              0.2390475513877039,
+              0.7029061286350302
+            ]
+          },
+          {
+            "object_id": "instance_0023",
+            "pose": {
+              "position": [
+                0.19041755813075142,
+                -0.15179805011889846,
+                0.051819431964178264
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.2367875145451239,
+                0.9715614612342045
+              ]
+            },
+            "size": [
+              0.024,
+              0.024,
+              0.022
+            ],
+            "label": "box",
+            "parent_id": "shelf_1",
+            "color_rgb": [
+              0.6024466423737621,
+              0.18520735727919474,
+              0.36166187877969763
+            ]
+          },
+          {
+            "object_id": "instance_0024",
+            "pose": {
+              "position": [
+                0.24227307915322913,
+                0.027283568741847536,
+                0.019833384513854982
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.058405302770021116,
+                0.998292953299953
+              ]
+            },
+            "size": [
+              0.028,
+              0.028,
+              0.028
+            ],
+            "label": "box",
+            "parent_id": "shelf_2",
+            "color_rgb": [
+              0.06296518607442961,
+              0.28877106398114755,
+              0.3144524476457262
+            ]
+          },
+          {
+            "object_id": "instance_0025",
+            "pose": {
+              "position": [
+                0.28882642135055353,
+                -0.20660663603774695,
+                0.024668285846710207
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.20656714148543562,
+                0.9784324279471404
+              ]
+            },
+            "size": [
+              0.032,
+              0.032,
+              0.035
+            ],
+            "label": "box",
+            "parent_id": "shelf_1",
+            "color_rgb": [
+              0.24308239541303894,
+              0.13754748590170107,
+              0.4892947311295148
+            ]
+          },
+          {
+            "object_id": "instance_0026",
+            "pose": {
+              "position": [
+                0.19001649685096814,
+                -0.20749640930268787,
+                0.04466686391830445
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                -0.1630351304032368,
+                0.986620264465716
+              ]
+            },
+            "size": [
+              0.024,
+              0.024,
+              0.022
+            ],
+            "label": "box",
+            "parent_id": "shelf_1",
+            "color_rgb": [
+              0.6995430044527795,
+              0.538563393484885,
+              0.20608220711923658
+            ]
+          },
+          {
+            "object_id": "instance_0027",
+            "pose": {
+              "position": [
+                0.18993859299081867,
+                -0.19638671673349273,
+                0.024276299715042114
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.12993279108591785,
+                0.9915228034698058
+              ]
+            },
+            "size": [
+              0.024,
+              0.024,
+              0.022
+            ],
+            "label": "box",
+            "parent_id": "shelf_1",
+            "color_rgb": [
+              0.11330557312530734,
+              0.4332507554993331,
+              0.39223768360390693
+            ]
+          }
+        ],
+        "edges": [],
+        "groups": {
+          "workspace": null,
+          "unassigned": "workspace",
+          "shelf_1": "workspace",
+          "shelf_2": "workspace",
+          "shelf_3": "workspace",
+          "buffer_tray": "workspace",
+          "output_tray": "workspace",
+          "tabletop": "workspace"
+        },
+        "held_object_id": null,
+        "timestamp": 0.0,
+        "episode_id": "so101-shelves-7200",
+        "frame_id": "robot_base",
+        "source": "rgbd",
+        "regions": {
+          "shelf_1": {
+            "kind": "region",
+            "center": [
+              0.24,
+              -0.18
+            ],
+            "size": [
+              0.17,
+              0.13
+            ],
+            "region_type": "shelf",
+            "floor_top_m": 0.006
+          },
+          "shelf_2": {
+            "kind": "region",
+            "center": [
+              0.24,
+              0.0
+            ],
+            "size": [
+              0.17,
+              0.13
+            ],
+            "region_type": "shelf",
+            "floor_top_m": 0.006
+          },
+          "shelf_3": {
+            "kind": "region",
+            "center": [
+              0.24,
+              0.18
+            ],
+            "size": [
+              0.17,
+              0.13
+            ],
+            "region_type": "shelf",
+            "floor_top_m": 0.006
+          },
+          "buffer_tray": {
+            "kind": "region",
+            "center": [
+              0.08,
+              -0.18
+            ],
+            "size": [
+              0.11,
+              0.11
+            ],
+            "region_type": "tray",
+            "floor_top_m": 0.006
+          },
+          "output_tray": {
+            "kind": "region",
+            "center": [
+              0.08,
+              0.18
+            ],
+            "size": [
+              0.11,
+              0.11
+            ],
+            "region_type": "tray",
+            "floor_top_m": 0.006
+          },
+          "tabletop": {
+            "kind": "region",
+            "center": [
+              0.15,
+              0.0
+            ],
+            "size": [
+              0.6,
+              0.6
+            ],
+            "region_type": "table",
+            "floor_top_m": 0.0
+          }
+        }
+      },
+      "object_count": 27,
+      "initial_target_gt_position": [
+        0.2889973437273989,
+        -0.20811001399384993,
+        0.0517115893503186
+      ],
+      "initial_decisions": {
+        "a_greedy": {
+          "goal": {
+            "subgoal_id": "so101-shelves-7200:0.000000000:PICK:instance_0014",
+            "primitive": "PICK",
+            "object_id": "instance_0014",
+            "object_pose": {
+              "position": [
+                0.2888761913652791,
+                -0.20805253732289802,
+                0.05171159648895264
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.20680540730517338,
+                0.9783820948429818
+              ]
+            },
+            "target_ee_pose": {
+              "position": [
+                0.2888761913652791,
+                -0.20805253732289802,
+                0.13171159648895264
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            },
+            "place_pose": null,
+            "frame_id": "robot_base"
+          },
+          "decision": {
+            "mode": "target_pick",
+            "hidden_estimates_used": false,
+            "selected": "instance_0014"
+          }
+        },
+        "b_no_hidden": {
+          "goal": {
+            "subgoal_id": "so101-shelves-7200:0.000000000:PICK:instance_0014",
+            "primitive": "PICK",
+            "object_id": "instance_0014",
+            "object_pose": {
+              "position": [
+                0.2888761913652791,
+                -0.20805253732289802,
+                0.05171159648895264
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.20680540730517338,
+                0.9783820948429818
+              ]
+            },
+            "target_ee_pose": {
+              "position": [
+                0.2888761913652791,
+                -0.20805253732289802,
+                0.13171159648895264
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            },
+            "place_pose": null,
+            "frame_id": "robot_base"
+          },
+          "decision": {
+            "mode": "target_pick",
+            "hidden_estimates_used": false,
+            "selected": "instance_0014"
+          }
+        },
+        "c_full": {
+          "goal": {
+            "subgoal_id": "so101-shelves-7200:0.000000000:PICK:instance_0014",
+            "primitive": "PICK",
+            "object_id": "instance_0014",
+            "object_pose": {
+              "position": [
+                0.2888761913652791,
+                -0.20805253732289802,
+                0.05171159648895264
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.20680540730517338,
+                0.9783820948429818
+              ]
+            },
+            "target_ee_pose": {
+              "position": [
+                0.2888761913652791,
+                -0.20805253732289802,
+                0.13171159648895264
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            },
+            "place_pose": null,
+            "frame_id": "robot_base"
+          },
+          "decision": {
+            "mode": "target_pick",
+            "hidden_estimates_used": false,
+            "selected": "instance_0014"
+          }
+        }
+      }
+    },
+    {
+      "case_id": "scene_001",
+      "seed": 7201,
+      "group": "visible_blocked",
+      "target_gt_id": "shelf_2_obj_01",
+      "target_spec": {
+        "reference_rgb": [
+          0.7966799999999999,
+          0.9,
+          0.16200000000000006
+        ],
+        "region": null,
+        "category": "box",
+        "size_m": [
+          0.032,
+          0.032,
+          0.035
+        ],
+        "color_tolerance": 0.08,
+        "ambiguity_margin": 0.015
+      },
+      "initial_track": "instance_0015",
+      "initial_state_sha256": "c73bd3cb6d1a36cb54df14a5d56dd608f667540e6d9644d4d6b2ed16e2c12e3e",
+      "initial_graph": {
+        "nodes": [
+          {
+            "object_id": "instance_0001",
+            "pose": {
+              "position": [
+                0.19012116384131947,
+                0.1522739618560914,
+                0.02339224338531494
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                -0.18661559264802396,
+                0.9824330107343843
+              ]
+            },
+            "size": [
+              0.032,
+              0.032,
+              0.035
+            ],
+            "label": "box",
+            "parent_id": "shelf_3",
+            "color_rgb": [
+              0.13582296961994705,
+              0.5228028927620416,
+              0.2551479665940471
+            ]
+          },
+          {
+            "object_id": "instance_0002",
+            "pose": {
+              "position": [
+                0.24103153994057866,
+                0.20712769806479875,
+                0.023280994289809447
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.29306175591772793,
+                0.9560935138460139
+              ]
+            },
+            "size": [
+              0.032,
+              0.032,
+              0.035
+            ],
+            "label": "box",
+            "parent_id": "shelf_3",
+            "color_rgb": [
+              0.37659489749342356,
+              0.5351489283182354,
+              0.12449572201342075
+            ]
+          },
+          {
+            "object_id": "instance_0003",
+            "pose": {
+              "position": [
+                0.19058621564040637,
+                0.027895554231943773,
+                0.02339224338531494
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.018461418348017358,
+                0.9998295734936927
+              ]
+            },
+            "size": [
+              0.032,
+              0.032,
+              0.035
+            ],
+            "label": "box",
+            "parent_id": "shelf_2",
+            "color_rgb": [
+              0.4305785504047102,
+              0.1929367939228669,
+              0.10603276630740688
+            ]
+          },
+          {
+            "object_id": "instance_0004",
+            "pose": {
+              "position": [
+                0.28863163855403917,
+                0.2084386229793596,
+                0.01980085645658715
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.0565738370674618,
+                0.9983984179471962
+              ]
+            },
+            "size": [
+              0.028,
+              0.028,
+              0.028
+            ],
+            "label": "box",
+            "parent_id": "shelf_3",
+            "color_rgb": [
+              0.5040839353285225,
+              0.11536199977066881,
+              0.12077726178190704
+            ]
+          },
+          {
+            "object_id": "instance_0005",
+            "pose": {
+              "position": [
+                0.29128484529236076,
+                -0.20781432805673633,
+                0.047585605144500734
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                -0.11360562913189409,
+                0.9935259236826921
+              ]
+            },
+            "size": [
+              0.028,
+              0.028,
+              0.028
+            ],
+            "label": "box",
+            "parent_id": "shelf_1",
+            "color_rgb": [
+              0.24784608137549388,
+              0.761372549019609,
+              0.2185214626391111
+            ]
+          },
+          {
+            "object_id": "instance_0006",
+            "pose": {
+              "position": [
+                0.19123327557322065,
+                0.20718586586715218,
+                0.04466686391830445
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                -0.1672531989537791,
+                0.9859139756792819
+              ]
+            },
+            "size": [
+              0.024,
+              0.024,
+              0.022
+            ],
+            "label": "box",
+            "parent_id": "shelf_3",
+            "color_rgb": [
+              0.16410736464887044,
+              0.5844921914768013,
+              0.1403017530999947
+            ]
+          },
+          {
+            "object_id": "instance_0007",
+            "pose": {
+              "position": [
+                0.24083332321690748,
+                0.02892876277038741,
+                0.0233557653427124
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.22447313353287526,
+                0.9744802780569405
+              ]
+            },
+            "size": [
+              0.032,
+              0.032,
+              0.035
+            ],
+            "label": "box",
+            "parent_id": "shelf_2",
+            "color_rgb": [
+              0.38719966859983174,
+              0.10004274010073508,
+              0.2891058770926228
+            ]
+          },
+          {
+            "object_id": "instance_0008",
+            "pose": {
+              "position": [
+                0.2403412731708305,
+                0.0284254363496326,
+                0.05171159648895264
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.22467611723652053,
+                0.9744334981636875
+              ]
+            },
+            "size": [
+              0.024,
+              0.024,
+              0.022
+            ],
+            "label": "box",
+            "parent_id": "shelf_2",
+            "color_rgb": [
+              0.4007609614687761,
+              0.6742642026009591,
+              0.21992457489498354
+            ]
+          },
+          {
+            "object_id": "instance_0009",
+            "pose": {
+              "position": [
+                0.24108228856489664,
+                0.15357443448489022,
+                0.019892214298248292
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                -0.26666057156801976,
+                0.963790506059806
+              ]
+            },
+            "size": [
+              0.028,
+              0.028,
+              0.028
+            ],
+            "label": "box",
+            "parent_id": "shelf_3",
+            "color_rgb": [
+              0.5702155065920979,
+              0.15346085169462934,
+              0.5429556633650015
+            ]
+          },
+          {
+            "object_id": "instance_0010",
+            "pose": {
+              "position": [
+                0.2890961795388532,
+                0.15381631074756139,
+                0.023332278580668622
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                -0.23862898683287817,
+                0.9711108106921239
+              ]
+            },
+            "size": [
+              0.032,
+              0.032,
+              0.035
+            ],
+            "label": "box",
+            "parent_id": "shelf_3",
+            "color_rgb": [
+              0.3413591346291052,
+              0.21033478893740973,
+              0.06330093900733494
+            ]
+          },
+          {
+            "object_id": "instance_0011",
+            "pose": {
+              "position": [
+                0.19186683188673936,
+                0.20702664484158026,
+                0.019833384513854982
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                -0.1672538203172916,
+                0.9859138702692397
+              ]
+            },
+            "size": [
+              0.028,
+              0.028,
+              0.028
+            ],
+            "label": "box",
+            "parent_id": "shelf_3",
+            "color_rgb": [
+              0.1318569370876324,
+              0.06840364897933887,
+              0.33123393117120314
+            ]
+          },
+          {
+            "object_id": "instance_0012",
+            "pose": {
+              "position": [
+                0.1885768089519394,
+                -0.15186507946111302,
+                0.019892214298248292
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.12801588397492844,
+                0.9917721177014999
+              ]
+            },
+            "size": [
+              0.028,
+              0.028,
+              0.028
+            ],
+            "label": "box",
+            "parent_id": "shelf_1",
+            "color_rgb": [
+              0.19988721504862184,
+              0.6295883150007973,
+              0.5836589351187622
+            ]
+          },
+          {
+            "object_id": "instance_0013",
+            "pose": {
+              "position": [
+                0.28877857167916776,
+                0.1534827372274757,
+                0.07306522625594307
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                -0.24346562697494323,
+                0.9699095259258452
+              ]
+            },
+            "size": [
+              0.024,
+              0.024,
+              0.022
+            ],
+            "label": "box",
+            "parent_id": "shelf_3",
+            "color_rgb": [
+              0.0957424024223624,
+              0.5108433957387086,
+              0.4373084450352647
+            ]
+          },
+          {
+            "object_id": "instance_0014",
+            "pose": {
+              "position": [
+                0.2904075420259316,
+                -0.15319157714331566,
+                0.023778248294179294
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                -0.12329158956451629,
+                0.9923704872388411
+              ]
+            },
+            "size": [
+              0.032,
+              0.032,
+              0.035
+            ],
+            "label": "box",
+            "parent_id": "shelf_1",
+            "color_rgb": [
+              0.48203324137334974,
+              0.13288248254920484,
+              0.4488037487579246
+            ]
+          },
+          {
+            "object_id": "instance_0015",
+            "pose": {
+              "position": [
+                0.24092520544562365,
+                -0.0258553535083261,
+                0.023298645013476386
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.3187752728338811,
+                0.9478303252321507
+              ]
+            },
+            "size": [
+              0.032,
+              0.032,
+              0.035
+            ],
+            "label": "box",
+            "parent_id": "shelf_2",
+            "color_rgb": [
+              0.2939890241811022,
+              0.33197945845004845,
+              0.06785349060259006
+            ]
+          },
+          {
+            "object_id": "instance_0016",
+            "pose": {
+              "position": [
+                0.2426920481919619,
+                -0.017814827070125747,
+                0.05439748038825998
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                -0.10957682310375975,
+                0.9939783296624164
+              ]
+            },
+            "size": [
+              0.028,
+              0.028,
+              0.028
+            ],
+            "label": "box",
+            "parent_id": "shelf_2",
+            "color_rgb": [
+              0.058983864379084816,
+              0.06586397058823512,
+              0.317852328431374
+            ]
+          },
+          {
+            "object_id": "instance_0017",
+            "pose": {
+              "position": [
+                0.1911701261873565,
+                -0.20487141848999446,
+                0.02307142020216081
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                -0.25121257626009885,
+                0.967931940545803
+              ]
+            },
+            "size": [
+              0.032,
+              0.032,
+              0.035
+            ],
+            "label": "box",
+            "parent_id": "shelf_1",
+            "color_rgb": [
+              0.48216119255272955,
+              0.08914455372054161,
+              0.0907836951815424
+            ]
+          },
+          {
+            "object_id": "instance_0018",
+            "pose": {
+              "position": [
+                0.24039946023722752,
+                -0.20598682015610062,
+                0.02398719894521069
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                -0.0599907795872351,
+                0.9981989312579511
+              ]
+            },
+            "size": [
+              0.032,
+              0.032,
+              0.035
+            ],
+            "label": "box",
+            "parent_id": "shelf_1",
+            "color_rgb": [
+              0.2343865784105583,
+              0.1298806252862092,
+              0.4827791307605878
+            ]
+          },
+          {
+            "object_id": "instance_0019",
+            "pose": {
+              "position": [
+                0.2403227295204419,
+                -0.20662812922422974,
+                0.051305112089203464
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                -0.046984007866472,
+                0.9988956416987729
+              ]
+            },
+            "size": [
+              0.024,
+              0.024,
+              0.022
+            ],
+            "label": "box",
+            "parent_id": "shelf_1",
+            "color_rgb": [
+              0.5747284048754646,
+              0.36471250662427246,
+              0.10758479067302566
+            ]
+          },
+          {
+            "object_id": "instance_0020",
+            "pose": {
+              "position": [
+                0.29101229978172743,
+                -0.02627064423011539,
+                0.0721564460503526
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                -0.1941621216404211,
+                0.9809694544276546
+              ]
+            },
+            "size": [
+              0.024,
+              0.024,
+              0.022
+            ],
+            "label": "box",
+            "parent_id": "shelf_2",
+            "color_rgb": [
+              0.20763880040584337,
+              0.6706064038130308,
+              0.512489912932682
+            ]
+          },
+          {
+            "object_id": "instance_0021",
+            "pose": {
+              "position": [
+                0.2901741940872472,
+                -0.15364978726858167,
+                0.05171159648895264
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                -0.12434711505327964,
+                0.9922387792149259
+              ]
+            },
+            "size": [
+              0.024,
+              0.024,
+              0.022
+            ],
+            "label": "box",
+            "parent_id": "shelf_1",
+            "color_rgb": [
+              0.5486861534737376,
+              0.6830101670297717,
+              0.20581336238198988
+            ]
+          },
+          {
+            "object_id": "instance_0022",
+            "pose": {
+              "position": [
+                0.2910590566541944,
+                -0.02600008283146575,
+                0.047434924602508546
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                -0.19068010556309806,
+                0.9816522283081957
+              ]
+            },
+            "size": [
+              0.028,
+              0.028,
+              0.028
+            ],
+            "label": "box",
+            "parent_id": "shelf_2",
+            "color_rgb": [
+              0.38070694944644623,
+              0.10591169801253819,
+              0.4222368947579043
+            ]
+          },
+          {
+            "object_id": "instance_0023",
+            "pose": {
+              "position": [
+                0.18935821337047326,
+                -0.20749664432788686,
+                0.05147837299226404
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                -0.2745543475795013,
+                0.9615715835158578
+              ]
+            },
+            "size": [
+              0.024,
+              0.024,
+              0.022
+            ],
+            "label": "box",
+            "parent_id": "shelf_1",
+            "color_rgb": [
+              0.6523504799409298,
+              0.1291164164410531,
+              0.305792107638034
+            ]
+          },
+          {
+            "object_id": "instance_0024",
+            "pose": {
+              "position": [
+                0.24,
+                -0.026914034381042284,
+                0.07937333726882935
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.33100694143550036,
+                0.9436283191604178
+              ]
+            },
+            "size": [
+              0.024,
+              0.024,
+              0.022
+            ],
+            "label": "box",
+            "parent_id": "shelf_2",
+            "color_rgb": [
+              0.9925773572832396,
+              0.9924493806846748,
+              0.5714406508524158
+            ]
+          }
+        ],
+        "edges": [],
+        "groups": {
+          "workspace": null,
+          "unassigned": "workspace",
+          "shelf_1": "workspace",
+          "shelf_2": "workspace",
+          "shelf_3": "workspace",
+          "buffer_tray": "workspace",
+          "output_tray": "workspace",
+          "tabletop": "workspace"
+        },
+        "held_object_id": null,
+        "timestamp": 0.0,
+        "episode_id": "so101-shelves-7201",
+        "frame_id": "robot_base",
+        "source": "rgbd",
+        "regions": {
+          "shelf_1": {
+            "kind": "region",
+            "center": [
+              0.24,
+              -0.18
+            ],
+            "size": [
+              0.17,
+              0.13
+            ],
+            "region_type": "shelf",
+            "floor_top_m": 0.006
+          },
+          "shelf_2": {
+            "kind": "region",
+            "center": [
+              0.24,
+              0.0
+            ],
+            "size": [
+              0.17,
+              0.13
+            ],
+            "region_type": "shelf",
+            "floor_top_m": 0.006
+          },
+          "shelf_3": {
+            "kind": "region",
+            "center": [
+              0.24,
+              0.18
+            ],
+            "size": [
+              0.17,
+              0.13
+            ],
+            "region_type": "shelf",
+            "floor_top_m": 0.006
+          },
+          "buffer_tray": {
+            "kind": "region",
+            "center": [
+              0.08,
+              -0.18
+            ],
+            "size": [
+              0.11,
+              0.11
+            ],
+            "region_type": "tray",
+            "floor_top_m": 0.006
+          },
+          "output_tray": {
+            "kind": "region",
+            "center": [
+              0.08,
+              0.18
+            ],
+            "size": [
+              0.11,
+              0.11
+            ],
+            "region_type": "tray",
+            "floor_top_m": 0.006
+          },
+          "tabletop": {
+            "kind": "region",
+            "center": [
+              0.15,
+              0.0
+            ],
+            "size": [
+              0.6,
+              0.6
+            ],
+            "region_type": "table",
+            "floor_top_m": 0.0
+          }
+        }
+      },
+      "object_count": 27,
+      "initial_target_gt_position": [
+        0.2399665153376255,
+        -0.02727544392363523,
+        0.023295943562977765
+      ],
+      "initial_decisions": {
+        "a_greedy": {
+          "goal": {
+            "subgoal_id": "so101-shelves-7201:0.000000000:PICK:instance_0003",
+            "primitive": "PICK",
+            "object_id": "instance_0003",
+            "object_pose": {
+              "position": [
+                0.19058621564040637,
+                0.027895554231943773,
+                0.02339224338531494
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.018461418348017358,
+                0.9998295734936927
+              ]
+            },
+            "target_ee_pose": {
+              "position": [
+                0.19058621564040637,
+                0.027895554231943773,
+                0.10339224338531494
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            },
+            "place_pose": null,
+            "frame_id": "robot_base"
+          },
+          "decision": {
+            "mode": "unblock",
+            "condition": "a_greedy",
+            "hidden_estimates_used": false,
+            "selected": "instance_0003",
+            "candidates": [
+              {
+                "object_id": "instance_0003",
+                "distance_to_robot_base_m": 0.1940321225690133
+              },
+              {
+                "object_id": "instance_0012",
+                "distance_to_robot_base_m": 0.24294014782228535
+              },
+              {
+                "object_id": "instance_0001",
+                "distance_to_robot_base_m": 0.24470515615803037
+              },
+              {
+                "object_id": "instance_0008",
+                "distance_to_robot_base_m": 0.24747933698084584
+              },
+              {
+                "object_id": "instance_0024",
+                "distance_to_robot_base_m": 0.2542134770539423
+              },
+              {
+                "object_id": "instance_0006",
+                "distance_to_robot_base_m": 0.28546677115538555
+              },
+              {
+                "object_id": "instance_0023",
+                "distance_to_robot_base_m": 0.2855895888580708
+              },
+              {
+                "object_id": "instance_0009",
+                "distance_to_robot_base_m": 0.28653355296846017
+              },
+              {
+                "object_id": "instance_0020",
+                "distance_to_robot_base_m": 0.30097318498353426
+              },
+              {
+                "object_id": "instance_0002",
+                "distance_to_robot_base_m": 0.31865355991557875
+              },
+              {
+                "object_id": "instance_0019",
+                "distance_to_robot_base_m": 0.3210644991856717
+              },
+              {
+                "object_id": "instance_0010",
+                "distance_to_robot_base_m": 0.3282993355151928
+              },
+              {
+                "object_id": "instance_0021",
+                "distance_to_robot_base_m": 0.33239044699464526
+              },
+              {
+                "object_id": "instance_0013",
+                "distance_to_robot_base_m": 0.3350948244538115
+              },
+              {
+                "object_id": "instance_0004",
+                "distance_to_robot_base_m": 0.35657671858989265
+              },
+              {
+                "object_id": "instance_0005",
+                "distance_to_robot_base_m": 0.3609682061617556
+              }
+            ]
+          }
+        },
+        "b_no_hidden": {
+          "goal": {
+            "subgoal_id": "so101-shelves-7201:0.000000000:PICK:instance_0024",
+            "primitive": "PICK",
+            "object_id": "instance_0024",
+            "object_pose": {
+              "position": [
+                0.24,
+                -0.026914034381042284,
+                0.07937333726882935
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.33100694143550036,
+                0.9436283191604178
+              ]
+            },
+            "target_ee_pose": {
+              "position": [
+                0.24,
+                -0.026914034381042284,
+                0.15937333726882935
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            },
+            "place_pose": null,
+            "frame_id": "robot_base"
+          },
+          "decision": {
+            "mode": "unblock",
+            "condition": "b_no_hidden",
+            "hidden_estimates_used": false,
+            "selected": "instance_0024",
+            "candidates": []
+          }
+        },
+        "c_full": {
+          "goal": {
+            "subgoal_id": "so101-shelves-7201:0.000000000:PICK:instance_0024",
+            "primitive": "PICK",
+            "object_id": "instance_0024",
+            "object_pose": {
+              "position": [
+                0.24,
+                -0.026914034381042284,
+                0.07937333726882935
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.33100694143550036,
+                0.9436283191604178
+              ]
+            },
+            "target_ee_pose": {
+              "position": [
+                0.24,
+                -0.026914034381042284,
+                0.15937333726882935
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            },
+            "place_pose": null,
+            "frame_id": "robot_base"
+          },
+          "decision": {
+            "mode": "unblock",
+            "condition": "c_full",
+            "hidden_estimates_used": false,
+            "selected": "instance_0024",
+            "candidates": []
+          }
+        }
+      }
+    },
+    {
+      "case_id": "scene_002",
+      "seed": 7202,
+      "group": "unlocalized_known_region",
+      "target_gt_id": "shelf_3_obj_09",
+      "target_spec": {
+        "reference_rgb": [
+          0.20212398251999908,
+          0.9,
+          0.16200000000000006
+        ],
+        "region": "shelf_3",
+        "category": "box",
+        "size_m": [
+          0.024,
+          0.024,
+          0.022
+        ],
+        "color_tolerance": 0.08,
+        "ambiguity_margin": 0.015
+      },
+      "initial_track": "unresolved:target",
+      "initial_state_sha256": "c1aafd1f7a4fc8cd1fa98e785e3e77f54078b0261202fd3ed65261a4bddf950b",
+      "initial_graph": {
+        "nodes": [
+          {
+            "object_id": "instance_0001",
+            "pose": {
+              "position": [
+                0.23859266209581773,
+                0.15208793311771615,
+                0.02334908532717519
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.1125181740685043,
+                0.9936496668868207
+              ]
+            },
+            "size": [
+              0.032,
+              0.032,
+              0.035
+            ],
+            "label": "box",
+            "parent_id": "shelf_3",
+            "color_rgb": [
+              0.12652148992232243,
+              0.506667479382674,
+              0.24146655317158974
+            ]
+          },
+          {
+            "object_id": "instance_0002",
+            "pose": {
+              "position": [
+                0.2898600819079701,
+                -0.026261675350153647,
+                0.023047511461566958
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.03211175991650967,
+                0.9994842844562712
+              ]
+            },
+            "size": [
+              0.032,
+              0.032,
+              0.035
+            ],
+            "label": "box",
+            "parent_id": "shelf_2",
+            "color_rgb": [
+              0.5231850349335085,
+              0.20817759747577247,
+              0.09525625422582853
+            ]
+          },
+          {
+            "object_id": "instance_0003",
+            "pose": {
+              "position": [
+                0.18877272503996104,
+                -0.1522663611333553,
+                0.02339224338531494
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.06655817975719791,
+                0.9977825458021444
+              ]
+            },
+            "size": [
+              0.032,
+              0.032,
+              0.035
+            ],
+            "label": "box",
+            "parent_id": "shelf_1",
+            "color_rgb": [
+              0.2965772094936134,
+              0.171718430828737,
+              0.5743528630034148
+            ]
+          },
+          {
+            "object_id": "instance_0004",
+            "pose": {
+              "position": [
+                0.2914857889682558,
+                0.20897322316537567,
+                0.019892214298248292
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.23041592462252,
+                0.9730922369849372
+              ]
+            },
+            "size": [
+              0.028,
+              0.028,
+              0.028
+            ],
+            "label": "box",
+            "parent_id": "shelf_3",
+            "color_rgb": [
+              0.5045511623452823,
+              0.11727626948215186,
+              0.12214750572593751
+            ]
+          },
+          {
+            "object_id": "instance_0005",
+            "pose": {
+              "position": [
+                0.2910312980836216,
+                0.15173967266108768,
+                0.019892214298248292
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.047740851403376,
+                0.9988597554748518
+              ]
+            },
+            "size": [
+              0.028,
+              0.028,
+              0.028
+            ],
+            "label": "box",
+            "parent_id": "shelf_3",
+            "color_rgb": [
+              0.5206277108192944,
+              0.13057354440247088,
+              0.4894549379384775
+            ]
+          },
+          {
+            "object_id": "instance_0006",
+            "pose": {
+              "position": [
+                0.18897722142972576,
+                0.20680879532633348,
+                0.04466686391830445
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                -0.08528447090756376,
+                0.9963566424840138
+              ]
+            },
+            "size": [
+              0.024,
+              0.024,
+              0.022
+            ],
+            "label": "box",
+            "parent_id": "shelf_3",
+            "color_rgb": [
+              0.14185226291774608,
+              0.28405968676779036,
+              0.598394993217413
+            ]
+          },
+          {
+            "object_id": "instance_0007",
+            "pose": {
+              "position": [
+                0.2400930833289874,
+                0.20803730757276315,
+                0.023320658206939696
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.29468721667258607,
+                0.9555937653259173
+              ]
+            },
+            "size": [
+              0.032,
+              0.032,
+              0.035
+            ],
+            "label": "box",
+            "parent_id": "shelf_3",
+            "color_rgb": [
+              0.38156501030781526,
+              0.24591095555304612,
+              0.08466906276266188
+            ]
+          },
+          {
+            "object_id": "instance_0008",
+            "pose": {
+              "position": [
+                0.23986690797866975,
+                0.02637764893095453,
+                0.023320658206939696
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                -0.16637633095547139,
+                0.986062328911208
+              ]
+            },
+            "size": [
+              0.032,
+              0.032,
+              0.035
+            ],
+            "label": "box",
+            "parent_id": "shelf_2",
+            "color_rgb": [
+              0.42030496483301083,
+              0.11769093119982478,
+              0.3231487239011175
+            ]
+          },
+          {
+            "object_id": "instance_0009",
+            "pose": {
+              "position": [
+                0.240295707673161,
+                -0.15139469471587158,
+                0.05171159648895264
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.19545772600067107,
+                0.9807121276636924
+              ]
+            },
+            "size": [
+              0.024,
+              0.024,
+              0.022
+            ],
+            "label": "box",
+            "parent_id": "shelf_1",
+            "color_rgb": [
+              0.7011925237931427,
+              0.22877393647517624,
+              0.4351034858387834
+            ]
+          },
+          {
+            "object_id": "instance_0010",
+            "pose": {
+              "position": [
+                0.18970694274725966,
+                0.026554355030899587,
+                0.019892214298248292
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.10367230872636551,
+                0.9946115082801652
+              ]
+            },
+            "size": [
+              0.028,
+              0.028,
+              0.028
+            ],
+            "label": "box",
+            "parent_id": "shelf_2",
+            "color_rgb": [
+              0.39521270496502764,
+              0.10715621775025858,
+              0.44648871975690896
+            ]
+          },
+          {
+            "object_id": "instance_0011",
+            "pose": {
+              "position": [
+                0.2888459663939749,
+                0.0283728750214021,
+                0.019892214298248292
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                -0.14924645769322667,
+                0.9888000277437414
+              ]
+            },
+            "size": [
+              0.028,
+              0.028,
+              0.028
+            ],
+            "label": "box",
+            "parent_id": "shelf_2",
+            "color_rgb": [
+              0.18819979927051872,
+              0.5730163276296827,
+              0.6039186311228634
+            ]
+          },
+          {
+            "object_id": "instance_0012",
+            "pose": {
+              "position": [
+                0.24066425140768438,
+                -0.150813720524975,
+                0.023445961788702938
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.19948360453112468,
+                0.979901164160585
+              ]
+            },
+            "size": [
+              0.032,
+              0.032,
+              0.035
+            ],
+            "label": "box",
+            "parent_id": "shelf_1",
+            "color_rgb": [
+              0.38793035993740266,
+              0.09817921691368275,
+              0.3558789008561212
+            ]
+          },
+          {
+            "object_id": "instance_0013",
+            "pose": {
+              "position": [
+                0.24398062621349803,
+                -0.02730400918770799,
+                0.026736561253903363
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.0626454233701738,
+                0.9980358465159314
+              ]
+            },
+            "size": [
+              0.028,
+              0.028,
+              0.028
+            ],
+            "label": "box",
+            "parent_id": "shelf_2",
+            "color_rgb": [
+              0.3199961172587868,
+              0.3602698505144631,
+              0.06888468258590545
+            ]
+          },
+          {
+            "object_id": "instance_0014",
+            "pose": {
+              "position": [
+                0.18878203291908532,
+                0.15310287211134144,
+                0.02309540190114081
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.1215840625339326,
+                0.9925811381130234
+              ]
+            },
+            "size": [
+              0.032,
+              0.032,
+              0.035
+            ],
+            "label": "box",
+            "parent_id": "shelf_3",
+            "color_rgb": [
+              0.4153545256486445,
+              0.6178566712880441,
+              0.11260645672410402
+            ]
+          },
+          {
+            "object_id": "instance_0015",
+            "pose": {
+              "position": [
+                0.24089945091702952,
+                -0.02816972053130016,
+                0.05136124672966824
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.06253270186030431,
+                0.998042915509173
+              ]
+            },
+            "size": [
+              0.024,
+              0.024,
+              0.022
+            ],
+            "label": "box",
+            "parent_id": "shelf_2",
+            "color_rgb": [
+              0.23978156174750534,
+              0.538825249398004,
+              0.09873409012727906
+            ]
+          },
+          {
+            "object_id": "instance_0016",
+            "pose": {
+              "position": [
+                0.24022500476668684,
+                0.20812035852692545,
+                0.07334349298477173
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.30251622827150737,
+                0.9531442344327438
+              ]
+            },
+            "size": [
+              0.024,
+              0.024,
+              0.022
+            ],
+            "label": "box",
+            "parent_id": "shelf_3",
+            "color_rgb": [
+              0.12482944246653888,
+              0.5405041299868352,
+              0.4738711910539588
+            ]
+          },
+          {
+            "object_id": "instance_0017",
+            "pose": {
+              "position": [
+                0.18898590009724722,
+                0.20687550267594976,
+                0.019833384513854982
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                -0.08481117450288746,
+                0.9963970416854121
+              ]
+            },
+            "size": [
+              0.028,
+              0.028,
+              0.028
+            ],
+            "label": "box",
+            "parent_id": "shelf_3",
+            "color_rgb": [
+              0.13366730432010307,
+              0.06927148095010349,
+              0.3395417751563136
+            ]
+          },
+          {
+            "object_id": "instance_0018",
+            "pose": {
+              "position": [
+                0.2901925966062961,
+                -0.20808185565592058,
+                0.023409680714611872
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                -0.29082331177965287,
+                0.9567767771667093
+              ]
+            },
+            "size": [
+              0.032,
+              0.032,
+              0.035
+            ],
+            "label": "box",
+            "parent_id": "shelf_1",
+            "color_rgb": [
+              0.4264444056554357,
+              0.1069214134714226,
+              0.10676334826710156
+            ]
+          },
+          {
+            "object_id": "instance_0019",
+            "pose": {
+              "position": [
+                0.29121735346033945,
+                -0.15301563785572653,
+                0.04466686391830445
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.11360058029570634,
+                0.9935265009834809
+              ]
+            },
+            "size": [
+              0.024,
+              0.024,
+              0.022
+            ],
+            "label": "box",
+            "parent_id": "shelf_1",
+            "color_rgb": [
+              0.5916084906614879,
+              0.45011989315850237,
+              0.17282522916287338
+            ]
+          },
+          {
+            "object_id": "instance_0020",
+            "pose": {
+              "position": [
+                0.24008410059829463,
+                0.02628136098144245,
+                0.07334349298477173
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                -0.16703960235665782,
+                0.9859501869995916
+              ]
+            },
+            "size": [
+              0.024,
+              0.024,
+              0.022
+            ],
+            "label": "box",
+            "parent_id": "shelf_2",
+            "color_rgb": [
+              0.1936376299153551,
+              0.6210521804350189,
+              0.4785353048323154
+            ]
+          },
+          {
+            "object_id": "instance_0021",
+            "pose": {
+              "position": [
+                0.29677986740929796,
+                -0.1443321595071614,
+                0.019487886954491176
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                -0.27771678608501355,
+                0.9606629933158718
+              ]
+            },
+            "size": [
+              0.028,
+              0.028,
+              0.028
+            ],
+            "label": "box",
+            "parent_id": "shelf_1",
+            "color_rgb": [
+              0.06816494039476236,
+              0.31380366099928303,
+              0.05769656699889242
+            ]
+          },
+          {
+            "object_id": "instance_0022",
+            "pose": {
+              "position": [
+                0.29013974833133865,
+                -0.20849688008566716,
+                0.051357933520844015
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                -0.2908877966396798,
+                0.9567571738775269
+              ]
+            },
+            "size": [
+              0.024,
+              0.024,
+              0.022
+            ],
+            "label": "box",
+            "parent_id": "shelf_1",
+            "color_rgb": [
+              0.386653144016226,
+              0.5796044624746446,
+              0.1087795807978361
+            ]
+          },
+          {
+            "object_id": "instance_0023",
+            "pose": {
+              "position": [
+                0.24111950337634336,
+                -0.20680897916049143,
+                0.01994096930067006
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                -0.29979275000388994,
+                0.9540043537872902
+              ]
+            },
+            "size": [
+              0.028,
+              0.028,
+              0.028
+            ],
+            "label": "box",
+            "parent_id": "shelf_1",
+            "color_rgb": [
+              0.24450961281198585,
+              0.7881114551083578,
+              0.7430334823988092
+            ]
+          },
+          {
+            "object_id": "instance_0024",
+            "pose": {
+              "position": [
+                0.18972520215225852,
+                -0.2063753420287558,
+                0.01990747629873886
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                -0.30069108870313005,
+                0.9537215889212776
+              ]
+            },
+            "size": [
+              0.028,
+              0.028,
+              0.028
+            ],
+            "label": "box",
+            "parent_id": "shelf_1",
+            "color_rgb": [
+              0.27876687560269997,
+              0.5083121272188288,
+              0.8701518357798489
+            ]
+          },
+          {
+            "object_id": "instance_0025",
+            "pose": {
+              "position": [
+                0.18962462937078997,
+                -0.026468548751483145,
+                0.019892214298248292
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.2669335818958119,
+                0.9637149282107609
+              ]
+            },
+            "size": [
+              0.028,
+              0.028,
+              0.028
+            ],
+            "label": "box",
+            "parent_id": "shelf_2",
+            "color_rgb": [
+              0.5571192810457518,
+              0.5815130718954247,
+              0.9886470588235293
+            ]
+          },
+          {
+            "object_id": "instance_0026",
+            "pose": {
+              "position": [
+                0.17922661778842933,
+                -0.020966064514115076,
+                0.02274657073373695
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                -0.21343003872149977,
+                0.9769583504793534
+              ]
+            },
+            "size": [
+              0.024,
+              0.024,
+              0.022
+            ],
+            "label": "box",
+            "parent_id": "shelf_2",
+            "color_rgb": [
+              0.08888888888888873,
+              0.10057301459396523,
+              0.48905900259647167
+            ]
+          },
+          {
+            "object_id": "instance_0027",
+            "pose": {
+              "position": [
+                0.28540244483842925,
+                -0.19963722068662282,
+                0.05171159648895264
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.22975292054736185,
+                0.97324898946773
+              ]
+            },
+            "size": [
+              0.024,
+              0.024,
+              0.022
+            ],
+            "label": "box",
+            "parent_id": "shelf_1",
+            "color_rgb": [
+              0.950046685340803,
+              0.9937254901960785,
+              0.39997198879551843
+            ]
+          }
+        ],
+        "edges": [],
+        "groups": {
+          "workspace": null,
+          "unassigned": "workspace",
+          "shelf_1": "workspace",
+          "shelf_2": "workspace",
+          "shelf_3": "workspace",
+          "buffer_tray": "workspace",
+          "output_tray": "workspace",
+          "tabletop": "workspace"
+        },
+        "held_object_id": null,
+        "timestamp": 0.0,
+        "episode_id": "so101-shelves-7202",
+        "frame_id": "robot_base",
+        "source": "rgbd",
+        "regions": {
+          "shelf_1": {
+            "kind": "region",
+            "center": [
+              0.24,
+              -0.18
+            ],
+            "size": [
+              0.17,
+              0.13
+            ],
+            "region_type": "shelf",
+            "floor_top_m": 0.006
+          },
+          "shelf_2": {
+            "kind": "region",
+            "center": [
+              0.24,
+              0.0
+            ],
+            "size": [
+              0.17,
+              0.13
+            ],
+            "region_type": "shelf",
+            "floor_top_m": 0.006
+          },
+          "shelf_3": {
+            "kind": "region",
+            "center": [
+              0.24,
+              0.18
+            ],
+            "size": [
+              0.17,
+              0.13
+            ],
+            "region_type": "shelf",
+            "floor_top_m": 0.006
+          },
+          "buffer_tray": {
+            "kind": "region",
+            "center": [
+              0.08,
+              -0.18
+            ],
+            "size": [
+              0.11,
+              0.11
+            ],
+            "region_type": "tray",
+            "floor_top_m": 0.006
+          },
+          "output_tray": {
+            "kind": "region",
+            "center": [
+              0.08,
+              0.18
+            ],
+            "size": [
+              0.11,
+              0.11
+            ],
+            "region_type": "tray",
+            "floor_top_m": 0.006
+          },
+          "tabletop": {
+            "kind": "region",
+            "center": [
+              0.15,
+              0.0
+            ],
+            "size": [
+              0.6,
+              0.6
+            ],
+            "region_type": "table",
+            "floor_top_m": 0.0
+          }
+        }
+      },
+      "object_count": 27,
+      "initial_target_gt_position": [
+        0.24011661781315177,
+        0.20782903073333917,
+        0.05155074095841777
+      ],
+      "initial_decisions": {
+        "a_greedy": {
+          "goal": {
+            "subgoal_id": "so101-shelves-7202:0.000000000:PICK:instance_0014",
+            "primitive": "PICK",
+            "object_id": "instance_0014",
+            "object_pose": {
+              "position": [
+                0.18878203291908532,
+                0.15310287211134144,
+                0.02309540190114081
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.1215840625339326,
+                0.9925811381130234
+              ]
+            },
+            "target_ee_pose": {
+              "position": [
+                0.18878203291908532,
+                0.15310287211134144,
+                0.1030954019011408
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            },
+            "place_pose": null,
+            "frame_id": "robot_base"
+          },
+          "decision": {
+            "mode": "search",
+            "condition": "a_greedy",
+            "hidden_estimates_used": false,
+            "selected": "instance_0014",
+            "candidates": [
+              {
+                "object_id": "instance_0014",
+                "distance_to_robot_base_m": 0.24415680000929652
+              },
+              {
+                "object_id": "instance_0006",
+                "distance_to_robot_base_m": 0.2836853834372247
+              },
+              {
+                "object_id": "instance_0001",
+                "distance_to_robot_base_m": 0.28390557865530514
+              },
+              {
+                "object_id": "instance_0007",
+                "distance_to_robot_base_m": 0.31854052034827446
+              },
+              {
+                "object_id": "instance_0016",
+                "distance_to_robot_base_m": 0.3261922815023954
+              },
+              {
+                "object_id": "instance_0005",
+                "distance_to_robot_base_m": 0.32881582217590943
+              },
+              {
+                "object_id": "instance_0004",
+                "distance_to_robot_base_m": 0.3592067278883566
+              }
+            ]
+          }
+        },
+        "b_no_hidden": {
+          "goal": {
+            "subgoal_id": "so101-shelves-7202:0.000000000:PICK:instance_0014",
+            "primitive": "PICK",
+            "object_id": "instance_0014",
+            "object_pose": {
+              "position": [
+                0.18878203291908532,
+                0.15310287211134144,
+                0.02309540190114081
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.1215840625339326,
+                0.9925811381130234
+              ]
+            },
+            "target_ee_pose": {
+              "position": [
+                0.18878203291908532,
+                0.15310287211134144,
+                0.1030954019011408
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            },
+            "place_pose": null,
+            "frame_id": "robot_base"
+          },
+          "decision": {
+            "mode": "search",
+            "condition": "b_no_hidden",
+            "hidden_estimates_used": false,
+            "selected": "instance_0014",
+            "candidates": [
+              {
+                "object_id": "instance_0014",
+                "region": "shelf_3",
+                "hidden_count": 0,
+                "region_hidden_count": 0,
+                "distance_to_robot_base_m": 0.24415680000929652
+              },
+              {
+                "object_id": "instance_0006",
+                "region": "shelf_3",
+                "hidden_count": 0,
+                "region_hidden_count": 0,
+                "distance_to_robot_base_m": 0.2836853834372247
+              },
+              {
+                "object_id": "instance_0001",
+                "region": "shelf_3",
+                "hidden_count": 0,
+                "region_hidden_count": 0,
+                "distance_to_robot_base_m": 0.28390557865530514
+              },
+              {
+                "object_id": "instance_0007",
+                "region": "shelf_3",
+                "hidden_count": 0,
+                "region_hidden_count": 0,
+                "distance_to_robot_base_m": 0.31854052034827446
+              },
+              {
+                "object_id": "instance_0016",
+                "region": "shelf_3",
+                "hidden_count": 0,
+                "region_hidden_count": 0,
+                "distance_to_robot_base_m": 0.3261922815023954
+              },
+              {
+                "object_id": "instance_0005",
+                "region": "shelf_3",
+                "hidden_count": 0,
+                "region_hidden_count": 0,
+                "distance_to_robot_base_m": 0.32881582217590943
+              },
+              {
+                "object_id": "instance_0004",
+                "region": "shelf_3",
+                "hidden_count": 0,
+                "region_hidden_count": 0,
+                "distance_to_robot_base_m": 0.3592067278883566
+              }
+            ]
+          }
+        },
+        "c_full": {
+          "goal": {
+            "subgoal_id": "so101-shelves-7202:0.000000000:PICK:instance_0016",
+            "primitive": "PICK",
+            "object_id": "instance_0016",
+            "object_pose": {
+              "position": [
+                0.24022500476668684,
+                0.20812035852692545,
+                0.07334349298477173
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.30251622827150737,
+                0.9531442344327438
+              ]
+            },
+            "target_ee_pose": {
+              "position": [
+                0.24022500476668684,
+                0.20812035852692545,
+                0.15334349298477173
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            },
+            "place_pose": null,
+            "frame_id": "robot_base"
+          },
+          "decision": {
+            "mode": "search",
+            "condition": "c_full",
+            "hidden_estimates_used": true,
+            "selected": "instance_0016",
+            "candidates": [
+              {
+                "object_id": "instance_0016",
+                "region": "shelf_3",
+                "hidden_count": 2,
+                "region_hidden_count": 2,
+                "distance_to_robot_base_m": 0.3261922815023954
+              },
+              {
+                "object_id": "instance_0014",
+                "region": "shelf_3",
+                "hidden_count": 0,
+                "region_hidden_count": 2,
+                "distance_to_robot_base_m": 0.24415680000929652
+              },
+              {
+                "object_id": "instance_0006",
+                "region": "shelf_3",
+                "hidden_count": 0,
+                "region_hidden_count": 2,
+                "distance_to_robot_base_m": 0.2836853834372247
+              },
+              {
+                "object_id": "instance_0001",
+                "region": "shelf_3",
+                "hidden_count": 0,
+                "region_hidden_count": 2,
+                "distance_to_robot_base_m": 0.28390557865530514
+              },
+              {
+                "object_id": "instance_0007",
+                "region": "shelf_3",
+                "hidden_count": 0,
+                "region_hidden_count": 2,
+                "distance_to_robot_base_m": 0.31854052034827446
+              },
+              {
+                "object_id": "instance_0005",
+                "region": "shelf_3",
+                "hidden_count": 0,
+                "region_hidden_count": 2,
+                "distance_to_robot_base_m": 0.32881582217590943
+              },
+              {
+                "object_id": "instance_0004",
+                "region": "shelf_3",
+                "hidden_count": 0,
+                "region_hidden_count": 2,
+                "distance_to_robot_base_m": 0.3592067278883566
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "case_id": "scene_003",
+      "seed": 7203,
+      "group": "unlocalized_unknown_region",
+      "target_gt_id": "shelf_2_obj_09",
+      "target_spec": {
+        "reference_rgb": [
+          0.9,
+          0.7565560174800032,
+          0.16200000000000006
+        ],
+        "region": null,
+        "category": "box",
+        "size_m": [
+          0.024,
+          0.024,
+          0.022
+        ],
+        "color_tolerance": 0.08,
+        "ambiguity_margin": 0.015
+      },
+      "initial_track": "unresolved:target",
+      "initial_state_sha256": "697bae7c7a4879274e0b12ce54616654faaae37a4e330f3382b589c6cb21f694",
+      "initial_graph": {
+        "nodes": [
+          {
+            "object_id": "instance_0001",
+            "pose": {
+              "position": [
+                0.29063777684121395,
+                -0.15108897981182215,
+                0.023009905063060776
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.1079248281203904,
+                0.994159057432554
+              ]
+            },
+            "size": [
+              0.032,
+              0.032,
+              0.035
+            ],
+            "label": "box",
+            "parent_id": "shelf_1",
+            "color_rgb": [
+              0.5433098447712429,
+              0.09882148692810439,
+              0.09852430555555536
+            ]
+          },
+          {
+            "object_id": "instance_0002",
+            "pose": {
+              "position": [
+                0.28959463202080266,
+                0.1520630721023216,
+                0.04755852575242514
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.2642751389447144,
+                0.9644473292698528
+              ]
+            },
+            "size": [
+              0.028,
+              0.028,
+              0.028
+            ],
+            "label": "box",
+            "parent_id": "shelf_3",
+            "color_rgb": [
+              0.2188321848263941,
+              0.12413445853723465,
+              0.4958097066406256
+            ]
+          },
+          {
+            "object_id": "instance_0003",
+            "pose": {
+              "position": [
+                0.2407314182444686,
+                0.2068338039248806,
+                0.023295981884002684
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.03615127934660043,
+                0.9993463288578209
+              ]
+            },
+            "size": [
+              0.032,
+              0.032,
+              0.035
+            ],
+            "label": "box",
+            "parent_id": "shelf_3",
+            "color_rgb": [
+              0.2156287039859118,
+              0.31569530518021865,
+              0.06299287705871094
+            ]
+          },
+          {
+            "object_id": "instance_0004",
+            "pose": {
+              "position": [
+                0.19114745576968112,
+                0.02909246984099897,
+                0.08191952560567184
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.011067751040043702,
+                0.9999387505677113
+              ]
+            },
+            "size": [
+              0.028,
+              0.028,
+              0.028
+            ],
+            "label": "box",
+            "parent_id": "shelf_2",
+            "color_rgb": [
+              0.30031486217675807,
+              0.06508439897698194,
+              0.34174140380790213
+            ]
+          },
+          {
+            "object_id": "instance_0005",
+            "pose": {
+              "position": [
+                0.28880396256751145,
+                0.027497279535176097,
+                0.023281416489529846
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                -0.2021910281840312,
+                0.9793461023161752
+              ]
+            },
+            "size": [
+              0.032,
+              0.032,
+              0.035
+            ],
+            "label": "box",
+            "parent_id": "shelf_2",
+            "color_rgb": [
+              0.6424114331723043,
+              0.19523361276877774,
+              0.5121255446623083
+            ]
+          },
+          {
+            "object_id": "instance_0006",
+            "pose": {
+              "position": [
+                0.19057175958196493,
+                0.20801703698830154,
+                0.023320658206939696
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                -0.006918344609696908,
+                0.9999760679675597
+              ]
+            },
+            "size": [
+              0.032,
+              0.032,
+              0.035
+            ],
+            "label": "box",
+            "parent_id": "shelf_3",
+            "color_rgb": [
+              0.0817231401417253,
+              0.37077452559123597,
+              0.1650570373076783
+            ]
+          },
+          {
+            "object_id": "instance_0007",
+            "pose": {
+              "position": [
+                0.23919982638762396,
+                -0.20671312495093083,
+                0.051746907898328906
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.215802918767251,
+                0.9764369412571071
+              ]
+            },
+            "size": [
+              0.024,
+              0.024,
+              0.022
+            ],
+            "label": "box",
+            "parent_id": "shelf_1",
+            "color_rgb": [
+              0.5503562512272407,
+              0.6820808437824343,
+              0.1976920811242968
+            ]
+          },
+          {
+            "object_id": "instance_0008",
+            "pose": {
+              "position": [
+                0.2405877417375636,
+                0.20680502867835077,
+                0.07928267073067186
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.03613166733110412,
+                0.9993470381283343
+              ]
+            },
+            "size": [
+              0.024,
+              0.024,
+              0.022
+            ],
+            "label": "box",
+            "parent_id": "shelf_3",
+            "color_rgb": [
+              0.12706330158442639,
+              0.48460429591390036,
+              0.10622726380775627
+            ]
+          },
+          {
+            "object_id": "instance_0009",
+            "pose": {
+              "position": [
+                0.19110512890286976,
+                0.02928771843765614,
+                0.023272080421447752
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.015875717799692834,
+                0.9998739728507511
+              ]
+            },
+            "size": [
+              0.032,
+              0.032,
+              0.035
+            ],
+            "label": "box",
+            "parent_id": "shelf_2",
+            "color_rgb": [
+              0.2839586107667098,
+              0.3168289173592926,
+              0.06934992576265464
+            ]
+          },
+          {
+            "object_id": "instance_0010",
+            "pose": {
+              "position": [
+                0.24100832041542442,
+                -0.15222785159905622,
+                0.019892214298248292
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                -0.017804666371028177,
+                0.9998414843641048
+              ]
+            },
+            "size": [
+              0.028,
+              0.028,
+              0.028
+            ],
+            "label": "box",
+            "parent_id": "shelf_1",
+            "color_rgb": [
+              0.20452082841168667,
+              0.6373934955508327,
+              0.5907150169304666
+            ]
+          },
+          {
+            "object_id": "instance_0011",
+            "pose": {
+              "position": [
+                0.19072310146566082,
+                0.20775709862818928,
+                0.07334349298477173
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                -0.022427042358359465,
+                0.9997484822549402
+              ]
+            },
+            "size": [
+              0.024,
+              0.024,
+              0.022
+            ],
+            "label": "box",
+            "parent_id": "shelf_3",
+            "color_rgb": [
+              0.11517250747079645,
+              0.5104255557153582,
+              0.44585790306342526
+            ]
+          },
+          {
+            "object_id": "instance_0012",
+            "pose": {
+              "position": [
+                0.24232436411470684,
+                -0.1971363618261181,
+                0.024121482372283926
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                -0.1427602776107438,
+                0.9897572950660699
+              ]
+            },
+            "size": [
+              0.032,
+              0.032,
+              0.035
+            ],
+            "label": "box",
+            "parent_id": "shelf_1",
+            "color_rgb": [
+              0.18494679480987897,
+              0.10020766927460631,
+              0.4022972407353745
+            ]
+          },
+          {
+            "object_id": "instance_0013",
+            "pose": {
+              "position": [
+                0.2890747130290931,
+                -0.02781190173540735,
+                0.07334349298477173
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                -0.27829695816080907,
+                0.9604950822770728
+              ]
+            },
+            "size": [
+              0.024,
+              0.024,
+              0.022
+            ],
+            "label": "box",
+            "parent_id": "shelf_2",
+            "color_rgb": [
+              0.4853606562900039,
+              0.7728758169934608,
+              0.2744003099521591
+            ]
+          },
+          {
+            "object_id": "instance_0014",
+            "pose": {
+              "position": [
+                0.19130329104644242,
+                0.15306784085923003,
+                0.023078295371742955
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                -0.07859817742425614,
+                0.9969063780042663
+              ]
+            },
+            "size": [
+              0.032,
+              0.032,
+              0.035
+            ],
+            "label": "box",
+            "parent_id": "shelf_3",
+            "color_rgb": [
+              0.47618895796801297,
+              0.292294135359656,
+              0.08748605133110136
+            ]
+          },
+          {
+            "object_id": "instance_0015",
+            "pose": {
+              "position": [
+                0.24164876890276749,
+                0.2073440171553217,
+                0.054264381538151066
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.029363859160613272,
+                0.9995687889160983
+              ]
+            },
+            "size": [
+              0.028,
+              0.028,
+              0.028
+            ],
+            "label": "box",
+            "parent_id": "shelf_3",
+            "color_rgb": [
+              0.28934516197783466,
+              0.05331290849673189,
+              0.26131322818982644
+            ]
+          },
+          {
+            "object_id": "instance_0016",
+            "pose": {
+              "position": [
+                0.2920537123577821,
+                -0.02304170385589248,
+                0.02325266823391387
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                -0.27672249727493164,
+                0.9609498735636138
+              ]
+            },
+            "size": [
+              0.032,
+              0.032,
+              0.035
+            ],
+            "label": "box",
+            "parent_id": "shelf_2",
+            "color_rgb": [
+              0.45563405995545164,
+              0.1818581808887427,
+              0.08357614926790065
+            ]
+          },
+          {
+            "object_id": "instance_0017",
+            "pose": {
+              "position": [
+                0.19841594542223404,
+                0.036224094870526295,
+                0.0531766817642593
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                -0.3816390934431709,
+                0.924311420656412
+              ]
+            },
+            "size": [
+              0.028,
+              0.028,
+              0.028
+            ],
+            "label": "box",
+            "parent_id": "shelf_2",
+            "color_rgb": [
+              0.05324197860962551,
+              0.2692290552584686,
+              0.292669340463457
+            ]
+          },
+          {
+            "object_id": "instance_0018",
+            "pose": {
+              "position": [
+                0.2894351653390071,
+                -0.2061466980575485,
+                0.019892214298248292
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                -0.015148040498426357,
+                0.9998852618521077
+              ]
+            },
+            "size": [
+              0.028,
+              0.028,
+              0.028
+            ],
+            "label": "box",
+            "parent_id": "shelf_1",
+            "color_rgb": [
+              0.22703616308032462,
+              0.6907888083600174,
+              0.2012084012210428
+            ]
+          },
+          {
+            "object_id": "instance_0019",
+            "pose": {
+              "position": [
+                0.2429243907686806,
+                0.03733599739052083,
+                0.019492195169866708
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                -0.1639885903861583,
+                0.9864622355788187
+              ]
+            },
+            "size": [
+              0.028,
+              0.028,
+              0.028
+            ],
+            "label": "box",
+            "parent_id": "shelf_2",
+            "color_rgb": [
+              0.05674807934869838,
+              0.06357451362611304,
+              0.31158315177923174
+            ]
+          },
+          {
+            "object_id": "instance_0020",
+            "pose": {
+              "position": [
+                0.189417303985428,
+                -0.20839608443568924,
+                0.0233557653427124
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                -0.1565138696467143,
+                0.987675760869027
+              ]
+            },
+            "size": [
+              0.032,
+              0.032,
+              0.035
+            ],
+            "label": "box",
+            "parent_id": "shelf_1",
+            "color_rgb": [
+              0.5097451173192987,
+              0.14068579250776167,
+              0.4780737270326003
+            ]
+          },
+          {
+            "object_id": "instance_0021",
+            "pose": {
+              "position": [
+                0.2391867695328247,
+                0.029219425654442528,
+                0.04455420526895877
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.236064524485115,
+                0.9717373823619304
+              ]
+            },
+            "size": [
+              0.024,
+              0.024,
+              0.022
+            ],
+            "label": "box",
+            "parent_id": "shelf_2",
+            "color_rgb": [
+              0.17601180213053183,
+              0.5903093548257733,
+              0.4464596949891062
+            ]
+          },
+          {
+            "object_id": "instance_0022",
+            "pose": {
+              "position": [
+                0.2976280234916188,
+                0.1612216472142471,
+                0.021662900615505503
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                -0.2436152193793437,
+                0.9698719631408851
+              ]
+            },
+            "size": [
+              0.024,
+              0.024,
+              0.022
+            ],
+            "label": "box",
+            "parent_id": "shelf_3",
+            "color_rgb": [
+              0.27936748893105745,
+              0.04938435589289464,
+              0.05260383723381812
+            ]
+          },
+          {
+            "object_id": "instance_0023",
+            "pose": {
+              "position": [
+                0.18915207512080023,
+                -0.2087028831897522,
+                0.05171159648895264
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                -0.16517400953961858,
+                0.9862644404887596
+              ]
+            },
+            "size": [
+              0.024,
+              0.024,
+              0.022
+            ],
+            "label": "box",
+            "parent_id": "shelf_1",
+            "color_rgb": [
+              0.7083278460638013,
+              0.21217442200761003,
+              0.4211522046629617
+            ]
+          },
+          {
+            "object_id": "instance_0024",
+            "pose": {
+              "position": [
+                0.19555033927034762,
+                -0.14315581865264504,
+                0.023365924596786502
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                -0.20954262470371432,
+                0.9777995134138073
+              ]
+            },
+            "size": [
+              0.024,
+              0.024,
+              0.022
+            ],
+            "label": "box",
+            "parent_id": "shelf_1",
+            "color_rgb": [
+              0.08617172675521804,
+              0.17256219692177982,
+              0.3626502213788754
+            ]
+          },
+          {
+            "object_id": "instance_0025",
+            "pose": {
+              "position": [
+                0.19686644467058054,
+                0.2149800517980165,
+                0.05024454633188717
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                -0.38171970610278594,
+                0.9242781323675264
+              ]
+            },
+            "size": [
+              0.024,
+              0.024,
+              0.022
+            ],
+            "label": "box",
+            "parent_id": "shelf_3",
+            "color_rgb": [
+              0.050452694739097685,
+              0.11983285117325586,
+              0.28102700096431993
+            ]
+          },
+          {
+            "object_id": "instance_0026",
+            "pose": {
+              "position": [
+                0.19043269001129656,
+                -0.15104771938504533,
+                0.045890428066253666
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.3067159302353327,
+                0.9518011021951354
+              ]
+            },
+            "size": [
+              0.024,
+              0.024,
+              0.022
+            ],
+            "label": "box",
+            "parent_id": "shelf_1",
+            "color_rgb": [
+              0.9625330043717267,
+              0.9577933601696752,
+              0.4658594121975495
+            ]
+          }
+        ],
+        "edges": [],
+        "groups": {
+          "workspace": null,
+          "unassigned": "workspace",
+          "shelf_1": "workspace",
+          "shelf_2": "workspace",
+          "shelf_3": "workspace",
+          "buffer_tray": "workspace",
+          "output_tray": "workspace",
+          "tabletop": "workspace"
+        },
+        "held_object_id": null,
+        "timestamp": 0.0,
+        "episode_id": "so101-shelves-7203",
+        "frame_id": "robot_base",
+        "source": "rgbd",
+        "regions": {
+          "shelf_1": {
+            "kind": "region",
+            "center": [
+              0.24,
+              -0.18
+            ],
+            "size": [
+              0.17,
+              0.13
+            ],
+            "region_type": "shelf",
+            "floor_top_m": 0.006
+          },
+          "shelf_2": {
+            "kind": "region",
+            "center": [
+              0.24,
+              0.0
+            ],
+            "size": [
+              0.17,
+              0.13
+            ],
+            "region_type": "shelf",
+            "floor_top_m": 0.006
+          },
+          "shelf_3": {
+            "kind": "region",
+            "center": [
+              0.24,
+              0.18
+            ],
+            "size": [
+              0.17,
+              0.13
+            ],
+            "region_type": "shelf",
+            "floor_top_m": 0.006
+          },
+          "buffer_tray": {
+            "kind": "region",
+            "center": [
+              0.08,
+              -0.18
+            ],
+            "size": [
+              0.11,
+              0.11
+            ],
+            "region_type": "tray",
+            "floor_top_m": 0.006
+          },
+          "output_tray": {
+            "kind": "region",
+            "center": [
+              0.08,
+              0.18
+            ],
+            "size": [
+              0.11,
+              0.11
+            ],
+            "region_type": "tray",
+            "floor_top_m": 0.006
+          },
+          "tabletop": {
+            "kind": "region",
+            "center": [
+              0.15,
+              0.0
+            ],
+            "size": [
+              0.6,
+              0.6
+            ],
+            "region_type": "table",
+            "floor_top_m": 0.0
+          }
+        }
+      },
+      "object_count": 27,
+      "initial_target_gt_position": [
+        0.2892810327123877,
+        -0.02780466697192233,
+        0.05155074095841776
+      ],
+      "initial_decisions": {
+        "a_greedy": {
+          "goal": {
+            "subgoal_id": "so101-shelves-7203:0.000000000:PICK:instance_0004",
+            "primitive": "PICK",
+            "object_id": "instance_0004",
+            "object_pose": {
+              "position": [
+                0.19114745576968112,
+                0.02909246984099897,
+                0.08191952560567184
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.011067751040043702,
+                0.9999387505677113
+              ]
+            },
+            "target_ee_pose": {
+              "position": [
+                0.19114745576968112,
+                0.02909246984099897,
+                0.16191952560567185
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            },
+            "place_pose": null,
+            "frame_id": "robot_base"
+          },
+          "decision": {
+            "mode": "search",
+            "condition": "a_greedy",
+            "hidden_estimates_used": false,
+            "selected": "instance_0004",
+            "candidates": [
+              {
+                "object_id": "instance_0004",
+                "distance_to_robot_base_m": 0.20998697655838078
+              },
+              {
+                "object_id": "instance_0021",
+                "distance_to_robot_base_m": 0.2450493067981883
+              },
+              {
+                "object_id": "instance_0014",
+                "distance_to_robot_base_m": 0.2460880346294225
+              },
+              {
+                "object_id": "instance_0026",
+                "distance_to_robot_base_m": 0.24735794780937598
+              },
+              {
+                "object_id": "instance_0010",
+                "distance_to_robot_base_m": 0.2857516920363125
+              },
+              {
+                "object_id": "instance_0023",
+                "distance_to_robot_base_m": 0.28637299136904737
+              },
+              {
+                "object_id": "instance_0005",
+                "distance_to_robot_base_m": 0.29104270052741593
+              },
+              {
+                "object_id": "instance_0011",
+                "distance_to_robot_base_m": 0.2914062137743311
+              },
+              {
+                "object_id": "instance_0016",
+                "distance_to_robot_base_m": 0.29388259152005114
+              },
+              {
+                "object_id": "instance_0013",
+                "distance_to_robot_base_m": 0.2995278944509171
+              },
+              {
+                "object_id": "instance_0007",
+                "distance_to_robot_base_m": 0.3203507693886292
+              },
+              {
+                "object_id": "instance_0008",
+                "distance_to_robot_base_m": 0.3270115032215567
+              },
+              {
+                "object_id": "instance_0001",
+                "distance_to_robot_base_m": 0.3283712120128553
+              },
+              {
+                "object_id": "instance_0002",
+                "distance_to_robot_base_m": 0.3305299414035044
+              },
+              {
+                "object_id": "instance_0018",
+                "distance_to_robot_base_m": 0.3559000930662085
+              }
+            ]
+          }
+        },
+        "b_no_hidden": {
+          "goal": {
+            "subgoal_id": "so101-shelves-7203:0.000000000:PICK:instance_0004",
+            "primitive": "PICK",
+            "object_id": "instance_0004",
+            "object_pose": {
+              "position": [
+                0.19114745576968112,
+                0.02909246984099897,
+                0.08191952560567184
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.011067751040043702,
+                0.9999387505677113
+              ]
+            },
+            "target_ee_pose": {
+              "position": [
+                0.19114745576968112,
+                0.02909246984099897,
+                0.16191952560567185
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            },
+            "place_pose": null,
+            "frame_id": "robot_base"
+          },
+          "decision": {
+            "mode": "search",
+            "condition": "b_no_hidden",
+            "hidden_estimates_used": false,
+            "selected": "instance_0004",
+            "candidates": [
+              {
+                "object_id": "instance_0004",
+                "region": "shelf_2",
+                "hidden_count": 0,
+                "region_hidden_count": 0,
+                "distance_to_robot_base_m": 0.20998697655838078
+              },
+              {
+                "object_id": "instance_0021",
+                "region": "shelf_2",
+                "hidden_count": 0,
+                "region_hidden_count": 0,
+                "distance_to_robot_base_m": 0.2450493067981883
+              },
+              {
+                "object_id": "instance_0014",
+                "region": "shelf_3",
+                "hidden_count": 0,
+                "region_hidden_count": 0,
+                "distance_to_robot_base_m": 0.2460880346294225
+              },
+              {
+                "object_id": "instance_0026",
+                "region": "shelf_1",
+                "hidden_count": 0,
+                "region_hidden_count": 0,
+                "distance_to_robot_base_m": 0.24735794780937598
+              },
+              {
+                "object_id": "instance_0010",
+                "region": "shelf_1",
+                "hidden_count": 0,
+                "region_hidden_count": 0,
+                "distance_to_robot_base_m": 0.2857516920363125
+              },
+              {
+                "object_id": "instance_0023",
+                "region": "shelf_1",
+                "hidden_count": 0,
+                "region_hidden_count": 0,
+                "distance_to_robot_base_m": 0.28637299136904737
+              },
+              {
+                "object_id": "instance_0005",
+                "region": "shelf_2",
+                "hidden_count": 0,
+                "region_hidden_count": 0,
+                "distance_to_robot_base_m": 0.29104270052741593
+              },
+              {
+                "object_id": "instance_0011",
+                "region": "shelf_3",
+                "hidden_count": 0,
+                "region_hidden_count": 0,
+                "distance_to_robot_base_m": 0.2914062137743311
+              },
+              {
+                "object_id": "instance_0016",
+                "region": "shelf_2",
+                "hidden_count": 0,
+                "region_hidden_count": 0,
+                "distance_to_robot_base_m": 0.29388259152005114
+              },
+              {
+                "object_id": "instance_0013",
+                "region": "shelf_2",
+                "hidden_count": 0,
+                "region_hidden_count": 0,
+                "distance_to_robot_base_m": 0.2995278944509171
+              },
+              {
+                "object_id": "instance_0007",
+                "region": "shelf_1",
+                "hidden_count": 0,
+                "region_hidden_count": 0,
+                "distance_to_robot_base_m": 0.3203507693886292
+              },
+              {
+                "object_id": "instance_0008",
+                "region": "shelf_3",
+                "hidden_count": 0,
+                "region_hidden_count": 0,
+                "distance_to_robot_base_m": 0.3270115032215567
+              },
+              {
+                "object_id": "instance_0001",
+                "region": "shelf_1",
+                "hidden_count": 0,
+                "region_hidden_count": 0,
+                "distance_to_robot_base_m": 0.3283712120128553
+              },
+              {
+                "object_id": "instance_0002",
+                "region": "shelf_3",
+                "hidden_count": 0,
+                "region_hidden_count": 0,
+                "distance_to_robot_base_m": 0.3305299414035044
+              },
+              {
+                "object_id": "instance_0018",
+                "region": "shelf_1",
+                "hidden_count": 0,
+                "region_hidden_count": 0,
+                "distance_to_robot_base_m": 0.3559000930662085
+              }
+            ]
+          }
+        },
+        "c_full": {
+          "goal": {
+            "subgoal_id": "so101-shelves-7203:0.000000000:PICK:instance_0013",
+            "primitive": "PICK",
+            "object_id": "instance_0013",
+            "object_pose": {
+              "position": [
+                0.2890747130290931,
+                -0.02781190173540735,
+                0.07334349298477173
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                -0.27829695816080907,
+                0.9604950822770728
+              ]
+            },
+            "target_ee_pose": {
+              "position": [
+                0.2890747130290931,
+                -0.02781190173540735,
+                0.15334349298477173
+              ],
+              "quaternion_xyzw": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            },
+            "place_pose": null,
+            "frame_id": "robot_base"
+          },
+          "decision": {
+            "mode": "search",
+            "condition": "c_full",
+            "hidden_estimates_used": true,
+            "selected": "instance_0013",
+            "candidates": [
+              {
+                "object_id": "instance_0013",
+                "region": "shelf_2",
+                "hidden_count": 2,
+                "region_hidden_count": 2,
+                "distance_to_robot_base_m": 0.2995278944509171
+              },
+              {
+                "object_id": "instance_0004",
+                "region": "shelf_2",
+                "hidden_count": 0,
+                "region_hidden_count": 2,
+                "distance_to_robot_base_m": 0.20998697655838078
+              },
+              {
+                "object_id": "instance_0021",
+                "region": "shelf_2",
+                "hidden_count": 0,
+                "region_hidden_count": 2,
+                "distance_to_robot_base_m": 0.2450493067981883
+              },
+              {
+                "object_id": "instance_0005",
+                "region": "shelf_2",
+                "hidden_count": 0,
+                "region_hidden_count": 2,
+                "distance_to_robot_base_m": 0.29104270052741593
+              },
+              {
+                "object_id": "instance_0016",
+                "region": "shelf_2",
+                "hidden_count": 0,
+                "region_hidden_count": 2,
+                "distance_to_robot_base_m": 0.29388259152005114
+              },
+              {
+                "object_id": "instance_0014",
+                "region": "shelf_3",
+                "hidden_count": 0,
+                "region_hidden_count": 0,
+                "distance_to_robot_base_m": 0.2460880346294225
+              },
+              {
+                "object_id": "instance_0026",
+                "region": "shelf_1",
+                "hidden_count": 0,
+                "region_hidden_count": 0,
+                "distance_to_robot_base_m": 0.24735794780937598
+              },
+              {
+                "object_id": "instance_0010",
+                "region": "shelf_1",
+                "hidden_count": 0,
+                "region_hidden_count": 0,
+                "distance_to_robot_base_m": 0.2857516920363125
+              },
+              {
+                "object_id": "instance_0023",
+                "region": "shelf_1",
+                "hidden_count": 0,
+                "region_hidden_count": 0,
+                "distance_to_robot_base_m": 0.28637299136904737
+              },
+              {
+                "object_id": "instance_0011",
+                "region": "shelf_3",
+                "hidden_count": 0,
+                "region_hidden_count": 0,
+                "distance_to_robot_base_m": 0.2914062137743311
+              },
+              {
+                "object_id": "instance_0007",
+                "region": "shelf_1",
+                "hidden_count": 0,
+                "region_hidden_count": 0,
+                "distance_to_robot_base_m": 0.3203507693886292
+              },
+              {
+                "object_id": "instance_0008",
+                "region": "shelf_3",
+                "hidden_count": 0,
+                "region_hidden_count": 0,
+                "distance_to_robot_base_m": 0.3270115032215567
+              },
+              {
+                "object_id": "instance_0001",
+                "region": "shelf_1",
+                "hidden_count": 0,
+                "region_hidden_count": 0,
+                "distance_to_robot_base_m": 0.3283712120128553
+              },
+              {
+                "object_id": "instance_0002",
+                "region": "shelf_3",
+                "hidden_count": 0,
+                "region_hidden_count": 0,
+                "distance_to_robot_base_m": 0.3305299414035044
+              },
+              {
+                "object_id": "instance_0018",
+                "region": "shelf_1",
+                "hidden_count": 0,
+                "region_hidden_count": 0,
+                "distance_to_robot_base_m": 0.3559000930662085
+              }
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "candidate_screening": [
+    {
+      "seed": 7200,
+      "group": "visible_free",
+      "hidden_cue_exists": false,
+      "eligible": true,
+      "quota_already_filled": false
+    },
+    {
+      "seed": 7201,
+      "group": "visible_blocked",
+      "hidden_cue_exists": false,
+      "eligible": true,
+      "quota_already_filled": false
+    },
+    {
+      "seed": 7202,
+      "group": "unlocalized_known_region",
+      "hidden_cue_exists": true,
+      "eligible": true,
+      "quota_already_filled": false
+    },
+    {
+      "seed": 7203,
+      "group": "unlocalized_unknown_region",
+      "hidden_cue_exists": true,
+      "eligible": true,
+      "quota_already_filled": false
+    },
+    {
+      "seed": 7204,
+      "group": "visible_free",
+      "hidden_cue_exists": false,
+      "eligible": true,
+      "quota_already_filled": true
+    },
+    {
+      "seed": 7205,
+      "group": "visible_blocked",
+      "hidden_cue_exists": false,
+      "eligible": true,
+      "quota_already_filled": true
+    },
+    {
+      "seed": 7206,
+      "group": "unlocalized_known_region",
+      "hidden_cue_exists": true,
+      "eligible": true,
+      "quota_already_filled": true
+    },
+    {
+      "seed": 7209,
+      "group": "unlocalized_unknown_region",
+      "hidden_cue_exists": true,
+      "eligible": true,
+      "quota_already_filled": true
+    },
+    {
+      "seed": 7210,
+      "group": "visible_free",
+      "hidden_cue_exists": false,
+      "eligible": true,
+      "quota_already_filled": true
+    },
+    {
+      "seed": 7211,
+      "group": "visible_blocked",
+      "hidden_cue_exists": false,
+      "eligible": true,
+      "quota_already_filled": true
+    },
+    {
+      "seed": 7212,
+      "group": "unlocalized_known_region",
+      "hidden_cue_exists": true,
+      "eligible": true,
+      "quota_already_filled": true
+    },
+    {
+      "seed": 7214,
+      "group": "unlocalized_unknown_region",
+      "hidden_cue_exists": true,
+      "eligible": true,
+      "quota_already_filled": true
+    },
+    {
+      "seed": 7215,
+      "group": "visible_free",
+      "hidden_cue_exists": false,
+      "eligible": true,
+      "quota_already_filled": true
+    },
+    {
+      "seed": 7216,
+      "group": "visible_blocked",
+      "hidden_cue_exists": false,
+      "eligible": true,
+      "quota_already_filled": true
+    },
+    {
+      "seed": 7217,
+      "group": "unlocalized_known_region",
+      "hidden_cue_exists": true,
+      "eligible": true,
+      "quota_already_filled": true
+    },
+    {
+      "seed": 7219,
+      "group": "unlocalized_unknown_region",
+      "hidden_cue_exists": false,
+      "eligible": false,
+      "quota_already_filled": true
+    }
+  ],
+  "scope": "visible controls + unlocalized targets with available height-derived hidden-space cues",
+  "conditions": [
+    "a_greedy",
+    "b_no_hidden",
+    "c_full"
+  ],
+  "robot_distance": "Euclidean 3D distance to robot_base origin (0,0,0)",
+  "shared_rules": [
+    "target priority when locally clear",
+    "same local geometry eligibility",
+    "same region hint",
+    "same completion-based placed-object history",
+    "same placement policy without hidden-space scores",
+    "same ACT and Subgoal encoding"
+  ],
+  "ablation": "disable computation/use of inferred hidden-space counts; visible poses and support relations remain"
+}

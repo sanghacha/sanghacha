@@ -1,0 +1,873 @@
+{
+  "summary": {
+    "all": {
+      "a_greedy": {
+        "n": 40,
+        "successes": 22,
+        "discovered": 26,
+        "mean_capped_removals": 14.625,
+        "mean_discovery_capped": 10.575,
+        "success_within_removal_budget": {
+          "0": 10,
+          "1": 12,
+          "2": 13,
+          "3": 13,
+          "5": 15,
+          "8": 18,
+          "12": 19
+        },
+        "errors": {
+          "executor rejected a physically supported/blocked pick": 10,
+          "ValueError: no eligible observed exploration object": 2,
+          "selected the physical target without recognizing the requested appearance": 6
+        }
+      },
+      "b_no_hidden": {
+        "n": 40,
+        "successes": 24,
+        "discovered": 26,
+        "mean_capped_removals": 12.125,
+        "mean_discovery_capped": 10.575,
+        "success_within_removal_budget": {
+          "0": 10,
+          "1": 19,
+          "2": 19,
+          "3": 19,
+          "5": 20,
+          "8": 22,
+          "12": 23
+        },
+        "errors": {
+          "executor rejected a physically supported/blocked pick": 8,
+          "ValueError: no eligible observed exploration object": 2,
+          "selected the physical target without recognizing the requested appearance": 6
+        }
+      },
+      "c_full": {
+        "n": 40,
+        "successes": 28,
+        "discovered": 30,
+        "mean_capped_removals": 9.0,
+        "mean_discovery_capped": 7.425,
+        "success_within_removal_budget": {
+          "0": 10,
+          "1": 21,
+          "2": 23,
+          "3": 25,
+          "5": 27,
+          "8": 28,
+          "12": 28
+        },
+        "errors": {
+          "selected the physical target without recognizing the requested appearance": 9,
+          "executor rejected a physically supported/blocked pick": 2,
+          "ValueError: no eligible observed exploration object": 1
+        }
+      }
+    },
+    "hidden": {
+      "a_greedy": {
+        "n": 20,
+        "successes": 6,
+        "discovered": 6,
+        "mean_capped_removals": 21.15,
+        "mean_discovery_capped": 21.15,
+        "success_within_removal_budget": {
+          "0": 0,
+          "1": 1,
+          "2": 1,
+          "3": 1,
+          "5": 2,
+          "8": 4,
+          "12": 5
+        },
+        "errors": {
+          "executor rejected a physically supported/blocked pick": 6,
+          "ValueError: no eligible observed exploration object": 2,
+          "selected the physical target without recognizing the requested appearance": 6
+        }
+      },
+      "b_no_hidden": {
+        "n": 20,
+        "successes": 6,
+        "discovered": 6,
+        "mean_capped_removals": 21.15,
+        "mean_discovery_capped": 21.15,
+        "success_within_removal_budget": {
+          "0": 0,
+          "1": 1,
+          "2": 1,
+          "3": 1,
+          "5": 2,
+          "8": 4,
+          "12": 5
+        },
+        "errors": {
+          "executor rejected a physically supported/blocked pick": 6,
+          "ValueError: no eligible observed exploration object": 2,
+          "selected the physical target without recognizing the requested appearance": 6
+        }
+      },
+      "c_full": {
+        "n": 20,
+        "successes": 10,
+        "discovered": 10,
+        "mean_capped_removals": 14.9,
+        "mean_discovery_capped": 14.85,
+        "success_within_removal_budget": {
+          "0": 0,
+          "1": 3,
+          "2": 5,
+          "3": 7,
+          "5": 9,
+          "8": 10,
+          "12": 10
+        },
+        "errors": {
+          "selected the physical target without recognizing the requested appearance": 9,
+          "ValueError: no eligible observed exploration object": 1
+        }
+      }
+    },
+    "visible_free": {
+      "a_greedy": {
+        "n": 10,
+        "successes": 10,
+        "discovered": 10,
+        "mean_capped_removals": 0.0,
+        "mean_discovery_capped": 0.0,
+        "success_within_removal_budget": {
+          "0": 10,
+          "1": 10,
+          "2": 10,
+          "3": 10,
+          "5": 10,
+          "8": 10,
+          "12": 10
+        },
+        "errors": {}
+      },
+      "b_no_hidden": {
+        "n": 10,
+        "successes": 10,
+        "discovered": 10,
+        "mean_capped_removals": 0.0,
+        "mean_discovery_capped": 0.0,
+        "success_within_removal_budget": {
+          "0": 10,
+          "1": 10,
+          "2": 10,
+          "3": 10,
+          "5": 10,
+          "8": 10,
+          "12": 10
+        },
+        "errors": {}
+      },
+      "c_full": {
+        "n": 10,
+        "successes": 10,
+        "discovered": 10,
+        "mean_capped_removals": 0.0,
+        "mean_discovery_capped": 0.0,
+        "success_within_removal_budget": {
+          "0": 10,
+          "1": 10,
+          "2": 10,
+          "3": 10,
+          "5": 10,
+          "8": 10,
+          "12": 10
+        },
+        "errors": {}
+      }
+    },
+    "visible_blocked": {
+      "a_greedy": {
+        "n": 10,
+        "successes": 6,
+        "discovered": 10,
+        "mean_capped_removals": 16.2,
+        "mean_discovery_capped": 0.0,
+        "success_within_removal_budget": {
+          "0": 0,
+          "1": 1,
+          "2": 2,
+          "3": 2,
+          "5": 3,
+          "8": 4,
+          "12": 4
+        },
+        "errors": {
+          "executor rejected a physically supported/blocked pick": 4
+        }
+      },
+      "b_no_hidden": {
+        "n": 10,
+        "successes": 8,
+        "discovered": 10,
+        "mean_capped_removals": 6.2,
+        "mean_discovery_capped": 0.0,
+        "success_within_removal_budget": {
+          "0": 0,
+          "1": 8,
+          "2": 8,
+          "3": 8,
+          "5": 8,
+          "8": 8,
+          "12": 8
+        },
+        "errors": {
+          "executor rejected a physically supported/blocked pick": 2
+        }
+      },
+      "c_full": {
+        "n": 10,
+        "successes": 8,
+        "discovered": 10,
+        "mean_capped_removals": 6.2,
+        "mean_discovery_capped": 0.0,
+        "success_within_removal_budget": {
+          "0": 0,
+          "1": 8,
+          "2": 8,
+          "3": 8,
+          "5": 8,
+          "8": 8,
+          "12": 8
+        },
+        "errors": {
+          "executor rejected a physically supported/blocked pick": 2
+        }
+      }
+    },
+    "unlocalized_known_region": {
+      "a_greedy": {
+        "n": 10,
+        "successes": 3,
+        "discovered": 3,
+        "mean_capped_removals": 20.1,
+        "mean_discovery_capped": 20.1,
+        "success_within_removal_budget": {
+          "0": 0,
+          "1": 1,
+          "2": 1,
+          "3": 1,
+          "5": 2,
+          "8": 3,
+          "12": 3
+        },
+        "errors": {
+          "ValueError: no eligible observed exploration object": 2,
+          "selected the physical target without recognizing the requested appearance": 4,
+          "executor rejected a physically supported/blocked pick": 1
+        }
+      },
+      "b_no_hidden": {
+        "n": 10,
+        "successes": 3,
+        "discovered": 3,
+        "mean_capped_removals": 20.1,
+        "mean_discovery_capped": 20.1,
+        "success_within_removal_budget": {
+          "0": 0,
+          "1": 1,
+          "2": 1,
+          "3": 1,
+          "5": 2,
+          "8": 3,
+          "12": 3
+        },
+        "errors": {
+          "ValueError: no eligible observed exploration object": 2,
+          "selected the physical target without recognizing the requested appearance": 4,
+          "executor rejected a physically supported/blocked pick": 1
+        }
+      },
+      "c_full": {
+        "n": 10,
+        "successes": 3,
+        "discovered": 3,
+        "mean_capped_removals": 19.7,
+        "mean_discovery_capped": 19.7,
+        "success_within_removal_budget": {
+          "0": 0,
+          "1": 1,
+          "2": 2,
+          "3": 2,
+          "5": 3,
+          "8": 3,
+          "12": 3
+        },
+        "errors": {
+          "selected the physical target without recognizing the requested appearance": 6,
+          "ValueError: no eligible observed exploration object": 1
+        }
+      }
+    },
+    "unlocalized_unknown_region": {
+      "a_greedy": {
+        "n": 10,
+        "successes": 3,
+        "discovered": 3,
+        "mean_capped_removals": 22.2,
+        "mean_discovery_capped": 22.2,
+        "success_within_removal_budget": {
+          "0": 0,
+          "1": 0,
+          "2": 0,
+          "3": 0,
+          "5": 0,
+          "8": 1,
+          "12": 2
+        },
+        "errors": {
+          "executor rejected a physically supported/blocked pick": 5,
+          "selected the physical target without recognizing the requested appearance": 2
+        }
+      },
+      "b_no_hidden": {
+        "n": 10,
+        "successes": 3,
+        "discovered": 3,
+        "mean_capped_removals": 22.2,
+        "mean_discovery_capped": 22.2,
+        "success_within_removal_budget": {
+          "0": 0,
+          "1": 0,
+          "2": 0,
+          "3": 0,
+          "5": 0,
+          "8": 1,
+          "12": 2
+        },
+        "errors": {
+          "executor rejected a physically supported/blocked pick": 5,
+          "selected the physical target without recognizing the requested appearance": 2
+        }
+      },
+      "c_full": {
+        "n": 10,
+        "successes": 7,
+        "discovered": 7,
+        "mean_capped_removals": 10.1,
+        "mean_discovery_capped": 10.0,
+        "success_within_removal_budget": {
+          "0": 0,
+          "1": 2,
+          "2": 3,
+          "3": 5,
+          "5": 6,
+          "8": 7,
+          "12": 7
+        },
+        "errors": {
+          "selected the physical target without recognizing the requested appearance": 3
+        }
+      }
+    }
+  },
+  "comparisons": {
+    "all:a_greedy->b_no_hidden": {
+      "n": 40,
+      "mean_saved": 2.5,
+      "mean_saved_bootstrap_95": [
+        0.675,
+        4.775
+      ],
+      "right_wins": 7,
+      "left_wins": 0,
+      "ties": 33,
+      "exact_two_sided_sign_p": 0.015625,
+      "both_success_n": 22,
+      "both_success_removal_difference": {
+        "n": 22,
+        "mean_saved": 2.1818181818181817,
+        "mean_saved_bootstrap_95": [
+          0.2727272727272727,
+          4.636363636363637
+        ],
+        "right_wins": 5,
+        "left_wins": 0,
+        "ties": 17,
+        "exact_two_sided_sign_p": 0.0625
+      },
+      "primary_sign_p_holm_2": 0.015625
+    },
+    "all:b_no_hidden->c_full": {
+      "n": 40,
+      "mean_saved": 3.125,
+      "mean_saved_bootstrap_95": [
+        1.05,
+        5.65
+      ],
+      "right_wins": 9,
+      "left_wins": 0,
+      "ties": 31,
+      "exact_two_sided_sign_p": 0.00390625,
+      "both_success_n": 24,
+      "both_success_removal_difference": {
+        "n": 24,
+        "mean_saved": 1.1666666666666667,
+        "mean_saved_bootstrap_95": [
+          0.16666666666666666,
+          2.5833333333333335
+        ],
+        "right_wins": 5,
+        "left_wins": 0,
+        "ties": 19,
+        "exact_two_sided_sign_p": 0.0625
+      }
+    },
+    "all:a_greedy->c_full": {
+      "n": 40,
+      "mean_saved": 5.625,
+      "mean_saved_bootstrap_95": [
+        2.9,
+        8.625
+      ],
+      "right_wins": 16,
+      "left_wins": 0,
+      "ties": 24,
+      "exact_two_sided_sign_p": 3.0517578125e-05,
+      "both_success_n": 22,
+      "both_success_removal_difference": {
+        "n": 22,
+        "mean_saved": 3.4545454545454546,
+        "mean_saved_bootstrap_95": [
+          1.2727272727272727,
+          6.0
+        ],
+        "right_wins": 10,
+        "left_wins": 0,
+        "ties": 12,
+        "exact_two_sided_sign_p": 0.001953125
+      }
+    },
+    "hidden:a_greedy->b_no_hidden": {
+      "n": 20,
+      "mean_saved": 0.0,
+      "mean_saved_bootstrap_95": [
+        0.0,
+        0.0
+      ],
+      "right_wins": 0,
+      "left_wins": 0,
+      "ties": 20,
+      "exact_two_sided_sign_p": 1.0,
+      "both_success_n": 6,
+      "both_success_removal_difference": {
+        "n": 6,
+        "mean_saved": 0.0,
+        "mean_saved_bootstrap_95": [
+          0.0,
+          0.0
+        ],
+        "right_wins": 0,
+        "left_wins": 0,
+        "ties": 6,
+        "exact_two_sided_sign_p": 1.0
+      }
+    },
+    "hidden:b_no_hidden->c_full": {
+      "n": 20,
+      "mean_saved": 6.25,
+      "mean_saved_bootstrap_95": [
+        2.3,
+        10.7
+      ],
+      "right_wins": 9,
+      "left_wins": 0,
+      "ties": 11,
+      "exact_two_sided_sign_p": 0.00390625,
+      "both_success_n": 6,
+      "both_success_removal_difference": {
+        "n": 6,
+        "mean_saved": 4.666666666666667,
+        "mean_saved_bootstrap_95": [
+          1.3333333333333333,
+          8.333333333333334
+        ],
+        "right_wins": 5,
+        "left_wins": 0,
+        "ties": 1,
+        "exact_two_sided_sign_p": 0.0625
+      },
+      "primary_sign_p_holm_2": 0.0078125
+    },
+    "hidden:a_greedy->c_full": {
+      "n": 20,
+      "mean_saved": 6.25,
+      "mean_saved_bootstrap_95": [
+        2.3,
+        10.7
+      ],
+      "right_wins": 9,
+      "left_wins": 0,
+      "ties": 11,
+      "exact_two_sided_sign_p": 0.00390625,
+      "both_success_n": 6,
+      "both_success_removal_difference": {
+        "n": 6,
+        "mean_saved": 4.666666666666667,
+        "mean_saved_bootstrap_95": [
+          1.3333333333333333,
+          8.333333333333334
+        ],
+        "right_wins": 5,
+        "left_wins": 0,
+        "ties": 1,
+        "exact_two_sided_sign_p": 0.0625
+      }
+    },
+    "visible_free:a_greedy->b_no_hidden": {
+      "n": 10,
+      "mean_saved": 0.0,
+      "mean_saved_bootstrap_95": [
+        0.0,
+        0.0
+      ],
+      "right_wins": 0,
+      "left_wins": 0,
+      "ties": 10,
+      "exact_two_sided_sign_p": 1.0,
+      "both_success_n": 10,
+      "both_success_removal_difference": {
+        "n": 10,
+        "mean_saved": 0.0,
+        "mean_saved_bootstrap_95": [
+          0.0,
+          0.0
+        ],
+        "right_wins": 0,
+        "left_wins": 0,
+        "ties": 10,
+        "exact_two_sided_sign_p": 1.0
+      }
+    },
+    "visible_free:b_no_hidden->c_full": {
+      "n": 10,
+      "mean_saved": 0.0,
+      "mean_saved_bootstrap_95": [
+        0.0,
+        0.0
+      ],
+      "right_wins": 0,
+      "left_wins": 0,
+      "ties": 10,
+      "exact_two_sided_sign_p": 1.0,
+      "both_success_n": 10,
+      "both_success_removal_difference": {
+        "n": 10,
+        "mean_saved": 0.0,
+        "mean_saved_bootstrap_95": [
+          0.0,
+          0.0
+        ],
+        "right_wins": 0,
+        "left_wins": 0,
+        "ties": 10,
+        "exact_two_sided_sign_p": 1.0
+      }
+    },
+    "visible_free:a_greedy->c_full": {
+      "n": 10,
+      "mean_saved": 0.0,
+      "mean_saved_bootstrap_95": [
+        0.0,
+        0.0
+      ],
+      "right_wins": 0,
+      "left_wins": 0,
+      "ties": 10,
+      "exact_two_sided_sign_p": 1.0,
+      "both_success_n": 10,
+      "both_success_removal_difference": {
+        "n": 10,
+        "mean_saved": 0.0,
+        "mean_saved_bootstrap_95": [
+          0.0,
+          0.0
+        ],
+        "right_wins": 0,
+        "left_wins": 0,
+        "ties": 10,
+        "exact_two_sided_sign_p": 1.0
+      }
+    },
+    "visible_blocked:a_greedy->b_no_hidden": {
+      "n": 10,
+      "mean_saved": 10.0,
+      "mean_saved_bootstrap_95": [
+        3.8,
+        16.5
+      ],
+      "right_wins": 7,
+      "left_wins": 0,
+      "ties": 3,
+      "exact_two_sided_sign_p": 0.015625,
+      "both_success_n": 6,
+      "both_success_removal_difference": {
+        "n": 6,
+        "mean_saved": 8.0,
+        "mean_saved_bootstrap_95": [
+          2.3333333333333335,
+          13.833333333333334
+        ],
+        "right_wins": 5,
+        "left_wins": 0,
+        "ties": 1,
+        "exact_two_sided_sign_p": 0.0625
+      }
+    },
+    "visible_blocked:b_no_hidden->c_full": {
+      "n": 10,
+      "mean_saved": 0.0,
+      "mean_saved_bootstrap_95": [
+        0.0,
+        0.0
+      ],
+      "right_wins": 0,
+      "left_wins": 0,
+      "ties": 10,
+      "exact_two_sided_sign_p": 1.0,
+      "both_success_n": 8,
+      "both_success_removal_difference": {
+        "n": 8,
+        "mean_saved": 0.0,
+        "mean_saved_bootstrap_95": [
+          0.0,
+          0.0
+        ],
+        "right_wins": 0,
+        "left_wins": 0,
+        "ties": 8,
+        "exact_two_sided_sign_p": 1.0
+      }
+    },
+    "visible_blocked:a_greedy->c_full": {
+      "n": 10,
+      "mean_saved": 10.0,
+      "mean_saved_bootstrap_95": [
+        3.8,
+        16.5
+      ],
+      "right_wins": 7,
+      "left_wins": 0,
+      "ties": 3,
+      "exact_two_sided_sign_p": 0.015625,
+      "both_success_n": 6,
+      "both_success_removal_difference": {
+        "n": 6,
+        "mean_saved": 8.0,
+        "mean_saved_bootstrap_95": [
+          2.3333333333333335,
+          13.833333333333334
+        ],
+        "right_wins": 5,
+        "left_wins": 0,
+        "ties": 1,
+        "exact_two_sided_sign_p": 0.0625
+      }
+    },
+    "unlocalized_known_region:a_greedy->b_no_hidden": {
+      "n": 10,
+      "mean_saved": 0.0,
+      "mean_saved_bootstrap_95": [
+        0.0,
+        0.0
+      ],
+      "right_wins": 0,
+      "left_wins": 0,
+      "ties": 10,
+      "exact_two_sided_sign_p": 1.0,
+      "both_success_n": 3,
+      "both_success_removal_difference": {
+        "n": 3,
+        "mean_saved": 0.0,
+        "mean_saved_bootstrap_95": [
+          0.0,
+          0.0
+        ],
+        "right_wins": 0,
+        "left_wins": 0,
+        "ties": 3,
+        "exact_two_sided_sign_p": 1.0
+      }
+    },
+    "unlocalized_known_region:b_no_hidden->c_full": {
+      "n": 10,
+      "mean_saved": 0.4,
+      "mean_saved_bootstrap_95": [
+        0.0,
+        1.0
+      ],
+      "right_wins": 2,
+      "left_wins": 0,
+      "ties": 8,
+      "exact_two_sided_sign_p": 0.5,
+      "both_success_n": 3,
+      "both_success_removal_difference": {
+        "n": 3,
+        "mean_saved": 1.3333333333333333,
+        "mean_saved_bootstrap_95": [
+          0.0,
+          2.0
+        ],
+        "right_wins": 2,
+        "left_wins": 0,
+        "ties": 1,
+        "exact_two_sided_sign_p": 0.5
+      }
+    },
+    "unlocalized_known_region:a_greedy->c_full": {
+      "n": 10,
+      "mean_saved": 0.4,
+      "mean_saved_bootstrap_95": [
+        0.0,
+        1.0
+      ],
+      "right_wins": 2,
+      "left_wins": 0,
+      "ties": 8,
+      "exact_two_sided_sign_p": 0.5,
+      "both_success_n": 3,
+      "both_success_removal_difference": {
+        "n": 3,
+        "mean_saved": 1.3333333333333333,
+        "mean_saved_bootstrap_95": [
+          0.0,
+          2.0
+        ],
+        "right_wins": 2,
+        "left_wins": 0,
+        "ties": 1,
+        "exact_two_sided_sign_p": 0.5
+      }
+    },
+    "unlocalized_unknown_region:a_greedy->b_no_hidden": {
+      "n": 10,
+      "mean_saved": 0.0,
+      "mean_saved_bootstrap_95": [
+        0.0,
+        0.0
+      ],
+      "right_wins": 0,
+      "left_wins": 0,
+      "ties": 10,
+      "exact_two_sided_sign_p": 1.0,
+      "both_success_n": 3,
+      "both_success_removal_difference": {
+        "n": 3,
+        "mean_saved": 0.0,
+        "mean_saved_bootstrap_95": [
+          0.0,
+          0.0
+        ],
+        "right_wins": 0,
+        "left_wins": 0,
+        "ties": 3,
+        "exact_two_sided_sign_p": 1.0
+      }
+    },
+    "unlocalized_unknown_region:b_no_hidden->c_full": {
+      "n": 10,
+      "mean_saved": 12.1,
+      "mean_saved_bootstrap_95": [
+        5.4,
+        18.9
+      ],
+      "right_wins": 7,
+      "left_wins": 0,
+      "ties": 3,
+      "exact_two_sided_sign_p": 0.015625,
+      "both_success_n": 3,
+      "both_success_removal_difference": {
+        "n": 3,
+        "mean_saved": 8.0,
+        "mean_saved_bootstrap_95": [
+          2.0,
+          12.0
+        ],
+        "right_wins": 3,
+        "left_wins": 0,
+        "ties": 0,
+        "exact_two_sided_sign_p": 0.25
+      }
+    },
+    "unlocalized_unknown_region:a_greedy->c_full": {
+      "n": 10,
+      "mean_saved": 12.1,
+      "mean_saved_bootstrap_95": [
+        5.4,
+        18.9
+      ],
+      "right_wins": 7,
+      "left_wins": 0,
+      "ties": 3,
+      "exact_two_sided_sign_p": 0.015625,
+      "both_success_n": 3,
+      "both_success_removal_difference": {
+        "n": 3,
+        "mean_saved": 8.0,
+        "mean_saved_bootstrap_95": [
+          2.0,
+          12.0
+        ],
+        "right_wins": 3,
+        "left_wins": 0,
+        "ties": 0,
+        "exact_two_sided_sign_p": 0.25
+      }
+    }
+  },
+  "exploratory_discovery_b_to_c": {
+    "n": 20,
+    "mean_saved": 6.3,
+    "mean_saved_bootstrap_95": [
+      2.3,
+      10.8
+    ],
+    "right_wins": 9,
+    "left_wins": 0,
+    "ties": 11,
+    "exact_two_sided_sign_p": 0.00390625
+  },
+  "primary": [
+    "all:a_greedy->b_no_hidden",
+    "hidden:b_no_hidden->c_full"
+  ],
+  "complete_cases": 40,
+  "cue_available_exploratory": {
+    "n": 20,
+    "mean_saved": 6.25,
+    "mean_saved_bootstrap_95": [
+      2.3,
+      10.7
+    ],
+    "right_wins": 9,
+    "left_wins": 0,
+    "ties": 11,
+    "exact_two_sided_sign_p": 0.00390625
+  },
+  "oracle_audit": {
+    "hidden_n": 20,
+    "hidden_cue_available": 20,
+    "hidden_geometric_target_present": 0,
+    "visible_blocked": {
+      "a_greedy": {
+        "n": 10,
+        "exact_lower_bound_successes": 1
+      },
+      "b_no_hidden": {
+        "n": 10,
+        "exact_lower_bound_successes": 8
+      },
+      "c_full": {
+        "n": 10,
+        "exact_lower_bound_successes": 8
+      }
+    }
+  },
+  "family": "적재 순서 무작위 가림 조건"
+}
