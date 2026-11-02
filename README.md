@@ -165,6 +165,15 @@ training/                    별도 uv 프로젝트: 자동 시연·ACT 학습·
 실제 모터 원시 단위와 구분한다. 실제 로봇 연결은 포함하지 않는다.
 모듈 C의 ACT 학습 환경은 공통 패키지와 분리된 [training/](training/README.md)에 있다.
 
+Greedy·Flat SG·HSG의 고정 장면 비교 실험과 실행 방법은
+[experiments/planner_benchmark/](experiments/planner_benchmark/README.md)에 있다.
+같은 계획의 계산 비용을 비교하는 계층 조회·부분 갱신 구현과 새 실험은
+[experiments/hsg_indexed/](experiments/hsg_indexed/README.md)에 있다.
+ACT를 고정하고 robot-base Greedy / 숨은 공간 단서 제거 / Full HSG를 비교하는 새 조건은
+[experiments/act_conditions/](experiments/act_conditions/README.md)에 있다.
+MuJoCo RGB-D와 공통 이상적 제거 실행기로 계획 선택의 효과를 분리하는 검증은
+[experiments/planner_search/](experiments/planner_search/README.md)에 있다.
+
 ```sh
 uv run python -m unittest discover -s tests -v
 ```

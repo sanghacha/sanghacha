@@ -299,7 +299,8 @@ class PipelineInspector:
                              if 'object_id' in c else c['label']+(' 비어 있음' if c['free'] else ' 점유됨') for c in candidates[:2]]
                     for i, line in enumerate(lines):
                         self._text(draw, (30, 480+i*19), line, 12, MUTED)
-                relation = 'A 그래프의 적층 관계' if self.explanation.get('support_source') == 'graph' else 'B의 위치·크기 기반 적층 추정'
+                relation = ('물체 목록·거리 규칙 (관계 정보 미사용)' if self.explanation.get('support_source') == 'none' else
+                            'A 그래프의 적층 관계' if self.explanation.get('support_source') == 'graph' else 'B의 위치·크기 기반 적층 추정')
                 self._text(draw, (30, 527), f'계획 t={self.plan_time:.2f}s  ·  {relation}', 12, MUTED)
             self._card(draw, 576, 745)
             chunk = f'{self.chunk_shape[0]}×{self.chunk_shape[1]}' if self.chunk_shape else '-'

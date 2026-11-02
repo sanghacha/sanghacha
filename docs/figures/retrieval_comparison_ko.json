@@ -1,0 +1,23 @@
+{
+  "removal_budget": 5,
+  "population": "initially unlocalized targets",
+  "executor": "ideal removal; no ACT or physical grasp",
+  "rows": [
+    {
+      "environment": "기본 적재 환경",
+      "n": 40,
+      "baseline_successes": 5,
+      "proposed_successes": 19
+    },
+    {
+      "environment": "적재 순서 무작위 가림 조건",
+      "n": 20,
+      "baseline_successes": 2,
+      "proposed_successes": 9
+    }
+  ],
+  "source_sha256": {
+    "experiments\\planner_search\\ordinary\\results.json": "4f2a7efc56564ffc79d46ecf4e373103bb5d0bd09ab87f15113ca2d1bfced69b",
+    "experiments\\planner_search\\occlusion\\results.json": "f422b1bb85525871888bfc9ccbe3822645e6a1636503d280ae9df707b366857f"
+  }
+}

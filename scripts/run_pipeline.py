@@ -37,6 +37,8 @@ def main() -> int:
     parser.add_argument('--inspect-paused', action='store_true', help='start paused at the first Subgoal')
     parser.add_argument('--inspect-no-hold', action='store_true', help='close inspector automatically after completion (for capture/tests)')
     args = parser.parse_args()
+    planner_module = import_module(args.planner_module)
+    planner_event = getattr(planner_module, 'on_pipeline_event', None)
     args.case = args.case or ("shelves" if args.backend == "mujoco" else "blocked")
     if args.inspect:
         if args.backend != 'mujoco':
@@ -127,12 +129,14 @@ def main() -> int:
             clock = time.perf_counter()
 
     def event(kind, **payload):
+        if planner_event is not None:
+            planner_event(kind, **payload)
         if inspector is None:
             return
         if kind == 'scene':
             payload['raw_graph'] = env.last_graph if args.perception != 'gt' else None
         if kind == 'planned':
-            explain = getattr(import_module(args.planner_module), 'explain_subgoal', None)
+            explain = getattr(planner_module, 'explain_subgoal', None)
             payload['explanation'] = explain(payload['graph'], payload['task'], payload['subgoal']) if explain else None
         inspector.on_event(kind, **payload)
         if (kind in ('scene', 'planned', 'completed', 'finished', 'failed') and inspector.observation is not None
@@ -180,11 +184,11 @@ def main() -> int:
         subgoals = run_pipeline(env, env.task, seed=args.seed,
                                generate_graph=(env.generate_scene_graph if args.perception != 'gt' else
                                                import_module(args.hssg_module).generate_scene_graph),
-                               plan_subgoal=import_module(args.planner_module).plan_next_subgoal,
+                               plan_subgoal=planner_module.plan_next_subgoal,
                                predict_action=import_module(args.action_module).predict_action_chunk,
                                on_step=display if args.gui else None,
                                refresh_observation=env.refresh if args.perception != 'gt' else None,
-                               on_event=event if inspector is not None else None)
+                               on_event=event if inspector is not None or planner_event is not None else None)
         for goal in subgoals:
             print(f"{goal.primitive}({goal.object_id})")
         if args.snapshot:

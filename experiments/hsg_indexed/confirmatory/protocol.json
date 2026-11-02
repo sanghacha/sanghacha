@@ -1,0 +1,34 @@
+{
+  "version": "indexed-ablation-v1",
+  "region_counts": [
+    3,
+    24,
+    192
+  ],
+  "objects_per_region": 9,
+  "seeds": [
+    6200,
+    6201,
+    6202,
+    6203,
+    6204,
+    6205,
+    6206,
+    6207,
+    6208,
+    6209
+  ],
+  "frames": 20,
+  "updates": [
+    "local",
+    "global"
+  ],
+  "queries": [
+    "hidden",
+    "visible"
+  ],
+  "noise_m": 5e-05,
+  "cell_size_m": 0.05,
+  "timing": "serial; rotate method order per frame; public snapshot API including diff and summary maintenance",
+  "controls": "same policy, spatial hash, adjacency, object/region inputs and stream; only storage/incrementality differ"
+}
